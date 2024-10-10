@@ -1,21 +1,35 @@
 import { resolve } from 'node:path';
 import { defineConfig } from 'vite';
+import dts from 'vite-plugin-dts';
 
 export default defineConfig({
+	plugins: [
+		dts({
+			insertTypesEntry: true,
+		}),
+	],
 	build: {
 		lib: {
-			entry: [
-				resolve(__dirname, 'lib/main.ts'),
-				resolve(__dirname, 'lib/tasklist.ts'),
-				resolve(__dirname, 'lib/process-management.ts'),
-				resolve(__dirname, 'lib/operate.ts'),
-				resolve(__dirname, 'lib/optimize.ts'),
-				resolve(__dirname, 'lib/identity.ts'),
-			],
+			entry: {
+				main: resolve(__dirname, 'lib/main.ts'),
+				tasklist: resolve(__dirname, 'lib/tasklist.ts'),
+				'process-management': resolve(__dirname, 'lib/process-management.ts'),
+				operate: resolve(__dirname, 'lib/operate.ts'),
+				optimize: resolve(__dirname, 'lib/optimize.ts'),
+				identity: resolve(__dirname, 'lib/identity.ts'),
+			},
 			formats: ['es'],
 		},
+		minify: false,
 		rollupOptions: {
 			external: ['zod'],
+			preserveEntrySignatures: 'strict',
+			output: {
+				format: 'es',
+				entryFileNames: '[name].js',
+				preserveModules: true,
+				preserveModulesRoot: 'lib',
+			},
 		},
 	},
 });
