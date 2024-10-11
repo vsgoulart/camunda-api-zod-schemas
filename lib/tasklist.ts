@@ -48,6 +48,7 @@ const queryUserTasksRequestBodySchema = getQueryRequestBodySchema({
 			processDefinitionKey: true,
 			processInstanceKey: true,
 			processDefinitionId: true,
+			tenantId: true,
 		})
 		.merge(
 			z.object({
@@ -57,7 +58,6 @@ const queryUserTasksRequestBodySchema = getQueryRequestBodySchema({
 						value: z.string(),
 					}),
 				),
-				tenantIds: z.string(),
 			}),
 		),
 });
