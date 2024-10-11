@@ -19,5 +19,16 @@
 			"semicolons": "always",
 			"trailingCommas": "all"
 		}
+	},
+	"linter": {
+		"enabled": true,
+		"rules": {
+			"correctness": {
+				"noUnusedImports": {
+					"fix": "safe",
+					"level": "error"
+				}
+			}
+		}
 	}
 }
