@@ -1,8 +1,10 @@
 import { z } from 'zod';
-import { API_VERSION, type Endpoint } from './common';
+import { API_VERSION, getQueryRequestBodySchema, getQueryResponseBodySchema, type Endpoint } from './common';
 
 const userTaskSchema = z.object({
+	state: z.string(),
 	processDefinitionVersion: z.number(),
+	processDefinitionId: z.string(),
 	bpmnProcessId: z.string(),
 	processInstanceKey: z.number(),
 	processDefinitionKey: z.number(),
@@ -16,9 +18,11 @@ const userTaskSchema = z.object({
 	dueDate: z.string(),
 	followUpDate: z.string(),
 	creationDate: z.string(),
+	completionDate: z.string(),
 	customHeaders: z.record(z.string(), z.any()),
 	formKey: z.number(),
 	externalFormReference: z.string(),
+	priority: z.number(),
 });
 type UserTask = z.infer<typeof userTaskSchema>;
 
@@ -31,7 +35,45 @@ const getUserTask: Endpoint<Pick<UserTask, 'userTaskKey'>> = {
 	},
 };
 
-const endpoints = { getUserTask } as const;
+const queryUserTasksRequestBodySchema = getQueryRequestBodySchema({
+	sortFields: ['creationDate', 'completionDate'],
+	filter: userTaskSchema
+		.pick({
+			userTaskKey: true,
+			state: true,
+			assignee: true,
+			elementId: true,
+			candidateGroups: true,
+			candidateUsers: true,
+			processDefinitionKey: true,
+			processInstanceKey: true,
+			processDefinitionId: true,
+		})
+		.merge(
+			z.object({
+				variables: z.array(
+					z.object({
+						name: z.string(),
+						value: z.string(),
+					}),
+				),
+				tenantIds: z.string(),
+			}),
+		),
+});
+type QueryUserTasksRequestBody = z.infer<typeof queryUserTasksRequestBodySchema>;
 
-export { endpoints, userTaskSchema };
-export type { UserTask };
+const queryUserTasksResponseBodySchema = getQueryResponseBodySchema(userTaskSchema);
+type QueryUserTasksResponseBody = z.infer<typeof queryUserTasksResponseBodySchema>;
+
+const queryUserTasks: Endpoint = {
+	method: 'POST',
+	getUrl() {
+		return `/${API_VERSION}/user-tasks/search`;
+	},
+};
+
+const endpoints = { getUserTask, queryUserTasks } as const;
+
+export { endpoints, userTaskSchema, queryUserTasksResponseBodySchema, queryUserTasksRequestBodySchema };
+export type { UserTask, QueryUserTasksResponseBody, QueryUserTasksRequestBody };
