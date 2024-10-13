@@ -62,7 +62,7 @@ function getQueryRequestBodySchema<FilterSchema extends z.ZodTypeAny>(options: {
 }
 
 interface Endpoint<URLParams extends object | undefined = undefined> {
-	getUrl: (params: URLParams) => string;
+	getUrl: URLParams extends undefined ? () => string : (params: URLParams) => string;
 	method: string;
 }
 
