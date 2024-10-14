@@ -14,12 +14,14 @@ type ProblemDetails = z.infer<typeof problemDetailsSchema>;
 const querySortOrderSchema = z.enum(['asc', 'desc']);
 type QuerySortOrder = z.infer<typeof querySortOrderSchema>;
 
-const queryPageSchema = z.object({
-	from: z.number().int(),
-	limit: z.number().int(),
-	searchBefore: z.tuple([z.string(), z.string()]),
-	searchAfter: z.tuple([z.string(), z.string()]),
-});
+const queryPageSchema = z
+	.object({
+		from: z.number().int(),
+		limit: z.number().int(),
+		searchBefore: z.tuple([z.string(), z.string()]),
+		searchAfter: z.tuple([z.string(), z.string()]),
+	})
+	.partial();
 type QueryPage = z.infer<typeof queryPageSchema>;
 
 const queryResponsePageSchema = z.object({
@@ -61,11 +63,13 @@ function getQueryRequestBodySchema<
 }) {
 	const { sortFields, filter } = options;
 
-	return z.object({
-		sort: getQueryRequestSortSchema(sortFields).optional(),
-		page: queryPageSchema.optional(),
-		filter: filter.optional(),
-	});
+	return z
+		.object({
+			sort: getQueryRequestSortSchema(sortFields),
+			page: queryPageSchema,
+			filter: filter,
+		})
+		.partial();
 }
 
 interface Endpoint<URLParams extends object | undefined = undefined> {
