@@ -52,12 +52,14 @@ const queryUserTasksRequestBodySchema = getQueryRequestBodySchema({
 		})
 		.merge(
 			z.object({
-				variables: z.array(
-					z.object({
-						name: z.string(),
-						value: z.string(),
-					}),
-				),
+				variables: z
+					.array(
+						z.object({
+							name: z.string(),
+							value: z.string(),
+						}),
+					)
+					.optional(),
 			}),
 		),
 });
