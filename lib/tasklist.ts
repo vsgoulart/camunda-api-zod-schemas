@@ -36,7 +36,7 @@ const getUserTask: Endpoint<Pick<UserTask, 'userTaskKey'>> = {
 };
 
 const queryUserTasksRequestBodySchema = getQueryRequestBodySchema({
-	sortFields: ['creationDate', 'completionDate'],
+	sortFields: ['creationDate', 'completionDate'] as const,
 	filter: userTaskSchema
 		.pick({
 			userTaskKey: true,

@@ -32,7 +32,7 @@ function getQueryResponseBodySchema<ItemSchema extends z.ZodTypeAny>(
 	});
 }
 
-function getQueryRequestSortSchema(fields: [string, ...string[]]) {
+function getQueryRequestSortSchema<Fields extends [string, ...string[]]>(fields: Fields) {
 	return z.array(
 		z.object({
 			field: z.enum(fields),
@@ -41,8 +41,11 @@ function getQueryRequestSortSchema(fields: [string, ...string[]]) {
 	);
 }
 
-function getQueryRequestBodySchema<FilterSchema extends z.ZodTypeAny>(options: {
-	sortFields: [string, ...string[]];
+function getQueryRequestBodySchema<
+	FilterSchema extends z.ZodTypeAny,
+	SortFields extends [string, ...string[]],
+>(options: {
+	sortFields: SortFields;
 	filter: FilterSchema;
 }) {
 	const { sortFields, filter } = options;
