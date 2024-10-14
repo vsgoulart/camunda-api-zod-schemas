@@ -3,4 +3,11 @@ export {} from './process-management';
 export {} from './operate';
 export {} from './optimize';
 export {} from './identity';
-export { problemDetailsSchema, type ProblemDetails } from './common';
+export {
+	problemDetailsSchema,
+	queryPageSchema,
+	querySortOrderSchema,
+	type ProblemDetails,
+	type QueryPage,
+	type QuerySortOrder,
+} from './common';

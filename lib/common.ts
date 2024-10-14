@@ -11,6 +11,17 @@ const problemDetailsSchema = z.object({
 });
 type ProblemDetails = z.infer<typeof problemDetailsSchema>;
 
+const querySortOrderSchema = z.enum(['asc', 'desc']);
+type QuerySortOrder = z.infer<typeof querySortOrderSchema>;
+
+const queryPageSchema = z.object({
+	from: z.number().int(),
+	limit: z.number().int(),
+	searchBefore: z.tuple([z.string(), z.string()]),
+	searchAfter: z.tuple([z.string(), z.string()]),
+});
+type QueryPage = z.infer<typeof queryPageSchema>;
+
 const queryResponsePageSchema = z.object({
 	totalItems: z.number(),
 	firstSortValues: z.tuple([z.string(), z.string()]),
@@ -52,14 +63,7 @@ function getQueryRequestBodySchema<
 
 	return z.object({
 		sort: getQueryRequestSortSchema(sortFields).optional(),
-		page: z
-			.object({
-				from: z.number().int(),
-				limit: z.number().int(),
-				searchBefore: z.tuple([z.string(), z.string()]),
-				searchAfter: z.tuple([z.string(), z.string()]),
-			})
-			.optional(),
+		page: queryPageSchema.optional(),
 		filter: filter.optional(),
 	});
 }
@@ -72,8 +76,10 @@ interface Endpoint<URLParams extends object | undefined = undefined> {
 export {
 	API_VERSION,
 	problemDetailsSchema,
+	querySortOrderSchema,
+	queryPageSchema,
 	queryResponsePageSchema,
 	getQueryResponseBodySchema,
 	getQueryRequestBodySchema,
 };
-export type { ProblemDetails, Endpoint, QueryResponseBody };
+export type { ProblemDetails, QuerySortOrder, QueryPage, Endpoint, QueryResponseBody };
