@@ -52,16 +52,15 @@ const queryUserTasksRequestBodySchema = getQueryRequestBodySchema({
 		})
 		.merge(
 			z.object({
-				variables: z
-					.array(
-						z.object({
-							name: z.string(),
-							value: z.string(),
-						}),
-					)
-					.optional(),
+				variables: z.array(
+					z.object({
+						name: z.string(),
+						value: z.string(),
+					}),
+				),
 			}),
-		),
+		)
+		.partial(),
 });
 type QueryUserTasksRequestBody = z.infer<typeof queryUserTasksRequestBodySchema>;
 
