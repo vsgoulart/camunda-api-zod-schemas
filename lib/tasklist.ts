@@ -18,10 +18,10 @@ const userTaskSchema = z.object({
 	dueDate: z.string().optional(),
 	followUpDate: z.string().optional(),
 	creationDate: z.string(),
-	completionDate: z.string(),
-	customHeaders: z.record(z.string(), z.any()),
+	completionDate: z.string().optional(),
+	customHeaders: z.record(z.string(), z.any()).optional(),
 	formKey: z.number(),
-	externalFormReference: z.string(),
+	externalFormReference: z.string().optional(),
 	priority: z.number(),
 });
 type UserTask = z.infer<typeof userTaskSchema>;
