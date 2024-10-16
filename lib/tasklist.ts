@@ -20,7 +20,7 @@ const userTaskSchema = z.object({
 	creationDate: z.string(),
 	completionDate: z.string().optional(),
 	customHeaders: z.record(z.string(), z.any()).optional(),
-	formKey: z.number(),
+	formKey: z.number().optional(),
 	externalFormReference: z.string().optional(),
 	priority: z.number(),
 });
