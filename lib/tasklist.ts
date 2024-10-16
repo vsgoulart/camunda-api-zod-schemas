@@ -74,7 +74,25 @@ const queryUserTasks: Endpoint = {
 	},
 };
 
-const endpoints = { getUserTask, queryUserTasks } as const;
+const formSchema = z.object({
+	formKey: z.number(),
+	tenantId: z.string(),
+	bpmnId: z.string(),
+	schema: z.string(),
+	version: z.number(),
+});
+type Form = z.infer<typeof formSchema>;
 
-export { endpoints, userTaskSchema, queryUserTasksResponseBodySchema, queryUserTasksRequestBodySchema };
-export type { UserTask, QueryUserTasksResponseBody, QueryUserTasksRequestBody };
+const getForm: Endpoint<Pick<Form, 'formKey'>> = {
+	method: 'GET',
+	getUrl(params) {
+		const { formKey } = params;
+
+		return `/${API_VERSION}/user-tasks/${formKey}/form`;
+	},
+};
+
+const endpoints = { getUserTask, queryUserTasks, getForm } as const;
+
+export { endpoints, userTaskSchema, queryUserTasksResponseBodySchema, queryUserTasksRequestBodySchema, formSchema };
+export type { UserTask, QueryUserTasksResponseBody, QueryUserTasksRequestBody, Form };
