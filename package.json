@@ -76,7 +76,7 @@
 		"access": "public"
 	},
 	"devDependencies": {
-		"@biomejs/biome": "1.9.3",
+		"@biomejs/biome": "1.9.4",
 		"@types/node": "22.7.5",
 		"changelogen": "0.5.7",
 		"typescript": "5.6.3",
