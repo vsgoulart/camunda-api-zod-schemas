@@ -18,8 +18,8 @@ const queryPageSchema = z
 	.object({
 		from: z.number().int(),
 		limit: z.number().int(),
-		searchBefore: z.tuple([z.string(), z.string()]),
-		searchAfter: z.tuple([z.string(), z.string()]),
+		searchBefore: z.tuple([z.number(), z.number()]),
+		searchAfter: z.tuple([z.number(), z.number()]),
 	})
 	.partial();
 type QueryPage = z.infer<typeof queryPageSchema>;
