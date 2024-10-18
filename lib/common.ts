@@ -26,8 +26,8 @@ type QueryPage = z.infer<typeof queryPageSchema>;
 
 const queryResponsePageSchema = z.object({
 	totalItems: z.number(),
-	firstSortValues: z.tuple([z.string(), z.string()]),
-	lastSortValues: z.tuple([z.string(), z.string()]),
+	firstSortValues: z.tuple([z.number(), z.number()]),
+	lastSortValues: z.tuple([z.number(), z.number()]),
 });
 type QueryResponsePage = z.infer<typeof queryResponsePageSchema>;
 
