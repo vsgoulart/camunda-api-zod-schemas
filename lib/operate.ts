@@ -21,7 +21,16 @@ const getProcessDefinition: Endpoint<Pick<ProcessDefinition, 'processDefinitionK
 	},
 };
 
-const endpoints = { getProcessDefinition } as const;
+const getProcessDefinitionXml: Endpoint<Pick<ProcessDefinition, 'processDefinitionKey'>> = {
+	method: 'GET',
+	getUrl(params) {
+		const { processDefinitionKey } = params;
+
+		return `/${API_VERSION}/process-definitions/${processDefinitionKey}/xml`;
+	},
+};
+
+const endpoints = { getProcessDefinition, getProcessDefinitionXml } as const;
 
 export { endpoints, processDefinitionSchema };
 export type { ProcessDefinition };
