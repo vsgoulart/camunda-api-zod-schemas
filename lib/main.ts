@@ -1,6 +1,6 @@
 export * as tasklist from './tasklist';
 export {} from './process-management';
-export {} from './operate';
+export * as operate from './operate';
 export {} from './optimize';
 export {} from './identity';
 export {
