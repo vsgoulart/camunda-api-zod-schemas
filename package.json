@@ -86,5 +86,5 @@
 	"peerDependencies": {
 		"zod": ">=3.0.0"
 	},
-	"packageManager": "pnpm@9.14.2"
+	"packageManager": "pnpm@9.15.6"
 }
