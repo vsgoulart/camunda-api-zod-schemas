@@ -3,7 +3,7 @@ import { API_VERSION, type Endpoint } from './common';
 
 const currentUserSchema = z.object({
 	userId: z.string(),
-	userKey: z.string(),
+	userKey: z.number(),
 	displayName: z.string(),
 	authorizedApplications: z.array(z.string()),
 	tenants: z.array(
@@ -14,7 +14,7 @@ const currentUserSchema = z.object({
 	),
 	groups: z.array(z.string()),
 	roles: z.array(z.string()),
-	salesPlanType: z.string(),
+	salesPlanType: z.string().nullable(),
 	c8Links: z.array(
 		z.object({
 			name: z.string(),
