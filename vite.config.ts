@@ -17,6 +17,7 @@ export default defineConfig({
 				operate: resolve(__dirname, 'lib/operate.ts'),
 				optimize: resolve(__dirname, 'lib/optimize.ts'),
 				identity: resolve(__dirname, 'lib/identity.ts'),
+				management: resolve(__dirname, 'lib/management.ts'),
 			},
 			formats: ['es'],
 		},

@@ -3,6 +3,7 @@ export {} from './process-management';
 export * as operate from './operate';
 export {} from './optimize';
 export {} from './identity';
+export * as management from './management';
 export {
 	problemDetailsSchema,
 	queryPageSchema,
