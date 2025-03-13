@@ -30,15 +30,14 @@ const getProcessDefinition: Endpoint<Pick<ProcessDefinition, 'processDefinitionK
 	},
 };
 
-const processDefinitionStatisticsBodySchema = z.array(
-	z.object({
-		flowNodeId: z.string(),
-		active: z.number(),
-		canceled: z.number(),
-		incidents: z.number(),
-		completed: z.number(),
-	}),
-);
+const processDefinitionStatisticSchema = z.object({
+	flowNodeId: z.string(),
+	active: z.number(),
+	canceled: z.number(),
+	incidents: z.number(),
+	completed: z.number(),
+});
+type ProcessDefinitionStatistic = z.infer<typeof processDefinitionStatisticSchema>;
 
 const getProcessDefinitionStatisticsRequestBodySchema = z.object({
 	filter: z.object({
@@ -61,9 +60,7 @@ const getProcessDefinitionStatisticsRequestBodySchema = z.object({
 
 type GetProcessDefinitionStatisticsRequestBody = z.infer<typeof getProcessDefinitionStatisticsRequestBodySchema>;
 
-const getProcessDefinitionStatisticsResponseBodySchema = getQueryResponseBodySchema(
-	processDefinitionStatisticsBodySchema,
-);
+const getProcessDefinitionStatisticsResponseBodySchema = getQueryResponseBodySchema(processDefinitionStatisticSchema);
 type GetProcessDefinitionStatisticsResponseBody = z.infer<typeof getProcessDefinitionStatisticsResponseBodySchema>;
 
 type GetProcessDefinitionStatisticsParams = Pick<ProcessDefinition, 'processDefinitionKey'> & {
@@ -102,4 +99,5 @@ export type {
 	ProcessDefinition,
 	ProcessInstanceState,
 	StatisticName,
+	ProcessDefinitionStatistic,
 };
