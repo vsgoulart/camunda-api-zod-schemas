@@ -7,11 +7,8 @@ import {
 	type Endpoint,
 } from './common';
 
-const processInstanceState = z.enum(['ACTIVE', 'COMPLETED', 'TERMINATED']);
-type ProcessInstanceState = z.infer<typeof processInstanceState>;
-
-const statisticName = z.enum(['flownode-instances']);
-type StatisticName = z.infer<typeof statisticName>;
+type ProcessInstanceState = 'ACTIVE' | 'COMPLETED' | 'TERMINATED';
+type StatisticName = 'flownode-instances';
 
 const processDefinitionSchema = z.object({
 	processDefinitionKey: z.number(),
@@ -47,7 +44,7 @@ const getProcessDefinitionStatisticsRequestBodySchema = z.object({
 	filter: z.object({
 		startDate: advancedDateTimeFilterSchema.optional(),
 		endDate: advancedDateTimeFilterSchema.optional(),
-		state: processInstanceState.optional(),
+		state: z.enum(['ACTIVE', 'COMPLETED', 'TERMINATED']).optional(),
 		hasIncident: z.boolean().optional(),
 		tenantId: advancedDateTimeFilterSchema.optional(),
 		variables: z.array(
@@ -69,8 +66,7 @@ const getProcessDefinitionStatisticsResponseBodySchema = getQueryResponseBodySch
 );
 type GetProcessDefinitionStatisticsResponseBody = z.infer<typeof getProcessDefinitionStatisticsResponseBodySchema>;
 
-type GetProcessDefinitionStatisticsParams = {
-	processDefinitionKey: string;
+type GetProcessDefinitionStatisticsParams = Pick<ProcessDefinition, 'processDefinitionKey'> & {
 	statisticName: StatisticName;
 };
 
@@ -99,11 +95,8 @@ export {
 	getProcessDefinitionStatisticsRequestBodySchema,
 	getProcessDefinitionStatisticsResponseBodySchema,
 	processDefinitionSchema,
-	processInstanceState,
-	statisticName,
 };
 export type {
-	GetProcessDefinitionStatisticsParams,
 	GetProcessDefinitionStatisticsRequestBody,
 	GetProcessDefinitionStatisticsResponseBody,
 	ProcessDefinition,
