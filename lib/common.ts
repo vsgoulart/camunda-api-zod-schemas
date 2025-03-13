@@ -2,6 +2,31 @@ import { z } from 'zod';
 
 const API_VERSION = 'v2';
 
+const advancedDateTimeFilterSchema = z.object({
+	$eq: z.string().optional(),
+	$neq: z.string().optional(),
+	$exists: z.boolean().optional(),
+	$gt: z.string().optional(),
+	$gte: z.string().optional(),
+	$lt: z.string().optional(),
+	$lte: z.string().optional(),
+	$in: z.array(z.string()).optional(),
+});
+type AdvancedDateTimeFilter = z.infer<typeof advancedDateTimeFilterSchema>;
+
+const advancedStringFilterSchema = z.object({
+	$like: z.string().optional(),
+});
+type AdvancedStringFilter = z.infer<typeof advancedStringFilterSchema>;
+
+const basicStringFilterSchema = z.object({
+	$eq: z.string().optional(),
+	$neq: z.string().optional(),
+	$exists: z.boolean().optional(),
+	$in: z.array(z.string()).optional(),
+});
+type BasicStringFilter = z.infer<typeof basicStringFilterSchema>;
+
 const problemDetailsSchema = z.object({
 	type: z.string(),
 	title: z.string(),
@@ -79,6 +104,9 @@ interface Endpoint<URLParams extends object | undefined = undefined> {
 
 export {
 	API_VERSION,
+	advancedDateTimeFilterSchema,
+	advancedStringFilterSchema,
+	basicStringFilterSchema,
 	problemDetailsSchema,
 	querySortOrderSchema,
 	queryPageSchema,
@@ -86,4 +114,13 @@ export {
 	getQueryResponseBodySchema,
 	getQueryRequestBodySchema,
 };
-export type { ProblemDetails, QuerySortOrder, QueryPage, Endpoint, QueryResponseBody };
+export type {
+	AdvancedDateTimeFilter,
+	AdvancedStringFilter,
+	BasicStringFilter,
+	ProblemDetails,
+	QuerySortOrder,
+	QueryPage,
+	Endpoint,
+	QueryResponseBody,
+};

@@ -1,5 +1,14 @@
 import { z } from 'zod';
-import { API_VERSION, type Endpoint } from './common';
+import {
+	advancedDateTimeFilterSchema,
+	API_VERSION,
+	basicStringFilterSchema,
+	getQueryResponseBodySchema,
+	type Endpoint,
+} from './common';
+
+type ProcessInstanceState = 'ACTIVE' | 'COMPLETED' | 'TERMINATED';
+type StatisticName = 'flownode-instances';
 
 const processDefinitionSchema = z.object({
 	processDefinitionKey: z.number(),
@@ -21,6 +30,55 @@ const getProcessDefinition: Endpoint<Pick<ProcessDefinition, 'processDefinitionK
 	},
 };
 
+const processDefinitionStatisticsBodySchema = z.array(
+	z.object({
+		flowNodeId: z.string(),
+		active: z.number(),
+		canceled: z.number(),
+		incidents: z.number(),
+		completed: z.number(),
+	}),
+);
+
+const getProcessDefinitionStatisticsRequestBodySchema = z.object({
+	filter: z.object({
+		startDate: advancedDateTimeFilterSchema.optional(),
+		endDate: advancedDateTimeFilterSchema.optional(),
+		state: z.enum(['ACTIVE', 'COMPLETED', 'TERMINATED']).optional(),
+		hasIncident: z.boolean().optional(),
+		tenantId: advancedDateTimeFilterSchema.optional(),
+		variables: z.array(
+			z.object({
+				name: z.string(),
+				value: z.string(),
+			}),
+		),
+		processInstanceKey: basicStringFilterSchema.optional(),
+		parentProcessInstanceKey: basicStringFilterSchema.optional(),
+		parentFlowNodeInstanceKey: basicStringFilterSchema.optional(),
+	}),
+});
+
+type GetProcessDefinitionStatisticsRequestBody = z.infer<typeof getProcessDefinitionStatisticsRequestBodySchema>;
+
+const getProcessDefinitionStatisticsResponseBodySchema = getQueryResponseBodySchema(
+	processDefinitionStatisticsBodySchema,
+);
+type GetProcessDefinitionStatisticsResponseBody = z.infer<typeof getProcessDefinitionStatisticsResponseBodySchema>;
+
+type GetProcessDefinitionStatisticsParams = Pick<ProcessDefinition, 'processDefinitionKey'> & {
+	statisticName: StatisticName;
+};
+
+const getProcessDefinitionStatistics: Endpoint<GetProcessDefinitionStatisticsParams> = {
+	method: 'POST',
+	getUrl(params) {
+		const { processDefinitionKey, statisticName = 'flownode-instances' } = params;
+
+		return `/${API_VERSION}/process-definitions/${processDefinitionKey}/statistics/${statisticName}`;
+	},
+};
+
 const getProcessDefinitionXml: Endpoint<Pick<ProcessDefinition, 'processDefinitionKey'>> = {
 	method: 'GET',
 	getUrl(params) {
@@ -30,7 +88,18 @@ const getProcessDefinitionXml: Endpoint<Pick<ProcessDefinition, 'processDefiniti
 	},
 };
 
-const endpoints = { getProcessDefinition, getProcessDefinitionXml } as const;
+const endpoints = { getProcessDefinition, getProcessDefinitionStatistics, getProcessDefinitionXml } as const;
 
-export { endpoints, processDefinitionSchema };
-export type { ProcessDefinition };
+export {
+	endpoints,
+	getProcessDefinitionStatisticsRequestBodySchema,
+	getProcessDefinitionStatisticsResponseBodySchema,
+	processDefinitionSchema,
+};
+export type {
+	GetProcessDefinitionStatisticsRequestBody,
+	GetProcessDefinitionStatisticsResponseBody,
+	ProcessDefinition,
+	ProcessInstanceState,
+	StatisticName,
+};
