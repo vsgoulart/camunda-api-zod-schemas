@@ -1,13 +1,8 @@
 import { z } from 'zod';
-import {
-	advancedDateTimeFilterSchema,
-	API_VERSION,
-	basicStringFilterSchema,
-	getQueryResponseBodySchema,
-	type Endpoint,
-} from './common';
+import { advancedDateTimeFilterSchema, API_VERSION, basicStringFilterSchema, type Endpoint } from './common';
 
-type ProcessInstanceState = 'ACTIVE' | 'COMPLETED' | 'TERMINATED';
+const processInstanceState = z.enum(['ACTIVE', 'COMPLETED', 'TERMINATED']);
+type ProcessInstanceState = z.infer<typeof processInstanceState>;
 type StatisticName = 'flownode-instances';
 
 const processDefinitionSchema = z.object({
@@ -39,40 +34,52 @@ const processDefinitionStatisticSchema = z.object({
 });
 type ProcessDefinitionStatistic = z.infer<typeof processDefinitionStatisticSchema>;
 
+const advancedProcessInstanceStateFilter = z.object({
+	$eq: processInstanceState.optional(),
+	$neq: processInstanceState.optional(),
+	$exists: z.boolean().optional(),
+	$in: z.array(processInstanceState).optional(),
+	$like: z.string().optional(),
+});
+
 const getProcessDefinitionStatisticsRequestBodySchema = z.object({
-	filter: z.object({
-		startDate: advancedDateTimeFilterSchema.optional(),
-		endDate: advancedDateTimeFilterSchema.optional(),
-		state: z.enum(['ACTIVE', 'COMPLETED', 'TERMINATED']).optional(),
-		hasIncident: z.boolean().optional(),
-		tenantId: advancedDateTimeFilterSchema.optional(),
-		variables: z.array(
-			z.object({
-				name: z.string(),
-				value: z.string(),
-			}),
-		),
-		processInstanceKey: basicStringFilterSchema.optional(),
-		parentProcessInstanceKey: basicStringFilterSchema.optional(),
-		parentFlowNodeInstanceKey: basicStringFilterSchema.optional(),
-	}),
+	filter: z
+		.object({
+			startDate: advancedDateTimeFilterSchema.optional(),
+			endDate: advancedDateTimeFilterSchema.optional(),
+			state: advancedProcessInstanceStateFilter.optional(),
+			hasIncident: z.boolean().optional(),
+			tenantId: advancedDateTimeFilterSchema.optional(),
+			variables: z
+				.array(
+					z.object({
+						name: z.string(),
+						value: z.string(),
+					}),
+				)
+				.optional(),
+			processInstanceKey: basicStringFilterSchema.optional(),
+			parentProcessInstanceKey: basicStringFilterSchema.optional(),
+			parentFlowNodeInstanceKey: basicStringFilterSchema.optional(),
+		})
+		.optional(),
 });
 
 type GetProcessDefinitionStatisticsRequestBody = z.infer<typeof getProcessDefinitionStatisticsRequestBodySchema>;
 
-const getProcessDefinitionStatisticsResponseBodySchema = getQueryResponseBodySchema(processDefinitionStatisticSchema);
+const getProcessDefinitionStatisticsResponseBodySchema = z.array(processDefinitionStatisticSchema);
 type GetProcessDefinitionStatisticsResponseBody = z.infer<typeof getProcessDefinitionStatisticsResponseBodySchema>;
 
-type GetProcessDefinitionStatisticsParams = Pick<ProcessDefinition, 'processDefinitionKey'> & {
+type GetProcessDefinitionStatisticsParams = Pick<ProcessDefinition, 'processDefinitionId'> & {
 	statisticName: StatisticName;
 };
 
 const getProcessDefinitionStatistics: Endpoint<GetProcessDefinitionStatisticsParams> = {
 	method: 'POST',
 	getUrl(params) {
-		const { processDefinitionKey, statisticName = 'flownode-instances' } = params;
+		const { processDefinitionId, statisticName = 'flownode-instances' } = params;
 
-		return `/${API_VERSION}/process-definitions/${processDefinitionKey}/statistics/${statisticName}`;
+		return `/${API_VERSION}/process-definitions/${processDefinitionId}/statistics/${statisticName}`;
 	},
 };
 
