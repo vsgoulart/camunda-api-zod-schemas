@@ -14,7 +14,7 @@
 		"camunda",
 		"zod"
 	],
-	"version": "0.0.2-beta.25",
+	"version": "0.0.2-beta.26",
 	"type": "module",
 	"license": "MIT",
 	"private": false,
