@@ -135,6 +135,7 @@ export {
 export type {
 	GetProcessDefinitionStatisticsRequestBody,
 	GetProcessDefinitionStatisticsResponseBody,
+	DecisionDefinition,
 	GetDecisionDefinitionXmlResponseBody,
 	ProcessDefinition,
 	ProcessInstanceState,
