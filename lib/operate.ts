@@ -67,7 +67,7 @@ const getProcessDefinitionStatisticsRequestBodySchema = z.object({
 
 type GetProcessDefinitionStatisticsRequestBody = z.infer<typeof getProcessDefinitionStatisticsRequestBodySchema>;
 
-const getProcessDefinitionStatisticsResponseBodySchema = z.array(processDefinitionStatisticSchema);
+const getProcessDefinitionStatisticsResponseBodySchema = z.object({ items: z.array(processDefinitionStatisticSchema) });
 type GetProcessDefinitionStatisticsResponseBody = z.infer<typeof getProcessDefinitionStatisticsResponseBodySchema>;
 
 type GetProcessDefinitionStatisticsParams = Pick<ProcessDefinition, 'processDefinitionId'> & {
