@@ -70,6 +70,14 @@ function getQueryResponseBodySchema<ItemSchema extends z.ZodTypeAny>(
 	});
 }
 
+function getItemsArrayResponseBodySchema<ItemSchema extends z.ZodTypeAny>(
+	itemSchema: ItemSchema,
+): z.ZodType<{ items: z.infer<ItemSchema>[] }> {
+	return z.object({
+		items: z.array(itemSchema),
+	});
+}
+
 function getQueryRequestSortSchema<Fields extends [string, ...string[]]>(fields: Fields) {
 	return z.array(
 		z.object({
@@ -111,6 +119,7 @@ export {
 	querySortOrderSchema,
 	queryPageSchema,
 	queryResponsePageSchema,
+	getItemsArrayResponseBodySchema,
 	getQueryResponseBodySchema,
 	getQueryRequestBodySchema,
 };
