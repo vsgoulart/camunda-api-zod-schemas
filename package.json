@@ -83,7 +83,7 @@
 	},
 	"devDependencies": {
 		"@biomejs/biome": "1.9.4",
-		"@types/node": "22.13.9",
+		"@types/node": "22.13.14",
 		"changelogen": "0.6.1",
 		"typescript": "5.8.2",
 		"vite": "6.2.0",
