@@ -16,6 +16,11 @@ const processDefinitionSchema = z.object({
 });
 type ProcessDefinition = z.infer<typeof processDefinitionSchema>;
 
+const processInstanceSchema = z.object({
+	processInstanceKey: z.string(),
+});
+type ProcessInstance = z.infer<typeof processInstanceSchema>;
+
 const getProcessDefinition: Endpoint<Pick<ProcessDefinition, 'processDefinitionKey'>> = {
 	method: 'GET',
 	getUrl(params) {
@@ -108,6 +113,22 @@ type GetDecisionDefinitionXmlResponseBody = z.infer<typeof getDecisionDefinition
 
 type GetDecisionDefinitionXmlParams = Pick<DecisionDefinition, 'decisionDefinitionKey'>;
 
+const getProcessInstanceStatistics: Endpoint<GetProcessInstanceStatisticsParams> = {
+	method: 'GET',
+	getUrl(params) {
+		const { processInstanceKey, statisticName = 'flownode-instances' } = params;
+
+		return `/${API_VERSION}/process-instances/${processInstanceKey}/statistics/${statisticName}`;
+	},
+};
+
+const getProcessInstanceStatisticsResponseBodySchema = z.object({ items: z.array(processDefinitionStatisticSchema) });
+type GetProcessInstanceStatisticsResponseBody = z.infer<typeof getProcessInstanceStatisticsResponseBodySchema>;
+
+type GetProcessInstanceStatisticsParams = Pick<ProcessInstance, 'processInstanceKey'> & {
+	statisticName: StatisticName;
+};
+
 const getDecisionDefinitionXml: Endpoint<GetDecisionDefinitionXmlParams> = {
 	method: 'GET',
 	getUrl(params) {
@@ -118,27 +139,30 @@ const getDecisionDefinitionXml: Endpoint<GetDecisionDefinitionXmlParams> = {
 };
 
 const endpoints = {
+	getDecisionDefinitionXml,
 	getProcessDefinition,
 	getProcessDefinitionStatistics,
 	getProcessDefinitionXml,
-	getDecisionDefinitionXml,
+	getProcessInstanceStatistics,
 } as const;
 
 export {
 	endpoints,
-	getProcessDefinitionStatisticsRequestBodySchema,
-	getProcessDefinitionStatisticsResponseBodySchema,
-	processDefinitionSchema,
 	decisionDefinitionSchema,
 	getDecisionDefinitionXmlResponseBodySchema,
+	getProcessDefinitionStatisticsRequestBodySchema,
+	getProcessDefinitionStatisticsResponseBodySchema,
+	getProcessInstanceStatisticsResponseBodySchema,
+	processDefinitionSchema,
 };
 export type {
-	GetProcessDefinitionStatisticsRequestBody,
-	GetProcessDefinitionStatisticsResponseBody,
 	DecisionDefinition,
 	GetDecisionDefinitionXmlResponseBody,
+	GetProcessDefinitionStatisticsRequestBody,
+	GetProcessDefinitionStatisticsResponseBody,
+	GetProcessInstanceStatisticsResponseBody,
 	ProcessDefinition,
+	ProcessDefinitionStatistic,
 	ProcessInstanceState,
 	StatisticName,
-	ProcessDefinitionStatistic,
 };
