@@ -4,6 +4,8 @@ import {
 	API_VERSION,
 	basicStringFilterSchema,
 	getCollectionResponseBodySchema,
+	getQueryRequestBodySchema,
+	getQueryResponseBodySchema,
 	type Endpoint,
 } from './common';
 
@@ -12,13 +14,13 @@ type ProcessInstanceState = z.infer<typeof processInstanceState>;
 type StatisticName = 'flownode-instances';
 
 const processDefinitionSchema = z.object({
-	processDefinitionKey: z.number(),
-	processDefinitionId: z.string(),
 	name: z.string().optional(),
+	resourceName: z.string().optional(),
 	version: z.number(),
 	versionTag: z.string().optional(),
+	processDefinitionId: z.string(),
 	tenantId: z.string(),
-	formKey: z.number(),
+	processDefinitionKey: z.number(),
 });
 type ProcessDefinition = z.infer<typeof processDefinitionSchema>;
 
@@ -105,6 +107,31 @@ const getProcessDefinitionXml: Endpoint<Pick<ProcessDefinition, 'processDefiniti
 	},
 };
 
+const queryProcessDefinitionsRequestBodySchema = getQueryRequestBodySchema({
+	sortFields: [
+		'processDefinitionKey',
+		'name',
+		'resourceName',
+		'version',
+		'versionTag',
+		'processDefinitionId',
+		'tenantId',
+	] as const,
+	filter: processDefinitionSchema.partial(),
+});
+
+type QueryProcessDefinitionsRequestBody = z.infer<typeof queryProcessDefinitionsRequestBodySchema>;
+
+const queryProcessDefinitionsResponseBodySchema = getQueryResponseBodySchema(processDefinitionSchema);
+type QueryProcessDefinitionsResponseBody = z.infer<typeof queryProcessDefinitionsResponseBodySchema>;
+
+const queryProcessDefinitions: Endpoint = {
+	method: 'POST',
+	getUrl() {
+		return `/${API_VERSION}/process-definitions/search`;
+	},
+};
+
 const decisionDefinitionSchema = z.object({
 	decisionDefinitionId: z.string(),
 	name: z.string(),
@@ -154,6 +181,7 @@ const endpoints = {
 	getProcessDefinitionStatistics,
 	getProcessDefinitionXml,
 	getProcessInstanceStatistics,
+	queryProcessDefinitions,
 } as const;
 
 export {
@@ -164,6 +192,8 @@ export {
 	getProcessDefinitionStatisticsResponseBodySchema,
 	getProcessInstanceStatisticsResponseBodySchema,
 	processDefinitionSchema,
+	queryProcessDefinitionsRequestBodySchema,
+	queryProcessDefinitionsResponseBodySchema,
 };
 export type {
 	DecisionDefinition,
@@ -175,4 +205,6 @@ export type {
 	ProcessDefinitionStatistic,
 	ProcessInstanceState,
 	StatisticName,
+	QueryProcessDefinitionsRequestBody,
+	QueryProcessDefinitionsResponseBody,
 };
