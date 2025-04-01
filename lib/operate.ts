@@ -3,7 +3,7 @@ import {
 	advancedDateTimeFilterSchema,
 	API_VERSION,
 	basicStringFilterSchema,
-	getItemsArrayResponseBodySchema,
+	getCollectionResponseBodySchema,
 	type Endpoint,
 } from './common';
 
@@ -78,7 +78,7 @@ const getProcessDefinitionStatisticsRequestBodySchema = z.object({
 
 type GetProcessDefinitionStatisticsRequestBody = z.infer<typeof getProcessDefinitionStatisticsRequestBodySchema>;
 
-const getProcessDefinitionStatisticsResponseBodySchema = getItemsArrayResponseBodySchema(
+const getProcessDefinitionStatisticsResponseBodySchema = getCollectionResponseBodySchema(
 	processDefinitionStatisticSchema,
 );
 type GetProcessDefinitionStatisticsResponseBody = z.infer<typeof getProcessDefinitionStatisticsResponseBodySchema>;
@@ -130,7 +130,7 @@ const getProcessInstanceStatistics: Endpoint<GetProcessInstanceStatisticsParams>
 	},
 };
 
-const getProcessInstanceStatisticsResponseBodySchema = getItemsArrayResponseBodySchema(
+const getProcessInstanceStatisticsResponseBodySchema = getCollectionResponseBodySchema(
 	processDefinitionStatisticSchema,
 );
 type GetProcessInstanceStatisticsResponseBody = z.infer<typeof getProcessInstanceStatisticsResponseBodySchema>;

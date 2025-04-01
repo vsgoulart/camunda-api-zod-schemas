@@ -70,7 +70,7 @@ function getQueryResponseBodySchema<ItemSchema extends z.ZodTypeAny>(
 	});
 }
 
-function getItemsArrayResponseBodySchema<ItemSchema extends z.ZodTypeAny>(
+function getCollectionResponseBodySchema<ItemSchema extends z.ZodTypeAny>(
 	itemSchema: ItemSchema,
 ): z.ZodType<{ items: z.infer<ItemSchema>[] }> {
 	return z.object({
@@ -119,7 +119,7 @@ export {
 	querySortOrderSchema,
 	queryPageSchema,
 	queryResponsePageSchema,
-	getItemsArrayResponseBodySchema,
+	getCollectionResponseBodySchema,
 	getQueryResponseBodySchema,
 	getQueryRequestBodySchema,
 };
