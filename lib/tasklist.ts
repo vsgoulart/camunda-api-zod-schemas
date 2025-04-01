@@ -8,7 +8,7 @@ const userTaskSchema = z.object({
 	processName: z.string().optional(),
 	processInstanceKey: z.number(),
 	processDefinitionKey: z.number(),
-	elementName: z.string().optional(),
+	name: z.string().optional(),
 	elementId: z.string(),
 	elementInstanceKey: z.number(),
 	tenantId: z.string(),
