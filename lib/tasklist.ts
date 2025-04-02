@@ -1,5 +1,14 @@
 import { z } from 'zod';
-import { API_VERSION, getQueryRequestBodySchema, getQueryResponseBodySchema, type Endpoint } from './common';
+import {
+	advancedDateTimeFilterSchema,
+	advancedIntegerFilterSchema,
+	advancedStringFilterSchema,
+	API_VERSION,
+	getQueryRequestBodySchema,
+	getQueryResponseBodySchema,
+	userTaskVariableFilterSchema,
+	type Endpoint,
+} from './common';
 
 const userTaskSchema = z.object({
 	state: z.string(),
@@ -40,25 +49,27 @@ const queryUserTasksRequestBodySchema = getQueryRequestBodySchema({
 	sortFields: ['creationDate', 'completionDate', 'followUpDate', 'dueDate', 'priority'] as const,
 	filter: userTaskSchema
 		.pick({
-			userTaskKey: true,
 			state: true,
-			assignee: true,
 			elementId: true,
-			candidateGroups: true,
-			candidateUsers: true,
+			tenantId: true,
+			processDefinitionId: true,
+			userTaskKey: true,
 			processDefinitionKey: true,
 			processInstanceKey: true,
-			processDefinitionId: true,
-			tenantId: true,
+			elementInstanceKey: true,
 		})
 		.merge(
 			z.object({
-				variables: z.array(
-					z.object({
-						name: z.string(),
-						value: z.string(),
-					}),
-				),
+				assignee: z.union([userTaskSchema.shape.assignee, advancedStringFilterSchema]),
+				priority: z.union([userTaskSchema.shape.priority, advancedIntegerFilterSchema]),
+				candidateGroup: z.union([z.string(), advancedStringFilterSchema]),
+				candidateUser: z.union([z.string(), advancedStringFilterSchema]),
+				creationDate: z.union([userTaskSchema.shape.creationDate, advancedDateTimeFilterSchema]),
+				completionDate: z.union([userTaskSchema.shape.completionDate, advancedDateTimeFilterSchema]),
+				followUpDate: z.union([userTaskSchema.shape.followUpDate, advancedDateTimeFilterSchema]),
+				dueDate: z.union([userTaskSchema.shape.dueDate, advancedDateTimeFilterSchema]),
+				localVariables: z.array(userTaskVariableFilterSchema),
+				processInstanceVariables: z.array(userTaskVariableFilterSchema),
 			}),
 		)
 		.partial(),

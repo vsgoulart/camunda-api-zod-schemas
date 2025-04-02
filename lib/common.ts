@@ -15,17 +15,31 @@ const advancedDateTimeFilterSchema = z.object({
 type AdvancedDateTimeFilter = z.infer<typeof advancedDateTimeFilterSchema>;
 
 const advancedStringFilterSchema = z.object({
-	$like: z.string().optional(),
-});
-type AdvancedStringFilter = z.infer<typeof advancedStringFilterSchema>;
-
-const basicStringFilterSchema = z.object({
 	$eq: z.string().optional(),
 	$neq: z.string().optional(),
 	$exists: z.boolean().optional(),
 	$in: z.array(z.string()).optional(),
+	$like: z.string().optional(),
 });
-type BasicStringFilter = z.infer<typeof basicStringFilterSchema>;
+type AdvancedStringFilter = z.infer<typeof advancedStringFilterSchema>;
+
+const advancedIntegerFilterSchema = z.object({
+	$eq: z.number().int().optional(),
+	$neq: z.number().int().optional(),
+	$exists: z.boolean().optional(),
+	$gt: z.number().int().optional(),
+	$gte: z.number().int().optional(),
+	$lt: z.number().int().optional(),
+	$lte: z.number().int().optional(),
+	$in: z.array(z.number().int()).optional(),
+});
+type AdvancedIntegerFilter = z.infer<typeof advancedIntegerFilterSchema>;
+
+const userTaskVariableFilterSchema = z.object({
+	name: z.string(),
+	value: z.union([z.string(), advancedStringFilterSchema]),
+});
+type UserTaskVariableFilter = z.infer<typeof userTaskVariableFilterSchema>;
 
 const problemDetailsSchema = z.object({
 	type: z.string(),
@@ -114,7 +128,8 @@ export {
 	API_VERSION,
 	advancedDateTimeFilterSchema,
 	advancedStringFilterSchema,
-	basicStringFilterSchema,
+	advancedIntegerFilterSchema,
+	userTaskVariableFilterSchema,
 	problemDetailsSchema,
 	querySortOrderSchema,
 	queryPageSchema,
@@ -126,7 +141,8 @@ export {
 export type {
 	AdvancedDateTimeFilter,
 	AdvancedStringFilter,
-	BasicStringFilter,
+	AdvancedIntegerFilter,
+	UserTaskVariableFilter,
 	ProblemDetails,
 	QuerySortOrder,
 	QueryPage,

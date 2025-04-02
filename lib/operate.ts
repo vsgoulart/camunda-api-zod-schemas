@@ -2,7 +2,7 @@ import { z } from 'zod';
 import {
 	advancedDateTimeFilterSchema,
 	API_VERSION,
-	basicStringFilterSchema,
+	advancedStringFilterSchema,
 	getCollectionResponseBodySchema,
 	getQueryRequestBodySchema,
 	getQueryResponseBodySchema,
@@ -71,9 +71,9 @@ const getProcessDefinitionStatisticsRequestBodySchema = z.object({
 					}),
 				)
 				.optional(),
-			processInstanceKey: basicStringFilterSchema.optional(),
-			parentProcessInstanceKey: basicStringFilterSchema.optional(),
-			parentFlowNodeInstanceKey: basicStringFilterSchema.optional(),
+			processInstanceKey: advancedStringFilterSchema.optional(),
+			parentProcessInstanceKey: advancedStringFilterSchema.optional(),
+			parentFlowNodeInstanceKey: advancedStringFilterSchema.optional(),
 		})
 		.optional(),
 });
