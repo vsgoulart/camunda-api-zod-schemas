@@ -14,8 +14,8 @@ devDependencies:
     specifier: 1.9.4
     version: 1.9.4
   '@types/node':
-    specifier: 22.13.9
-    version: 22.13.9
+    specifier: 22.13.17
+    version: 22.13.17
   changelogen:
     specifier: 0.6.1
     version: 0.6.1
@@ -23,11 +23,11 @@ devDependencies:
     specifier: 5.8.2
     version: 5.8.2
   vite:
-    specifier: 6.2.0
-    version: 6.2.0(@types/node@22.13.9)
+    specifier: 6.2.4
+    version: 6.2.4(@types/node@22.13.17)
   vite-plugin-dts:
     specifier: 4.5.3
-    version: 4.5.3(@types/node@22.13.9)(typescript@5.8.2)(vite@6.2.0)
+    version: 4.5.3(@types/node@22.13.17)(typescript@5.8.2)(vite@6.2.4)
 
 packages:
 
@@ -375,27 +375,27 @@ packages:
     resolution: {integrity: sha512-gv3ZRaISU3fjPAgNsriBRqGWQL6quFx04YMPW/zD8XMLsU32mhCCbfbO6KZFLjvYpCZ8zyDEgqsgf+PwPaM7GQ==}
     dev: true
 
-  /@microsoft/api-extractor-model@7.30.3(@types/node@22.13.9):
+  /@microsoft/api-extractor-model@7.30.3(@types/node@22.13.17):
     resolution: {integrity: sha512-yEAvq0F78MmStXdqz9TTT4PZ05Xu5R8nqgwI5xmUmQjWBQ9E6R2n8HB/iZMRciG4rf9iwI2mtuQwIzDXBvHn1w==}
     dependencies:
       '@microsoft/tsdoc': 0.15.1
       '@microsoft/tsdoc-config': 0.17.1
-      '@rushstack/node-core-library': 5.11.0(@types/node@22.13.9)
+      '@rushstack/node-core-library': 5.11.0(@types/node@22.13.17)
     transitivePeerDependencies:
       - '@types/node'
     dev: true
 
-  /@microsoft/api-extractor@7.51.1(@types/node@22.13.9):
+  /@microsoft/api-extractor@7.51.1(@types/node@22.13.17):
     resolution: {integrity: sha512-VoFvIeYXme8QctXDkixy1KIn750kZaFy2snAEOB3nhDFfbBcJNEcvBrpCIQIV09MqI4g9egKUkg+/12WMRC77w==}
     hasBin: true
     dependencies:
-      '@microsoft/api-extractor-model': 7.30.3(@types/node@22.13.9)
+      '@microsoft/api-extractor-model': 7.30.3(@types/node@22.13.17)
       '@microsoft/tsdoc': 0.15.1
       '@microsoft/tsdoc-config': 0.17.1
-      '@rushstack/node-core-library': 5.11.0(@types/node@22.13.9)
+      '@rushstack/node-core-library': 5.11.0(@types/node@22.13.17)
       '@rushstack/rig-package': 0.5.3
-      '@rushstack/terminal': 0.15.0(@types/node@22.13.9)
-      '@rushstack/ts-command-line': 4.23.5(@types/node@22.13.9)
+      '@rushstack/terminal': 0.15.0(@types/node@22.13.17)
+      '@rushstack/ts-command-line': 4.23.5(@types/node@22.13.17)
       lodash: 4.17.21
       minimatch: 3.0.8
       resolve: 1.22.8
@@ -585,7 +585,7 @@ packages:
     dev: true
     optional: true
 
-  /@rushstack/node-core-library@5.11.0(@types/node@22.13.9):
+  /@rushstack/node-core-library@5.11.0(@types/node@22.13.17):
     resolution: {integrity: sha512-I8+VzG9A0F3nH2rLpPd7hF8F7l5Xb7D+ldrWVZYegXM6CsKkvWc670RlgK3WX8/AseZfXA/vVrh0bpXe2Y2UDQ==}
     peerDependencies:
       '@types/node': '*'
@@ -593,7 +593,7 @@ packages:
       '@types/node':
         optional: true
     dependencies:
-      '@types/node': 22.13.9
+      '@types/node': 22.13.17
       ajv: 8.13.0
       ajv-draft-04: 1.0.0(ajv@8.13.0)
       ajv-formats: 3.0.1(ajv@8.13.0)
@@ -611,7 +611,7 @@ packages:
       strip-json-comments: 3.1.1
     dev: true
 
-  /@rushstack/terminal@0.15.0(@types/node@22.13.9):
+  /@rushstack/terminal@0.15.0(@types/node@22.13.17):
     resolution: {integrity: sha512-vXQPRQ+vJJn4GVqxkwRe+UGgzNxdV8xuJZY2zem46Y0p3tlahucH9/hPmLGj2i9dQnUBFiRnoM9/KW7PYw8F4Q==}
     peerDependencies:
       '@types/node': '*'
@@ -619,15 +619,15 @@ packages:
       '@types/node':
         optional: true
     dependencies:
-      '@rushstack/node-core-library': 5.11.0(@types/node@22.13.9)
-      '@types/node': 22.13.9
+      '@rushstack/node-core-library': 5.11.0(@types/node@22.13.17)
+      '@types/node': 22.13.17
       supports-color: 8.1.1
     dev: true
 
-  /@rushstack/ts-command-line@4.23.5(@types/node@22.13.9):
+  /@rushstack/ts-command-line@4.23.5(@types/node@22.13.17):
     resolution: {integrity: sha512-jg70HfoK44KfSP3MTiL5rxsZH7X1ktX3cZs9Sl8eDu1/LxJSbPsh0MOFRC710lIuYYSgxWjI5AjbCBAl7u3RxA==}
     dependencies:
-      '@rushstack/terminal': 0.15.0(@types/node@22.13.9)
+      '@rushstack/terminal': 0.15.0(@types/node@22.13.17)
       '@types/argparse': 1.0.38
       argparse: 1.0.10
       string-argv: 0.3.2
@@ -643,8 +643,8 @@ packages:
     resolution: {integrity: sha512-AYnb1nQyY49te+VRAVgmzfcgjYS91mY5P0TKUDCLEM+gNnA+3T6rWITXRLYCpahpqSQbN5cE+gHpnPyXjHWxcw==}
     dev: true
 
-  /@types/node@22.13.9:
-    resolution: {integrity: sha512-acBjXdRJ3A6Pb3tqnw9HZmyR3Fiol3aGxRCK1x3d+6CDAMjl7I649wpSd+yNURCjbOUGu9tqtLKnTGxmK6CyGw==}
+  /@types/node@22.13.17:
+    resolution: {integrity: sha512-nAJuQXoyPj04uLgu+obZcSmsfOenUg6DxPKogeUy6yNCFwWaj5sBF8/G/pNo8EtBJjAfSVgfIlugR/BCOleO+g==}
     dependencies:
       undici-types: 6.20.0
     dev: true
@@ -1406,7 +1406,7 @@ packages:
       punycode: 2.3.1
     dev: true
 
-  /vite-plugin-dts@4.5.3(@types/node@22.13.9)(typescript@5.8.2)(vite@6.2.0):
+  /vite-plugin-dts@4.5.3(@types/node@22.13.17)(typescript@5.8.2)(vite@6.2.4):
     resolution: {integrity: sha512-P64VnD00dR+e8S26ESoFELqc17+w7pKkwlBpgXteOljFyT0zDwD8hH4zXp49M/kciy//7ZbVXIwQCekBJjfWzA==}
     peerDependencies:
       typescript: '*'
@@ -1415,7 +1415,7 @@ packages:
       vite:
         optional: true
     dependencies:
-      '@microsoft/api-extractor': 7.51.1(@types/node@22.13.9)
+      '@microsoft/api-extractor': 7.51.1(@types/node@22.13.17)
       '@rollup/pluginutils': 5.1.4
       '@volar/typescript': 2.4.11
       '@vue/language-core': 2.2.0(typescript@5.8.2)
@@ -1425,15 +1425,15 @@ packages:
       local-pkg: 1.1.1
       magic-string: 0.30.17
       typescript: 5.8.2
-      vite: 6.2.0(@types/node@22.13.9)
+      vite: 6.2.4(@types/node@22.13.17)
     transitivePeerDependencies:
       - '@types/node'
       - rollup
       - supports-color
     dev: true
 
-  /vite@6.2.0(@types/node@22.13.9):
-    resolution: {integrity: sha512-7dPxoo+WsT/64rDcwoOjk76XHj+TqNTIvHKcuMQ1k4/SeHDaQt5GFAeLYzrimZrMpn/O6DtdI03WUjdxuPM0oQ==}
+  /vite@6.2.4(@types/node@22.13.17):
+    resolution: {integrity: sha512-veHMSew8CcRzhL5o8ONjy8gkfmFJAd5Ac16oxBUjlwgX3Gq2Wqr+qNC3TjPIpy7TPV/KporLga5GT9HqdrCizw==}
     engines: {node: ^18.0.0 || ^20.0.0 || >=22.0.0}
     hasBin: true
     peerDependencies:
@@ -1472,7 +1472,7 @@ packages:
       yaml:
         optional: true
     dependencies:
-      '@types/node': 22.13.9
+      '@types/node': 22.13.17
       esbuild: 0.25.0
       postcss: 8.5.3
       rollup: 4.34.9
