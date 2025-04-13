@@ -55,25 +55,30 @@ const advancedProcessInstanceStateFilter = z.object({
 	$like: z.string().optional(),
 });
 
+const processDefinitionStatisticsFilterFields = {
+	startDate: advancedDateTimeFilterSchema.optional(),
+	endDate: advancedDateTimeFilterSchema.optional(),
+	state: advancedProcessInstanceStateFilter.optional(),
+	hasIncident: z.boolean().optional(),
+	tenantId: advancedDateTimeFilterSchema.optional(),
+	variables: z
+		.array(
+			z.object({
+				name: z.string(),
+				value: z.string(),
+			}),
+		)
+		.optional(),
+	processInstanceKey: advancedStringFilterSchema.optional(),
+	parentProcessInstanceKey: advancedStringFilterSchema.optional(),
+	parentFlowNodeInstanceKey: advancedStringFilterSchema.optional(),
+};
+
 const getProcessDefinitionStatisticsRequestBodySchema = z.object({
 	filter: z
 		.object({
-			startDate: advancedDateTimeFilterSchema.optional(),
-			endDate: advancedDateTimeFilterSchema.optional(),
-			state: advancedProcessInstanceStateFilter.optional(),
-			hasIncident: z.boolean().optional(),
-			tenantId: advancedDateTimeFilterSchema.optional(),
-			variables: z
-				.array(
-					z.object({
-						name: z.string(),
-						value: z.string(),
-					}),
-				)
-				.optional(),
-			processInstanceKey: advancedStringFilterSchema.optional(),
-			parentProcessInstanceKey: advancedStringFilterSchema.optional(),
-			parentFlowNodeInstanceKey: advancedStringFilterSchema.optional(),
+			...processDefinitionStatisticsFilterFields,
+			$or: z.array(z.object(processDefinitionStatisticsFilterFields).optional()).optional(),
 		})
 		.optional(),
 });
