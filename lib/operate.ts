@@ -7,11 +7,12 @@ import {
 	getQueryRequestBodySchema,
 	getQueryResponseBodySchema,
 	type Endpoint,
+	basicStringFilterSchema,
 } from './common';
 
 const processInstanceState = z.enum(['ACTIVE', 'COMPLETED', 'TERMINATED']);
 type ProcessInstanceState = z.infer<typeof processInstanceState>;
-type StatisticName = 'flownode-instances';
+type StatisticName = 'element-instances';
 
 const processDefinitionSchema = z.object({
 	name: z.string().optional(),
@@ -39,7 +40,7 @@ const getProcessDefinition: Endpoint<Pick<ProcessDefinition, 'processDefinitionK
 };
 
 const processDefinitionStatisticSchema = z.object({
-	flowNodeId: z.string(),
+	elementId: z.string(),
 	active: z.number(),
 	canceled: z.number(),
 	incidents: z.number(),
@@ -60,7 +61,7 @@ const processDefinitionStatisticsFilterFields = {
 	endDate: advancedDateTimeFilterSchema.optional(),
 	state: advancedProcessInstanceStateFilter.optional(),
 	hasIncident: z.boolean().optional(),
-	tenantId: advancedDateTimeFilterSchema.optional(),
+	tenantId: advancedStringFilterSchema.optional(),
 	variables: z
 		.array(
 			z.object({
@@ -69,9 +70,16 @@ const processDefinitionStatisticsFilterFields = {
 			}),
 		)
 		.optional(),
-	processInstanceKey: advancedStringFilterSchema.optional(),
-	parentProcessInstanceKey: advancedStringFilterSchema.optional(),
-	parentFlowNodeInstanceKey: advancedStringFilterSchema.optional(),
+	processInstanceKey: basicStringFilterSchema.optional(),
+	parentProcessInstanceKey: basicStringFilterSchema.optional(),
+	parentElementInstanceKey: basicStringFilterSchema.optional(),
+	batchOperationId: advancedStringFilterSchema.optional(),
+	errorMessage: advancedStringFilterSchema.optional(),
+	hasRetriesLeft: z.boolean().optional(),
+	elementInstanceState: advancedProcessInstanceStateFilter.optional(),
+	elementId: advancedStringFilterSchema.optional(),
+	hasElementInstanceIncident: z.boolean().optional(),
+	incidentErrorHashCode: z.number().optional(),
 };
 
 const getProcessDefinitionStatisticsRequestBodySchema = z.object({
@@ -97,7 +105,7 @@ type GetProcessDefinitionStatisticsParams = Pick<ProcessDefinition, 'processDefi
 const getProcessDefinitionStatistics: Endpoint<GetProcessDefinitionStatisticsParams> = {
 	method: 'POST',
 	getUrl(params) {
-		const { processDefinitionId, statisticName = 'flownode-instances' } = params;
+		const { processDefinitionId, statisticName = 'element-instances' } = params;
 
 		return `/${API_VERSION}/process-definitions/${processDefinitionId}/statistics/${statisticName}`;
 	},
@@ -156,7 +164,7 @@ type GetDecisionDefinitionXmlParams = Pick<DecisionDefinition, 'decisionDefiniti
 const getProcessInstanceStatistics: Endpoint<GetProcessInstanceStatisticsParams> = {
 	method: 'GET',
 	getUrl(params) {
-		const { processInstanceKey, statisticName = 'flownode-instances' } = params;
+		const { processInstanceKey, statisticName = 'element-instances' } = params;
 
 		return `/${API_VERSION}/process-instances/${processInstanceKey}/statistics/${statisticName}`;
 	},

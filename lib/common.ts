@@ -14,11 +14,21 @@ const advancedDateTimeFilterSchema = z.object({
 });
 type AdvancedDateTimeFilter = z.infer<typeof advancedDateTimeFilterSchema>;
 
+const basicStringFilterSchema = z.object({
+	$eq: z.string().optional(),
+	$neq: z.string().optional(),
+	$exists: z.boolean().optional(),
+	$in: z.array(z.string()).optional(),
+	$notIn: z.array(z.string()).optional(),
+});
+type BasicStringFilter = z.infer<typeof basicStringFilterSchema>;
+
 const advancedStringFilterSchema = z.object({
 	$eq: z.string().optional(),
 	$neq: z.string().optional(),
 	$exists: z.boolean().optional(),
 	$in: z.array(z.string()).optional(),
+	$notIn: z.array(z.string()).optional(),
 	$like: z.string().optional(),
 });
 type AdvancedStringFilter = z.infer<typeof advancedStringFilterSchema>;
@@ -127,6 +137,7 @@ interface Endpoint<URLParams extends object | undefined = undefined> {
 export {
 	API_VERSION,
 	advancedDateTimeFilterSchema,
+	basicStringFilterSchema,
 	advancedStringFilterSchema,
 	advancedIntegerFilterSchema,
 	userTaskVariableFilterSchema,
@@ -140,6 +151,7 @@ export {
 };
 export type {
 	AdvancedDateTimeFilter,
+	BasicStringFilter,
 	AdvancedStringFilter,
 	AdvancedIntegerFilter,
 	UserTaskVariableFilter,
