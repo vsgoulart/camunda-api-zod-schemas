@@ -179,6 +179,28 @@ type GetProcessInstanceStatisticsParams = Pick<ProcessInstance, 'processInstance
 	statisticName: StatisticName;
 };
 
+const getProcessSequenceFlows: Endpoint<Pick<ProcessInstance, 'processInstanceKey'>> = {
+	method: 'GET',
+	getUrl(params) {
+		const { processInstanceKey } = params;
+
+		return `/${API_VERSION}/process-instances/${processInstanceKey}/sequence-flows`;
+	},
+};
+
+const sequenceFlowSchema = z.object({
+	processInstanceKey: z.string(),
+	sequenceFlowKey: z.string(),
+	processDefinitionKey: z.number(),
+	processDefinitionId: z.string(),
+});
+type SequenceFlow = z.infer<typeof sequenceFlowSchema>;
+
+const getProcessSequenceFlowsResponseBodySchema = getCollectionResponseBodySchema(
+	sequenceFlowSchema,
+);
+type GetProcessSequenceFlowsResponseBody = z.infer<typeof getProcessSequenceFlowsResponseBodySchema>;
+
 const getDecisionDefinitionXml: Endpoint<GetDecisionDefinitionXmlParams> = {
 	method: 'GET',
 	getUrl(params) {
@@ -194,6 +216,7 @@ const endpoints = {
 	getProcessDefinitionStatistics,
 	getProcessDefinitionXml,
 	getProcessInstanceStatistics,
+	getProcessSequenceFlows,
 	queryProcessDefinitions,
 } as const;
 
@@ -204,6 +227,7 @@ export {
 	getProcessDefinitionStatisticsRequestBodySchema,
 	getProcessDefinitionStatisticsResponseBodySchema,
 	getProcessInstanceStatisticsResponseBodySchema,
+	getProcessSequenceFlowsResponseBodySchema,
 	processDefinitionSchema,
 	queryProcessDefinitionsRequestBodySchema,
 	queryProcessDefinitionsResponseBodySchema,
@@ -214,9 +238,11 @@ export type {
 	GetProcessDefinitionStatisticsRequestBody,
 	GetProcessDefinitionStatisticsResponseBody,
 	GetProcessInstanceStatisticsResponseBody,
+	GetProcessSequenceFlowsResponseBody,
 	ProcessDefinition,
 	ProcessDefinitionStatistic,
 	ProcessInstanceState,
+	SequenceFlow,
 	StatisticName,
 	QueryProcessDefinitionsRequestBody,
 	QueryProcessDefinitionsResponseBody,
