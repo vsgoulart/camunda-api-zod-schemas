@@ -26,7 +26,19 @@ const processDefinitionSchema = z.object({
 type ProcessDefinition = z.infer<typeof processDefinitionSchema>;
 
 const processInstanceSchema = z.object({
+	processDefinitionId: z.string(),
+	processDefinitionName: z.string(),
+	processDefinitionVersion: z.number(),
+	processDefinitionVersionTag: z.string().optional(),
+	startDate: z.string(),
+	endDate: z.string().optional(),
+	state: processInstanceState,
+	hasIncident: z.boolean(),
+	tenantId: z.string(),
 	processInstanceKey: z.string(),
+	processDefinitionKey: z.string(),
+	parentProcessInstanceKey: z.string().optional(),
+	parentElementInstanceKey: z.string().optional(),
 });
 type ProcessInstance = z.infer<typeof processInstanceSchema>;
 
@@ -36,6 +48,15 @@ const getProcessDefinition: Endpoint<Pick<ProcessDefinition, 'processDefinitionK
 		const { processDefinitionKey } = params;
 
 		return `/${API_VERSION}/process-definitions/${processDefinitionKey}`;
+	},
+};
+
+const getProcessInstance: Endpoint<Pick<ProcessInstance, 'processInstanceKey'>> = {
+	method: 'GET',
+	getUrl(params) {
+		const { processInstanceKey } = params;
+
+		return `/${API_VERSION}/process-instances/${processInstanceKey}`;
 	},
 };
 
@@ -188,11 +209,30 @@ const getDecisionDefinitionXml: Endpoint<GetDecisionDefinitionXmlParams> = {
 	},
 };
 
+const getProcessInstanceCallHierarchy: Endpoint<Pick<ProcessInstance, 'processInstanceKey'>> = {
+	method: 'GET',
+	getUrl(params) {
+		const { processInstanceKey } = params;
+
+		return `/${API_VERSION}/process-instances/${processInstanceKey}/call-hierarchy`;
+	},
+};
+
+const callHierarchySchema = z.object({
+	processInstanceKey: z.string(),
+	processDefinitionName: z.string(),
+});
+type CallHierarchy = z.infer<typeof callHierarchySchema>;
+const getProcessInstanceCallHierarchyResponseBodySchema = getCollectionResponseBodySchema(callHierarchySchema);
+type GetProcessInstanceCallHierarchyResponseBody = z.infer<typeof getProcessInstanceCallHierarchyResponseBodySchema>;
+
 const endpoints = {
 	getDecisionDefinitionXml,
 	getProcessDefinition,
 	getProcessDefinitionStatistics,
 	getProcessDefinitionXml,
+	getProcessInstance,
+	getProcessInstanceCallHierarchy,
 	getProcessInstanceStatistics,
 	queryProcessDefinitions,
 } as const;
@@ -203,19 +243,24 @@ export {
 	getDecisionDefinitionXmlResponseBodySchema,
 	getProcessDefinitionStatisticsRequestBodySchema,
 	getProcessDefinitionStatisticsResponseBodySchema,
+	getProcessInstanceCallHierarchyResponseBodySchema,
 	getProcessInstanceStatisticsResponseBodySchema,
 	processDefinitionSchema,
+	processInstanceSchema,
 	queryProcessDefinitionsRequestBodySchema,
 	queryProcessDefinitionsResponseBodySchema,
 };
 export type {
+	CallHierarchy,
 	DecisionDefinition,
 	GetDecisionDefinitionXmlResponseBody,
 	GetProcessDefinitionStatisticsRequestBody,
 	GetProcessDefinitionStatisticsResponseBody,
+	GetProcessInstanceCallHierarchyResponseBody,
 	GetProcessInstanceStatisticsResponseBody,
 	ProcessDefinition,
 	ProcessDefinitionStatistic,
+	ProcessInstance,
 	ProcessInstanceState,
 	StatisticName,
 	QueryProcessDefinitionsRequestBody,
