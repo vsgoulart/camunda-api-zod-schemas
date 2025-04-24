@@ -217,9 +217,7 @@ const sequenceFlowSchema = z.object({
 });
 type SequenceFlow = z.infer<typeof sequenceFlowSchema>;
 
-const getProcessSequenceFlowsResponseBodySchema = getCollectionResponseBodySchema(
-	sequenceFlowSchema,
-);
+const getProcessSequenceFlowsResponseBodySchema = getCollectionResponseBodySchema(sequenceFlowSchema);
 type GetProcessSequenceFlowsResponseBody = z.infer<typeof getProcessSequenceFlowsResponseBodySchema>;
 
 const getDecisionDefinitionXml: Endpoint<GetDecisionDefinitionXmlParams> = {
