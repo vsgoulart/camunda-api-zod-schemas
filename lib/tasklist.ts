@@ -104,7 +104,15 @@ const getForm: Endpoint<Pick<Form, 'formKey'>> = {
 	},
 };
 
-const endpoints = { getUserTask, queryUserTasks, getForm } as const;
+const getTask: Endpoint<Pick<UserTask, 'userTaskKey'>> = {
+	method: 'GET',
+	getUrl(params) {
+		const { userTaskKey } = params;
+		return `/${API_VERSION}/user-tasks/${userTaskKey}`;
+	},
+};
+
+const endpoints = { getUserTask, queryUserTasks, getForm, getTask } as const;
 
 export { endpoints, userTaskSchema, queryUserTasksResponseBodySchema, queryUserTasksRequestBodySchema, formSchema };
 export type { UserTask, QueryUserTasksResponseBody, QueryUserTasksRequestBody, Form };
