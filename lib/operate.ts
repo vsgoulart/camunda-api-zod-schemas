@@ -21,7 +21,7 @@ const processDefinitionSchema = z.object({
 	versionTag: z.string().optional(),
 	processDefinitionId: z.string(),
 	tenantId: z.string(),
-	processDefinitionKey: z.number(),
+	processDefinitionKey: z.string(),
 });
 type ProcessDefinition = z.infer<typeof processDefinitionSchema>;
 
@@ -212,7 +212,7 @@ const getProcessSequenceFlows: Endpoint<Pick<ProcessInstance, 'processInstanceKe
 const sequenceFlowSchema = z.object({
 	processInstanceKey: z.string(),
 	sequenceFlowKey: z.string(),
-	processDefinitionKey: z.number(),
+	processDefinitionKey: z.string(),
 	processDefinitionId: z.string(),
 });
 type SequenceFlow = z.infer<typeof sequenceFlowSchema>;

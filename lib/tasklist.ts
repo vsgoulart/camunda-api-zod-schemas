@@ -15,13 +15,13 @@ const userTaskSchema = z.object({
 	processDefinitionVersion: z.number(),
 	processDefinitionId: z.string(),
 	processName: z.string().optional(),
-	processInstanceKey: z.number(),
-	processDefinitionKey: z.number(),
+	processInstanceKey: z.string(),
+	processDefinitionKey: z.string(),
 	name: z.string().optional(),
 	elementId: z.string(),
-	elementInstanceKey: z.number(),
+	elementInstanceKey: z.string(),
 	tenantId: z.string(),
-	userTaskKey: z.number(),
+	userTaskKey: z.string(),
 	assignee: z.string().optional(),
 	candidateGroups: z.array(z.string()),
 	candidateUsers: z.array(z.string()),
@@ -30,7 +30,7 @@ const userTaskSchema = z.object({
 	creationDate: z.string(),
 	completionDate: z.string().optional(),
 	customHeaders: z.record(z.string(), z.any()).optional(),
-	formKey: z.number().optional(),
+	formKey: z.string().optional(),
 	externalFormReference: z.string().optional(),
 	priority: z.number(),
 });
@@ -87,7 +87,7 @@ const queryUserTasks: Endpoint = {
 };
 
 const formSchema = z.object({
-	formKey: z.number(),
+	formKey: z.string(),
 	tenantId: z.string(),
 	bpmnId: z.string(),
 	schema: z.string(),
