@@ -11,7 +11,7 @@ import {
 } from './common';
 
 const userTaskSchema = z.object({
-	state: z.string(),
+	state: z.enum(['COMPLETED', 'CANCELED', 'CREATED', 'FAILED']),
 	processDefinitionVersion: z.number(),
 	processDefinitionId: z.string(),
 	processName: z.string().optional(),
