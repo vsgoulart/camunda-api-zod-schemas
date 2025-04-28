@@ -112,7 +112,74 @@ const getTask: Endpoint<Pick<UserTask, 'userTaskKey'>> = {
 	},
 };
 
-const endpoints = { getUserTask, queryUserTasks, getForm, getTask } as const;
+const assignTaskRequestBodySchema = z.object({
+	assignee: z.string(),
+	allowOverride: z.boolean().optional(),
+	action: z.string().optional(),
+});
+type AssignTaskRequestBody = z.infer<typeof assignTaskRequestBodySchema>;
 
-export { endpoints, userTaskSchema, queryUserTasksResponseBodySchema, queryUserTasksRequestBodySchema, formSchema };
-export type { UserTask, QueryUserTasksResponseBody, QueryUserTasksRequestBody, Form };
+const assignTask: Endpoint<Pick<UserTask, 'userTaskKey'>> = {
+	method: 'POST',
+	getUrl(params) {
+		const { userTaskKey } = params;
+		return `/${API_VERSION}/user-tasks/${userTaskKey}/assignment`;
+	},
+};
+
+const unassignTaskRequestBodySchema = z.object({
+	action: z.string().optional(),
+});
+type UnassignTaskRequestBody = z.infer<typeof unassignTaskRequestBodySchema>;
+
+const unassignTask: Endpoint<Pick<UserTask, 'userTaskKey'>> = {
+	method: 'DELETE',
+	getUrl(params) {
+		const { userTaskKey } = params;
+		return `/${API_VERSION}/user-tasks/${userTaskKey}/assignee`;
+	},
+};
+
+const completeTaskRequestBodySchema = z.object({
+	variables: z.record(z.string(), z.any()),
+	action: z.string().optional(),
+});
+type CompleteTaskRequestBody = z.infer<typeof completeTaskRequestBodySchema>;
+
+const completeTask: Endpoint<Pick<UserTask, 'userTaskKey'>> = {
+	method: 'POST',
+	getUrl(params) {
+		const { userTaskKey } = params;
+		return `/${API_VERSION}/user-tasks/${userTaskKey}/completion`;
+	},
+};
+
+const endpoints = {
+	getUserTask,
+	queryUserTasks,
+	getForm,
+	getTask,
+	assignTask,
+	unassignTask,
+	completeTask,
+} as const;
+
+export {
+	endpoints,
+	userTaskSchema,
+	queryUserTasksResponseBodySchema,
+	queryUserTasksRequestBodySchema,
+	formSchema,
+	assignTaskRequestBodySchema,
+	unassignTaskRequestBodySchema,
+	completeTaskRequestBodySchema,
+};
+export type {
+	UserTask,
+	QueryUserTasksResponseBody,
+	QueryUserTasksRequestBody,
+	Form,
+	AssignTaskRequestBody,
+	UnassignTaskRequestBody,
+	CompleteTaskRequestBody,
+};
