@@ -4,11 +4,13 @@ import {
 	advancedIntegerFilterSchema,
 	advancedStringFilterSchema,
 	API_VERSION,
+	getCollectionResponseBodySchema,
 	getQueryRequestBodySchema,
 	getQueryResponseBodySchema,
 	userTaskVariableFilterSchema,
 	type Endpoint,
 } from './common';
+import { variableSchema } from './process-management';
 
 const userTaskSchema = z.object({
 	state: z.enum(['COMPLETED', 'CANCELED', 'CREATED', 'FAILED']),
@@ -154,6 +156,26 @@ const completeTask: Endpoint<Pick<UserTask, 'userTaskKey'>> = {
 	},
 };
 
+const queryVariablesByUserTaskRequestBodySchema = getQueryRequestBodySchema({
+	sortFields: ['name', 'value', 'fullValue', 'tenantId', 'variableKey', 'scopeKey', 'processInstanceKey'] as const,
+	filter: z.object({
+		name: advancedStringFilterSchema.optional(),
+	}),
+});
+type QueryVariablesByUserTaskRequestBody = z.infer<typeof queryVariablesByUserTaskRequestBodySchema>;
+
+const queryVariablesByUserTaskResponseBodySchema = getCollectionResponseBodySchema(variableSchema);
+type QueryVariablesByUserTaskResponseBody = z.infer<typeof queryVariablesByUserTaskResponseBodySchema>;
+
+const queryVariablesByUserTask: Endpoint<Pick<UserTask, 'userTaskKey'>> = {
+	method: 'POST',
+	getUrl(params) {
+		const { userTaskKey } = params;
+
+		return `/${API_VERSION}/user-tasks/${userTaskKey}/variables/search`;
+	},
+};
+
 const endpoints = {
 	getUserTask,
 	queryUserTasks,
@@ -162,6 +184,7 @@ const endpoints = {
 	assignTask,
 	unassignTask,
 	completeTask,
+	queryVariablesByUserTask,
 } as const;
 
 export {
@@ -173,6 +196,8 @@ export {
 	assignTaskRequestBodySchema,
 	unassignTaskRequestBodySchema,
 	completeTaskRequestBodySchema,
+	queryVariablesByUserTaskRequestBodySchema,
+	queryVariablesByUserTaskResponseBodySchema,
 };
 export type {
 	UserTask,
@@ -182,4 +207,6 @@ export type {
 	AssignTaskRequestBody,
 	UnassignTaskRequestBody,
 	CompleteTaskRequestBody,
+	QueryVariablesByUserTaskRequestBody,
+	QueryVariablesByUserTaskResponseBody,
 };
