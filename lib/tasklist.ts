@@ -96,12 +96,12 @@ const formSchema = z.object({
 });
 type Form = z.infer<typeof formSchema>;
 
-const getForm: Endpoint<Pick<Form, 'formKey'>> = {
+const getUserTaskForm: Endpoint<Pick<UserTask, 'userTaskKey'>> = {
 	method: 'GET',
 	getUrl(params) {
-		const { formKey } = params;
+		const { userTaskKey } = params;
 
-		return `/${API_VERSION}/user-tasks/${formKey}/form`;
+		return `/${API_VERSION}/user-tasks/${userTaskKey}/form`;
 	},
 };
 
@@ -109,7 +109,7 @@ const getTask: Endpoint<Pick<UserTask, 'userTaskKey'>> = {
 	method: 'GET',
 	getUrl(params) {
 		const { userTaskKey } = params;
-		return `/${API_VERSION}/user-tasks/${userTaskKey}`;
+		return `/${API_VERSION}/user-tasks/${userTaskKey}/form`;
 	},
 };
 
@@ -178,7 +178,7 @@ const queryVariablesByUserTask: Endpoint<Pick<UserTask, 'userTaskKey'>> = {
 const endpoints = {
 	getUserTask,
 	queryUserTasks,
-	getForm,
+	getUserTaskForm,
 	getTask,
 	assignTask,
 	unassignTask,
