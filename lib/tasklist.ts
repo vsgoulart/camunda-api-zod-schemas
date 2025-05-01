@@ -109,7 +109,7 @@ const getTask: Endpoint<Pick<UserTask, 'userTaskKey'>> = {
 	method: 'GET',
 	getUrl(params) {
 		const { userTaskKey } = params;
-		return `/${API_VERSION}/user-tasks/${userTaskKey}/form`;
+		return `/${API_VERSION}/user-tasks/${userTaskKey}`;
 	},
 };
 
