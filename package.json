@@ -10,10 +10,7 @@
 	"bugs": {
 		"url": "https://github.com/vsgoulart/camunda-api-zod-schemas/issues"
 	},
-	"keywords": [
-		"camunda",
-		"zod"
-	],
+	"keywords": ["camunda", "zod"],
 	"version": "0.0.2-beta.41",
 	"type": "module",
 	"license": "MIT",
@@ -28,9 +25,7 @@
 		"postpublish": "pnpm changelogen gh release"
 	},
 	"sideEffects": false,
-	"files": [
-		"dist"
-	],
+	"files": ["dist"],
 	"exports": {
 		".": {
 			"import": {
@@ -83,14 +78,14 @@
 	},
 	"devDependencies": {
 		"@biomejs/biome": "1.9.4",
-		"@types/node": "22.13.17",
+		"@types/node": "22.15.3",
 		"changelogen": "0.6.1",
-		"typescript": "5.8.2",
-		"vite": "6.2.4",
+		"typescript": "5.8.3",
+		"vite": "6.3.4",
 		"vite-plugin-dts": "4.5.3"
 	},
 	"peerDependencies": {
 		"zod": ">=3.0.0"
 	},
-	"packageManager": "pnpm@10.7.1"
+	"packageManager": "pnpm@10.10.0"
 }
