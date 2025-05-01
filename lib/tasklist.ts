@@ -4,7 +4,6 @@ import {
 	advancedIntegerFilterSchema,
 	advancedStringFilterSchema,
 	API_VERSION,
-	getCollectionResponseBodySchema,
 	getQueryRequestBodySchema,
 	getQueryResponseBodySchema,
 	userTaskVariableFilterSchema,
@@ -164,7 +163,7 @@ const queryVariablesByUserTaskRequestBodySchema = getQueryRequestBodySchema({
 });
 type QueryVariablesByUserTaskRequestBody = z.infer<typeof queryVariablesByUserTaskRequestBodySchema>;
 
-const queryVariablesByUserTaskResponseBodySchema = getCollectionResponseBodySchema(variableSchema);
+const queryVariablesByUserTaskResponseBodySchema = getQueryResponseBodySchema(variableSchema);
 type QueryVariablesByUserTaskResponseBody = z.infer<typeof queryVariablesByUserTaskResponseBodySchema>;
 
 const queryVariablesByUserTask: Endpoint<Pick<UserTask, 'userTaskKey'>> = {
