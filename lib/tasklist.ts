@@ -163,9 +163,7 @@ const queryVariablesByUserTaskRequestBodySchema = getQueryRequestBodySchema({
 });
 type QueryVariablesByUserTaskRequestBody = z.infer<typeof queryVariablesByUserTaskRequestBodySchema>;
 
-const queryVariablesByUserTaskResponseBodySchema = getQueryResponseBodySchema(
-	variableSchema.omit({ isTruncated: true }),
-);
+const queryVariablesByUserTaskResponseBodySchema = getQueryResponseBodySchema(variableSchema);
 type QueryVariablesByUserTaskResponseBody = z.infer<typeof queryVariablesByUserTaskResponseBodySchema>;
 
 const queryVariablesByUserTask: Endpoint<Pick<UserTask, 'userTaskKey'>> = {
