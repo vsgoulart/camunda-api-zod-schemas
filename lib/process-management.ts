@@ -10,7 +10,6 @@ import {
 const variableSchema = z.object({
 	name: z.string(),
 	value: z.string(),
-	fullValue: z.string(),
 	tenantId: z.string(),
 	isTruncated: z.boolean(),
 	variableKey: z.string(),
