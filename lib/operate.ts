@@ -211,9 +211,11 @@ const getProcessSequenceFlows: Endpoint<Pick<ProcessInstance, 'processInstanceKe
 
 const sequenceFlowSchema = z.object({
 	processInstanceKey: z.string(),
-	sequenceFlowKey: z.string(),
+	sequenceFlowId: z.string(),
 	processDefinitionKey: z.string(),
 	processDefinitionId: z.string(),
+	elementId: z.string(),
+	tenantId: z.string(),
 });
 type SequenceFlow = z.infer<typeof sequenceFlowSchema>;
 
