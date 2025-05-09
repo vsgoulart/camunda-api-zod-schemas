@@ -86,7 +86,6 @@ const createProcessInstanceResponseBodySchema = processInstanceSchema
 		processDefinitionKey: true,
 		processInstanceKey: true,
 	})
-	.partial()
 	.merge(
 		z.object({
 			variables: z.record(variableSchema).optional(),
