@@ -10,8 +10,11 @@
 	"bugs": {
 		"url": "https://github.com/vsgoulart/camunda-api-zod-schemas/issues"
 	},
-	"keywords": ["camunda", "zod"],
-	"version": "0.0.2-beta.46",
+	"keywords": [
+		"camunda",
+		"zod"
+	],
+	"version": "0.0.2-beta.47",
 	"type": "module",
 	"license": "MIT",
 	"private": false,
@@ -25,7 +28,9 @@
 		"postpublish": "pnpm changelogen gh release"
 	},
 	"sideEffects": false,
-	"files": ["dist"],
+	"files": [
+		"dist"
+	],
 	"exports": {
 		".": {
 			"import": {
