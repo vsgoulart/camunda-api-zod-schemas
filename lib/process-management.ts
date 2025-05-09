@@ -6,6 +6,7 @@ import {
 	getQueryRequestBodySchema,
 	type Endpoint,
 } from './common';
+import { processInstanceSchema } from './operate';
 
 const variableSchema = z.object({
 	name: z.string(),
@@ -34,6 +35,7 @@ const queryVariablesRequestBodySchema = getQueryRequestBodySchema({
 			tenantId: true,
 			isTruncated: true,
 		})
+		.partial()
 		.merge(
 			z.object({
 				name: advancedStringFilterSchema.optional(),
@@ -56,7 +58,63 @@ const queryVariables: Endpoint = {
 	},
 };
 
-const endpoints = { getVariable, queryVariables } as const;
+const createProcessInstanceRequestBodySchema = processInstanceSchema
+	.pick({
+		processDefinitionId: true,
+		processDefinitionVersion: true,
+		tenantId: true,
+		processDefinitionKey: true,
+	})
+	.partial()
+	.merge(
+		z.object({
+			variables: z.record(variableSchema).optional(),
+			operationReference: z.number().optional(),
+			startInstructions: z.array(z.string()).optional(),
+			awaitCompletion: z.boolean().optional(),
+			fetchVariables: z.array(z.string()).optional(),
+			requestTimeout: z.number().optional(),
+		}),
+	);
+type CreateProcessInstanceRequestBody = z.infer<typeof createProcessInstanceRequestBodySchema>;
 
-export { endpoints, variableSchema, queryVariablesRequestBodySchema, queryVariablesResponseBodySchema };
-export type { Variable, QueryVariablesRequestBody, QueryVariablesResponseBody };
+const createProcessInstanceResponseBodySchema = processInstanceSchema
+	.pick({
+		processDefinitionId: true,
+		processDefinitionVersion: true,
+		tenantId: true,
+		processDefinitionKey: true,
+		processInstanceKey: true,
+	})
+	.partial()
+	.merge(
+		z.object({
+			variables: z.record(variableSchema).optional(),
+		}),
+	);
+type CreateProcessInstanceResponseBody = z.infer<typeof createProcessInstanceResponseBodySchema>;
+
+const createProcessInstance: Endpoint = {
+	method: 'POST',
+	getUrl() {
+		return `/${API_VERSION}/process-instances`;
+	},
+};
+
+const endpoints = { getVariable, queryVariables, createProcessInstance } as const;
+
+export {
+	endpoints,
+	variableSchema,
+	queryVariablesRequestBodySchema,
+	queryVariablesResponseBodySchema,
+	createProcessInstanceRequestBodySchema,
+	createProcessInstanceResponseBodySchema,
+};
+export type {
+	Variable,
+	QueryVariablesRequestBody,
+	QueryVariablesResponseBody,
+	CreateProcessInstanceRequestBody,
+	CreateProcessInstanceResponseBody,
+};

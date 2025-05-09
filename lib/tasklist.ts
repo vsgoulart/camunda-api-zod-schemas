@@ -59,6 +59,7 @@ const queryUserTasksRequestBodySchema = getQueryRequestBodySchema({
 			processInstanceKey: true,
 			elementInstanceKey: true,
 		})
+		.partial()
 		.merge(
 			z.object({
 				assignee: z.union([userTaskSchema.shape.assignee, advancedStringFilterSchema]),
