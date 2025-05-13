@@ -242,10 +242,11 @@ const getProcessInstanceCallHierarchy: Endpoint<Pick<ProcessInstance, 'processIn
 
 const callHierarchySchema = z.object({
 	processInstanceKey: z.string(),
+	processDefinitionKey: z.string(),
 	processDefinitionName: z.string(),
 });
 type CallHierarchy = z.infer<typeof callHierarchySchema>;
-const getProcessInstanceCallHierarchyResponseBodySchema = getCollectionResponseBodySchema(callHierarchySchema);
+const getProcessInstanceCallHierarchyResponseBodySchema = z.array(callHierarchySchema);
 type GetProcessInstanceCallHierarchyResponseBody = z.infer<typeof getProcessInstanceCallHierarchyResponseBodySchema>;
 
 const endpoints = {
