@@ -249,6 +249,44 @@ type CallHierarchy = z.infer<typeof callHierarchySchema>;
 const getProcessInstanceCallHierarchyResponseBodySchema = z.array(callHierarchySchema);
 type GetProcessInstanceCallHierarchyResponseBody = z.infer<typeof getProcessInstanceCallHierarchyResponseBodySchema>;
 
+const searchVariablesRequestBodySchema = getQueryRequestBodySchema({
+	sortFields: [
+		'value', 'name', 'tenantId', 'variableKey', 'scopeKey', 'processInstanceKey'
+	] as const,
+	filter: 
+	z.object({
+		name: advancedStringFilterSchema.optional(),
+		value: advancedStringFilterSchema.optional(),
+		tenantId: z.string().optional(),
+		isTruncated: z.boolean().optional(),
+		variableKey: basicStringFilterSchema.optional(),
+		scopeKey: basicStringFilterSchema.optional(),
+		processInstanceKey: basicStringFilterSchema.optional(),
+})
+});
+
+type SearchVariablesRequestBody = z.infer<typeof searchVariablesRequestBodySchema>;
+
+const searchVariables: Endpoint = {
+	method: 'POST',
+	getUrl() {
+		return `/${API_VERSION}/jobs/search`;
+	},
+};
+
+const variableSchema = z.object({
+	name: z.string(),
+	value: z.string(),
+	tenantId: z.string(),
+	variableKey: z.string(),
+	scopeKey: z.string(),
+	processInstanceKey: z.string(),
+	isTruncated: z.boolean(),
+});
+type Variable = z.infer<typeof variableSchema>;
+const searchVariablesResponseBodySchema = getQueryResponseBodySchema(variableSchema);
+type SearchVariablesResponseBody = z.infer<typeof searchVariablesResponseBodySchema>;
+
 const endpoints = {
 	getDecisionDefinitionXml,
 	getProcessDefinition,
@@ -259,6 +297,7 @@ const endpoints = {
 	getProcessInstanceStatistics,
 	getProcessSequenceFlows,
 	queryProcessDefinitions,
+	searchVariables,
 } as const;
 
 export {
@@ -274,6 +313,8 @@ export {
 	processInstanceSchema,
 	queryProcessDefinitionsRequestBodySchema,
 	queryProcessDefinitionsResponseBodySchema,
+	searchVariablesRequestBodySchema,
+	searchVariablesResponseBodySchema,
 };
 export type {
 	CallHierarchy,
@@ -290,6 +331,9 @@ export type {
 	ProcessInstanceState,
 	SequenceFlow,
 	StatisticName,
+	Variable,
 	QueryProcessDefinitionsRequestBody,
 	QueryProcessDefinitionsResponseBody,
+	SearchVariablesRequestBody,
+	SearchVariablesResponseBody,
 };
