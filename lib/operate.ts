@@ -6,6 +6,7 @@ import {
 	getCollectionResponseBodySchema,
 	getQueryRequestBodySchema,
 	getQueryResponseBodySchema,
+	getEnumFilterSchema,
 	type Endpoint,
 	basicStringFilterSchema,
 } from './common';
@@ -249,8 +250,88 @@ type CallHierarchy = z.infer<typeof callHierarchySchema>;
 const getProcessInstanceCallHierarchyResponseBodySchema = z.array(callHierarchySchema);
 type GetProcessInstanceCallHierarchyResponseBody = z.infer<typeof getProcessInstanceCallHierarchyResponseBodySchema>;
 
+const jobState = z.enum([
+	'CREATED',
+	'COMPLETED',
+	'FAILED',
+	'RETRIES_UPDATED',
+	'TIMED_OUT',
+	'CANCELED',
+	'ERROR_THROWN',
+	'MIGRATED',
+]);
+const jobKind = z.enum(['BPMN_ELEMENT', 'EXECUTION_LISTENER', 'TASK_LISTENER']);
+const listenerEventType = z.enum([
+	'UNSPECIFIED',
+	'START',
+	'END',
+	'CREATING',
+	'ASSIGNING',
+	'UPDATING',
+	'COMPLETING',
+	'CANCELING',
+]);
+
+const jobStateFilter = getEnumFilterSchema(jobState);
+const jobKindFilter = getEnumFilterSchema(jobKind);
+const listenerEventTypeFilter = getEnumFilterSchema(listenerEventType);
+
+const getJobsRequestBodySchema = z.object({
+	filter: z.object({
+		jobKey: basicStringFilterSchema.optional(),
+		type: advancedStringFilterSchema.optional(),
+		worker: advancedStringFilterSchema.optional(),
+		state: jobStateFilter.optional(),
+		kind: jobKindFilter.optional(),
+		listenerEventType: listenerEventTypeFilter.optional(),
+		processDefinitionId: advancedStringFilterSchema.optional(),
+		processDefinitionKey: basicStringFilterSchema.optional(),
+		processInstanceKey: basicStringFilterSchema.optional(),
+		elementId: advancedStringFilterSchema.optional(),
+		elementInstanceKey: basicStringFilterSchema.optional(),
+		tenantId: advancedStringFilterSchema.optional(),
+	}),
+});
+
+type GetJobsRequestBody = z.infer<typeof getJobsRequestBodySchema>;
+
+const getJobs: Endpoint = {
+	method: 'POST',
+	getUrl() {
+		return `/${API_VERSION}/jobs/search`;
+	},
+};
+
+const jobSchema = z.object({
+	jobKey: z.string(),
+	type: z.string(),
+	worker: z.string(),
+	state: jobState,
+	kind: jobKind,
+	listenerEventType: listenerEventType,
+	retries: z.number(),
+	isDenied: z.boolean(),
+	deniedReason: z.string(),
+	hasFailedWithRetriesLeft: z.boolean(),
+	errorCode: z.string(),
+	errorMessage: z.string(),
+	customHeaders: z.record(z.string(), z.any()).optional(),
+	deadline: z.string(),
+	endTime: z.string(),
+	processDefinitionId: z.string(),
+	processDefinitionKey: z.string(),
+	processInstanceKey: z.string(),
+	elementId: z.string(),
+	elementInstanceKey: z.string(),
+	tenantId: z.string(),
+});
+type Job = z.infer<typeof jobSchema>;
+const getJobsResponseBodySchema = getQueryResponseBodySchema(jobSchema);
+type GetJobsResponseBody = z.infer<typeof getJobsResponseBodySchema>;
+
 const endpoints = {
 	getDecisionDefinitionXml,
+	getJobs,
 	getProcessDefinition,
 	getProcessDefinitionStatistics,
 	getProcessDefinitionXml,
@@ -265,6 +346,8 @@ export {
 	endpoints,
 	decisionDefinitionSchema,
 	getDecisionDefinitionXmlResponseBodySchema,
+	getJobsRequestBodySchema,
+	getJobsResponseBodySchema,
 	getProcessDefinitionStatisticsRequestBodySchema,
 	getProcessDefinitionStatisticsResponseBodySchema,
 	getProcessInstanceCallHierarchyResponseBodySchema,
@@ -278,7 +361,10 @@ export {
 export type {
 	CallHierarchy,
 	DecisionDefinition,
+	Job,
 	GetDecisionDefinitionXmlResponseBody,
+	GetJobsRequestBody,
+	GetJobsResponseBody,
 	GetProcessDefinitionStatisticsRequestBody,
 	GetProcessDefinitionStatisticsResponseBody,
 	GetProcessInstanceCallHierarchyResponseBody,

@@ -111,6 +111,16 @@ function getQueryRequestSortSchema<Fields extends [string, ...string[]]>(fields:
 	);
 }
 
+function getEnumFilterSchema<Fields extends [string, ...string[]]>(fields: z.ZodEnum<Fields>) {
+	return z.object({
+		$eq: fields.optional(),
+		$neq: fields.optional(),
+		$exists: z.boolean().optional(),
+		$in: z.array(fields).optional(),
+		$notIn: z.array(fields).optional(),
+	});
+}
+
 function getQueryRequestBodySchema<
 	FilterSchema extends z.ZodTypeAny,
 	SortFields extends [string, ...string[]],
@@ -148,6 +158,7 @@ export {
 	getCollectionResponseBodySchema,
 	getQueryResponseBodySchema,
 	getQueryRequestBodySchema,
+	getEnumFilterSchema,
 };
 export type {
 	AdvancedDateTimeFilter,
