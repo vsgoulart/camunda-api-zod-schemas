@@ -250,17 +250,34 @@ type CallHierarchy = z.infer<typeof callHierarchySchema>;
 const getProcessInstanceCallHierarchyResponseBodySchema = z.array(callHierarchySchema);
 type GetProcessInstanceCallHierarchyResponseBody = z.infer<typeof getProcessInstanceCallHierarchyResponseBodySchema>;
 
-const jobState = z.enum(['CREATED', 'COMPLETED', 'FAILED', 'RETRIES_UPDATED', 'TIMED_OUT', 'CANCELED', 'ERROR_THROWN', 'MIGRATED']);
+const jobState = z.enum([
+	'CREATED',
+	'COMPLETED',
+	'FAILED',
+	'RETRIES_UPDATED',
+	'TIMED_OUT',
+	'CANCELED',
+	'ERROR_THROWN',
+	'MIGRATED',
+]);
 const jobKind = z.enum(['BPMN_ELEMENT', 'EXECUTION_LISTENER', 'TASK_LISTENER']);
-const listenerEventType = z.enum(['UNSPECIFIED', 'START', 'END', 'CREATING', 'ASSIGNING', 'UPDATING', 'COMPLETING', 'CANCELING']);
+const listenerEventType = z.enum([
+	'UNSPECIFIED',
+	'START',
+	'END',
+	'CREATING',
+	'ASSIGNING',
+	'UPDATING',
+	'COMPLETING',
+	'CANCELING',
+]);
 
 const jobStateFilter = getEnumFilterSchema(jobState);
 const jobKindFilter = getEnumFilterSchema(jobKind);
 const listenerEventTypeFilter = getEnumFilterSchema(listenerEventType);
 
 const getJobsRequestBodySchema = z.object({
-	filter: 
-	z.object({
+	filter: z.object({
 		jobKey: basicStringFilterSchema.optional(),
 		type: advancedStringFilterSchema.optional(),
 		worker: advancedStringFilterSchema.optional(),
@@ -273,7 +290,7 @@ const getJobsRequestBodySchema = z.object({
 		elementId: advancedStringFilterSchema.optional(),
 		elementInstanceKey: basicStringFilterSchema.optional(),
 		tenantId: advancedStringFilterSchema.optional(),
-})
+	}),
 });
 
 type GetJobsRequestBody = z.infer<typeof getJobsRequestBodySchema>;
