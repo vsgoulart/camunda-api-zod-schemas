@@ -6,6 +6,7 @@ import {
 	getCollectionResponseBodySchema,
 	getQueryRequestBodySchema,
 	getQueryResponseBodySchema,
+	getEnumFilterSchema,
 	type Endpoint,
 	basicStringFilterSchema,
 } from './common';
@@ -253,29 +254,9 @@ const jobState = z.enum(['CREATED', 'COMPLETED', 'FAILED', 'RETRIES_UPDATED', 'T
 const jobKind = z.enum(['BPMN_ELEMENT', 'EXECUTION_LISTENER', 'TASK_LISTENER']);
 const listenerEventType = z.enum(['UNSPECIFIED', 'START', 'END', 'CREATING', 'ASSIGNING', 'UPDATING', 'COMPLETING', 'CANCELING']);
 
-const jobStateFilter = z.object({
-	$eq: jobState.optional(),
-	$neq: jobState.optional(),
-	$exists: z.boolean().optional(),
-	$in: z.array(jobState).optional(),
-	$notIn: z.array(jobState).optional(),
-});
-
-const jobKindFilter = z.object({
-	$eq: jobKind.optional(),
-	$neq: jobKind.optional(),
-	$exists: z.boolean().optional(),
-	$in: z.array(jobKind).optional(),
-	$notIn: z.array(jobKind).optional(),
-});
-
-const listenerEventTypeFilter = z.object({
-	$eq: listenerEventType.optional(),
-	$neq: listenerEventType.optional(),
-	$exists: z.boolean().optional(),
-	$in: z.array(listenerEventType).optional(),
-	$notIn: z.array(listenerEventType).optional(),
-});
+const jobStateFilter = getEnumFilterSchema(jobState);
+const jobKindFilter = getEnumFilterSchema(jobKind);
+const listenerEventTypeFilter = getEnumFilterSchema(listenerEventType);
 
 const getJobsRequestBodySchema = z.object({
 	filter: 
@@ -291,7 +272,7 @@ const getJobsRequestBodySchema = z.object({
 		processInstanceKey: basicStringFilterSchema.optional(),
 		elementId: advancedStringFilterSchema.optional(),
 		elementInstanceKey: basicStringFilterSchema.optional(),
-		tenant: advancedStringFilterSchema.optional(),
+		tenantId: advancedStringFilterSchema.optional(),
 })
 });
 
