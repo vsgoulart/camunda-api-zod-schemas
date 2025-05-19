@@ -315,6 +315,7 @@ const jobSchema = z.object({
 	hasFailedWithRetriesLeft: z.boolean(),
 	errorCode: z.string(),
 	errorMessage: z.string(),
+	customHeaders: z.record(z.string(), z.any()).optional(),
 	deadline: z.string(),
 	endTime: z.string(),
 	processDefinitionId: z.string(),
