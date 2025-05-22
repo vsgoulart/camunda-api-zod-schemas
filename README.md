@@ -12,13 +12,13 @@ You can install the package using your favorite package manager:
 
 ```bash
 # pnpm
-pnpm add @vzeta/camunda-api-zod-schemas zod
+pnpm add @vzeta/camunda-api-zod-schemas
 
 # npm
-npm install @vzeta/camunda-api-zod-schemas zod
+npm install @vzeta/camunda-api-zod-schemas
 
 # yarn
-yarn add @vzeta/camunda-api-zod-schemas zod
+yarn add @vzeta/camunda-api-zod-schemas
 ```
 
 ## Usage
