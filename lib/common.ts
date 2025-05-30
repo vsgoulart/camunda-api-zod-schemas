@@ -144,6 +144,15 @@ interface Endpoint<URLParams extends object | undefined = undefined> {
 	method: string;
 }
 
+const problemDetailResponseSchema = z.object({
+	type: z.string(),
+	title: z.string(),
+	status: z.number().min(400).max(600),
+	detail: z.string(),
+	instance: z.string(),
+});
+type ProblemDetailsResponse = z.infer<typeof problemDetailResponseSchema>;
+
 export {
 	API_VERSION,
 	advancedDateTimeFilterSchema,
@@ -159,6 +168,7 @@ export {
 	getQueryResponseBodySchema,
 	getQueryRequestBodySchema,
 	getEnumFilterSchema,
+	problemDetailResponseSchema,
 };
 export type {
 	AdvancedDateTimeFilter,
@@ -171,4 +181,5 @@ export type {
 	QueryPage,
 	Endpoint,
 	QueryResponseBody,
+	ProblemDetailsResponse,
 };
