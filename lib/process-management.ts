@@ -2,8 +2,8 @@ import { z } from 'zod';
 import {
 	advancedStringFilterSchema,
 	API_VERSION,
-	getCollectionResponseBodySchema,
 	getQueryRequestBodySchema,
+	getQueryResponseBodySchema,
 	type Endpoint,
 } from './common';
 import { processInstanceSchema } from './operate';
@@ -48,7 +48,7 @@ const queryVariablesRequestBodySchema = getQueryRequestBodySchema({
 });
 type QueryVariablesRequestBody = z.infer<typeof queryVariablesRequestBodySchema>;
 
-const queryVariablesResponseBodySchema = getCollectionResponseBodySchema(variableSchema);
+const queryVariablesResponseBodySchema = getQueryResponseBodySchema(variableSchema);
 type QueryVariablesResponseBody = z.infer<typeof queryVariablesResponseBodySchema>;
 
 const queryVariables: Endpoint = {
