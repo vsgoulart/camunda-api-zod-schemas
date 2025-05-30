@@ -8,7 +8,9 @@ export {
 	problemDetailsSchema,
 	queryPageSchema,
 	querySortOrderSchema,
+	problemDetailResponseSchema,
 	type ProblemDetails,
 	type QueryPage,
 	type QuerySortOrder,
+	type ProblemDetailsResponse,
 } from './common';
