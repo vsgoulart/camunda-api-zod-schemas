@@ -9,7 +9,7 @@ import {
 	userTaskVariableFilterSchema,
 	type Endpoint,
 } from './common';
-import { variableSchema } from './process-management';
+import { variableSchema } from './variable';
 
 const userTaskSchema = z.object({
 	state: z.enum(['COMPLETED', 'CANCELED', 'CREATED', 'FAILED']),
@@ -176,7 +176,7 @@ const queryVariablesByUserTask: Endpoint<Pick<UserTask, 'userTaskKey'>> = {
 	},
 };
 
-const endpoints = {
+export {
 	getUserTask,
 	queryUserTasks,
 	getUserTaskForm,
@@ -185,10 +185,6 @@ const endpoints = {
 	unassignTask,
 	completeTask,
 	queryVariablesByUserTask,
-} as const;
-
-export {
-	endpoints,
 	userTaskSchema,
 	queryUserTasksResponseBodySchema,
 	queryUserTasksRequestBodySchema,

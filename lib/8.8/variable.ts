@@ -6,7 +6,6 @@ import {
 	getQueryResponseBodySchema,
 	type Endpoint,
 } from './common';
-import { processInstanceSchema } from './operate';
 
 const variableSchema = z.object({
 	name: z.string(),
@@ -58,62 +57,11 @@ const queryVariables: Endpoint = {
 	},
 };
 
-const createProcessInstanceRequestBodySchema = processInstanceSchema
-	.pick({
-		processDefinitionId: true,
-		processDefinitionVersion: true,
-		tenantId: true,
-		processDefinitionKey: true,
-	})
-	.partial()
-	.merge(
-		z.object({
-			variables: z.record(variableSchema).optional(),
-			operationReference: z.number().optional(),
-			startInstructions: z.array(z.string()).optional(),
-			awaitCompletion: z.boolean().optional(),
-			fetchVariables: z.array(z.string()).optional(),
-			requestTimeout: z.number().optional(),
-		}),
-	);
-type CreateProcessInstanceRequestBody = z.infer<typeof createProcessInstanceRequestBodySchema>;
-
-const createProcessInstanceResponseBodySchema = processInstanceSchema
-	.pick({
-		processDefinitionId: true,
-		processDefinitionVersion: true,
-		tenantId: true,
-		processDefinitionKey: true,
-		processInstanceKey: true,
-	})
-	.merge(
-		z.object({
-			variables: z.record(variableSchema).optional(),
-		}),
-	);
-type CreateProcessInstanceResponseBody = z.infer<typeof createProcessInstanceResponseBodySchema>;
-
-const createProcessInstance: Endpoint = {
-	method: 'POST',
-	getUrl() {
-		return `/${API_VERSION}/process-instances`;
-	},
-};
-
-const endpoints = { getVariable, queryVariables, createProcessInstance } as const;
-
 export {
-	endpoints,
+	getVariable,
+	queryVariables,
 	variableSchema,
 	queryVariablesRequestBodySchema,
 	queryVariablesResponseBodySchema,
-	createProcessInstanceRequestBodySchema,
-	createProcessInstanceResponseBodySchema,
 };
-export type {
-	Variable,
-	QueryVariablesRequestBody,
-	QueryVariablesResponseBody,
-	CreateProcessInstanceRequestBody,
-	CreateProcessInstanceResponseBody,
-};
+export type { Variable, QueryVariablesRequestBody, QueryVariablesResponseBody };

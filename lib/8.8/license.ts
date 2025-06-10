@@ -15,7 +15,5 @@ const getLicense: Endpoint = {
 	getUrl: () => `/${API_VERSION}/license`,
 };
 
-const endpoints = { getLicense } as const;
-
-export { endpoints, licenseSchema };
+export { licenseSchema, getLicense };
 export type { License };

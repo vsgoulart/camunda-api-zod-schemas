@@ -1,96 +1,114 @@
 {
-	"name": "@vzeta/camunda-api-zod-schemas",
-	"description": "Zod schemas and TypeScript types for Camunda 8 unified API",
-	"author": "Vinicius Goulart (https://github.com/vsgoulart)",
-	"homepage": "https://github.com/vsgoulart/camunda-api-zod-schemas#readme",
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/vsgoulart/camunda-api-zod-schemas.git"
-	},
-	"bugs": {
-		"url": "https://github.com/vsgoulart/camunda-api-zod-schemas/issues"
-	},
-	"keywords": [
-		"camunda",
-		"zod"
-	],
-	"version": "0.0.2-beta.56",
-	"type": "module",
-	"license": "MIT",
-	"private": false,
-	"scripts": {
-		"dev": "vite",
-		"build": "vite build",
-		"preview": "vite preview",
-		"lint": "biome lint --error-on-warnings .",
-		"format": "biome format --write .",
-		"prepublish": "pnpm run lint && pnpm run build",
-		"postpublish": "pnpm changelogen gh release"
-	},
-	"sideEffects": false,
-	"files": [
-		"dist"
-	],
-	"exports": {
-		".": {
-			"import": {
-				"types": "./dist/main.d.ts",
-				"default": "./dist/main.js"
-			}
-		},
-		"./tasklist": {
-			"import": {
-				"types": "./dist/tasklist.d.ts",
-				"default": "./dist/tasklist.js"
-			}
-		},
-		"./process-management": {
-			"import": {
-				"types": "./dist/process-management.d.ts",
-				"default": "./dist/process-management.js"
-			}
-		},
-		"./operate": {
-			"import": {
-				"types": "./dist/operate.d.ts",
-				"default": "./dist/operate.js"
-			}
-		},
-		"./optimize": {
-			"import": {
-				"types": "./dist/optimize.d.ts",
-				"default": "./dist/optimize.js"
-			}
-		},
-		"./identity": {
-			"import": {
-				"types": "./dist/identity.d.ts",
-				"default": "./dist/identity.js"
-			}
-		},
-		"./management": {
-			"import": {
-				"types": "./dist/management.d.ts",
-				"default": "./dist/management.js"
-			}
-		},
-		"./package.json": "./package.json"
-	},
-	"main": "./dist/main.js",
-	"types": "./dist/main.d.ts",
-	"publishConfig": {
-		"access": "public"
-	},
-	"devDependencies": {
-		"@biomejs/biome": "1.9.4",
-		"@types/node": "22.15.27",
-		"changelogen": "0.6.1",
-		"typescript": "5.8.3",
-		"vite": "6.3.5",
-		"vite-plugin-dts": "4.5.4"
-	},
-	"peerDependencies": {
-		"zod": ">=3.0.0"
-	},
-	"packageManager": "pnpm@10.11.0"
+  "name": "@vzeta/camunda-api-zod-schemas",
+  "description": "Zod schemas and TypeScript types for Camunda 8 unified API",
+  "author": "Vinicius Goulart (https://github.com/vsgoulart)",
+  "homepage": "https://github.com/vsgoulart/camunda-api-zod-schemas#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vsgoulart/camunda-api-zod-schemas.git"
+  },
+  "bugs": {
+    "url": "https://github.com/vsgoulart/camunda-api-zod-schemas/issues"
+  },
+  "keywords": [
+    "camunda",
+    "zod"
+  ],
+  "version": "0.0.2-beta.56",
+  "type": "module",
+  "license": "MIT",
+  "private": false,
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "lint": "biome lint --error-on-warnings .",
+    "format": "biome format --write .",
+    "prepublish": "pnpm run lint && pnpm run build",
+    "postpublish": "pnpm changelogen gh release"
+  },
+  "sideEffects": false,
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/main.d.ts",
+        "default": "./dist/main.js"
+      }
+    },
+    "./8.8": {
+      "import": {
+        "types": "./dist/8.8.d.ts",
+        "default": "./dist/8.8.js"
+      }
+    },
+    "./8.8/authentication": {
+      "import": {
+        "types": "./dist/8.8/authentication.d.ts",
+        "default": "./dist/8.8/authentication.js"
+      }
+    },
+    "./8.8/license": {
+      "import": {
+        "types": "./dist/8.8/license.d.ts",
+        "default": "./dist/8.8/license.js"
+      }
+    },
+    "./8.8/process-instance": {
+      "import": {
+        "types": "./dist/8.8/process-instance.d.ts",
+        "default": "./dist/8.8/process-instance.js"
+      }
+    },
+    "./8.8/process-definition": {
+      "import": {
+        "types": "./dist/8.8/process-definition.d.ts",
+        "default": "./dist/8.8/process-definition.js"
+      }
+    },
+    "./8.8/user-task": {
+      "import": {
+        "types": "./dist/8.8/user-task.d.ts",
+        "default": "./dist/8.8/user-task.js"
+      }
+    },
+    "./8.8/variable": {
+      "import": {
+        "types": "./dist/8.8/variable.d.ts",
+        "default": "./dist/8.8/variable.js"
+      }
+    },
+    "./8.8/decision-definition": {
+      "import": {
+        "types": "./dist/8.8/decision-definition.d.ts",
+        "default": "./dist/8.8/decision-definition.js"
+      }
+    },
+    "./8.8/job": {
+      "import": {
+        "types": "./dist/8.8/job.d.ts",
+        "default": "./dist/8.8/job.js"
+      }
+    },
+    "./package.json": "./package.json"
+  },
+  "main": "./dist/main.js",
+  "types": "./dist/main.d.ts",
+  "publishConfig": {
+    "access": "public"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "1.9.4",
+    "@types/node": "22.15.27",
+    "changelogen": "0.6.1",
+    "typescript": "5.8.3",
+    "vite": "6.3.5",
+    "vite-plugin-dts": "4.5.4"
+  },
+  "peerDependencies": {
+    "zod": ">=3.0.0"
+  },
+  "packageManager": "pnpm@10.11.0"
 }
