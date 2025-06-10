@@ -32,7 +32,5 @@ const getCurrentUser: Endpoint = {
 	getUrl: () => `/${API_VERSION}/authentication/me`,
 };
 
-const endpoints = { getCurrentUser } as const;
-
-export { endpoints, currentUserSchema };
+export { currentUserSchema, getCurrentUser };
 export type { CurrentUser };
