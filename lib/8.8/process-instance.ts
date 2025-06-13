@@ -1,5 +1,14 @@
 import { z } from 'zod';
-import { API_VERSION, getCollectionResponseBodySchema, type Endpoint } from './common';
+import {
+	API_VERSION,
+	getCollectionResponseBodySchema,
+	getQueryRequestBodySchema,
+	getQueryResponseBodySchema,
+	advancedDateTimeFilterSchema,
+	advancedStringFilterSchema,
+	basicStringFilterSchema,
+	type Endpoint,
+} from './common';
 import { variableSchema } from './variable';
 import { processDefinitionStatisticSchema } from './process-definition';
 
@@ -23,6 +32,80 @@ const processInstanceSchema = z.object({
 	parentElementInstanceKey: z.string().optional(),
 });
 type ProcessInstance = z.infer<typeof processInstanceSchema>;
+
+const processInstanceVariableFilterSchema = z.object({
+	name: z.string(),
+	value: z.string(),
+});
+
+const advancedProcessInstanceStateFilterSchema = z
+	.object({
+		$eq: processInstanceStateSchema,
+		$neq: processInstanceStateSchema,
+		$exists: z.boolean(),
+		$in: z.array(processInstanceStateSchema),
+		$like: z.string(),
+	})
+	.partial();
+
+const queryProcessInstancesRequestBodySchema = getQueryRequestBodySchema({
+	sortFields: [
+		'processInstanceKey',
+		'processDefinitionId',
+		'processDefinitionName',
+		'processDefinitionVersion',
+		'startDate',
+		'endDate',
+		'state',
+		'tenantId',
+	] as const,
+	filter: z
+		.object({
+			processDefinitionId: advancedStringFilterSchema,
+			processDefinitionName: advancedStringFilterSchema,
+			processDefinitionVersion: z.number().int(),
+			processDefinitionVersionTag: advancedStringFilterSchema,
+			processDefinitionKey: basicStringFilterSchema,
+			processInstanceKey: basicStringFilterSchema,
+			parentProcessInstanceKey: basicStringFilterSchema,
+			parentElementInstanceKey: basicStringFilterSchema,
+			startDate: advancedDateTimeFilterSchema,
+			endDate: advancedDateTimeFilterSchema,
+			state: advancedProcessInstanceStateFilterSchema,
+			hasIncident: z.boolean(),
+			tenantId: advancedStringFilterSchema,
+			variables: z.array(processInstanceVariableFilterSchema),
+		})
+		.partial(),
+});
+type QueryProcessInstancesRequestBody = z.infer<typeof queryProcessInstancesRequestBodySchema>;
+
+const queryProcessInstancesResponseBodySchema = getQueryResponseBodySchema(processInstanceSchema);
+type QueryProcessInstancesResponseBody = z.infer<typeof queryProcessInstancesResponseBodySchema>;
+
+const cancelProcessInstanceRequestBodySchema = z
+	.object({
+		operationReference: z.number().int(),
+	})
+	.optional();
+type CancelProcessInstanceRequestBody = z.infer<typeof cancelProcessInstanceRequestBodySchema>;
+
+const queryProcessInstanceIncidentsRequestBodySchema = getQueryRequestBodySchema({
+	sortFields: [
+		'incidentKey',
+		'errorType',
+		'errorMessage',
+		'state',
+		'creationTime',
+		'processInstanceKey',
+		'processDefinitionKey',
+		'elementInstanceKey',
+		'jobKey',
+		'tenantId',
+	] as const,
+	filter: z.never(),
+});
+type QueryProcessInstanceIncidentsRequestBody = z.infer<typeof queryProcessInstanceIncidentsRequestBodySchema>;
 
 const getProcessInstance: Endpoint<Pick<ProcessInstance, 'processInstanceKey'>> = {
 	method: 'GET',
@@ -72,6 +155,31 @@ const createProcessInstance: Endpoint = {
 	method: 'POST',
 	getUrl() {
 		return `/${API_VERSION}/process-instances`;
+	},
+};
+
+const queryProcessInstances: Endpoint = {
+	method: 'POST',
+	getUrl() {
+		return `/${API_VERSION}/process-instances/search`;
+	},
+};
+
+const cancelProcessInstance: Endpoint<Pick<ProcessInstance, 'processInstanceKey'>> = {
+	method: 'POST',
+	getUrl(params) {
+		const { processInstanceKey } = params;
+
+		return `/${API_VERSION}/process-instances/${processInstanceKey}/cancellation`;
+	},
+};
+
+const queryProcessInstanceIncidents: Endpoint<Pick<ProcessInstance, 'processInstanceKey'>> = {
+	method: 'POST',
+	getUrl(params) {
+		const { processInstanceKey } = params;
+
+		return `/${API_VERSION}/process-instances/${processInstanceKey}/incidents/search`;
 	},
 };
 
@@ -136,21 +244,33 @@ type GetProcessSequenceFlowsResponseBody = z.infer<typeof getProcessSequenceFlow
 export {
 	createProcessInstance,
 	getProcessInstance,
+	queryProcessInstances,
+	cancelProcessInstance,
+	queryProcessInstanceIncidents,
 	getProcessInstanceCallHierarchy,
 	getProcessInstanceStatistics,
 	getProcessInstanceSequenceFlows,
 	createProcessInstanceRequestBodySchema,
 	createProcessInstanceResponseBodySchema,
+	queryProcessInstancesRequestBodySchema,
+	queryProcessInstancesResponseBodySchema,
+	cancelProcessInstanceRequestBodySchema,
+	queryProcessInstanceIncidentsRequestBodySchema,
 	getProcessInstanceCallHierarchyResponseBodySchema,
 	getProcessInstanceStatisticsResponseBodySchema,
 	getProcessSequenceFlowsResponseBodySchema,
 	processInstanceStateSchema,
 	processInstanceSchema,
 	sequenceFlowSchema,
+	callHierarchySchema,
 };
 export type {
 	CreateProcessInstanceRequestBody,
 	CreateProcessInstanceResponseBody,
+	QueryProcessInstancesRequestBody,
+	QueryProcessInstancesResponseBody,
+	CancelProcessInstanceRequestBody,
+	QueryProcessInstanceIncidentsRequestBody,
 	CallHierarchy,
 	GetProcessInstanceCallHierarchyResponseBody,
 	SequenceFlow,

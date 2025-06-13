@@ -25,7 +25,7 @@ yarn add @vzeta/camunda-api-zod-schemas
 
 The library exports modules that correspond to the different parts of the Camunda API. You can import the schemas and types you need from the main package or specific sub-modules like `@vzeta/camunda-api-zod-schemas/tasklist`.
 
-Refer to the exported members from `lib/main.ts` and other files in the `lib` directory for available schemas and types.
+Refer to the exported members from `lib/8.8/index.ts` and other files in the `lib` directory for available schemas and types.
 
 ## Contributing
 
