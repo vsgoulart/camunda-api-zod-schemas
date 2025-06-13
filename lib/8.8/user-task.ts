@@ -30,10 +30,10 @@ const userTaskSchema = z.object({
 	followUpDate: z.string().optional(),
 	creationDate: z.string(),
 	completionDate: z.string().optional(),
-	customHeaders: z.record(z.string(), z.any()).optional(),
+	customHeaders: z.record(z.string(), z.unknown()).optional(),
 	formKey: z.string().optional(),
 	externalFormReference: z.string().optional(),
-	priority: z.number(),
+	priority: z.number().int().min(0).max(100),
 });
 type UserTask = z.infer<typeof userTaskSchema>;
 
@@ -106,6 +106,29 @@ const getUserTaskForm: Endpoint<Pick<UserTask, 'userTaskKey'>> = {
 	},
 };
 
+const updateUserTaskRequestBodySchema = z.object({
+	changeset: userTaskSchema
+		.pick({
+			dueDate: true,
+			followUpDate: true,
+			candidateUsers: true,
+			candidateGroups: true,
+			priority: true,
+		})
+		.partial(),
+	action: z.string().optional(),
+});
+type UpdateUserTaskRequestBody = z.infer<typeof updateUserTaskRequestBodySchema>;
+
+const updateUserTask: Endpoint<Pick<UserTask, 'userTaskKey'>> = {
+	method: 'PATCH',
+	getUrl(params) {
+		const { userTaskKey } = params;
+
+		return `/${API_VERSION}/user-tasks/${userTaskKey}`;
+	},
+};
+
 const getTask: Endpoint<Pick<UserTask, 'userTaskKey'>> = {
 	method: 'GET',
 	getUrl(params) {
@@ -143,7 +166,7 @@ const unassignTask: Endpoint<Pick<UserTask, 'userTaskKey'>> = {
 };
 
 const completeTaskRequestBodySchema = z.object({
-	variables: z.record(z.string(), z.any()),
+	variables: z.record(z.string(), z.unknown()),
 	action: z.string().optional(),
 });
 type CompleteTaskRequestBody = z.infer<typeof completeTaskRequestBodySchema>;
@@ -194,6 +217,8 @@ export {
 	completeTaskRequestBodySchema,
 	queryVariablesByUserTaskRequestBodySchema,
 	queryVariablesByUserTaskResponseBodySchema,
+	updateUserTask,
+	updateUserTaskRequestBodySchema,
 };
 export type {
 	UserTask,
@@ -205,4 +230,5 @@ export type {
 	CompleteTaskRequestBody,
 	QueryVariablesByUserTaskRequestBody,
 	QueryVariablesByUserTaskResponseBody,
+	UpdateUserTaskRequestBody,
 };
