@@ -67,16 +67,16 @@ const queryPageSchema = z
 	.object({
 		from: z.number().int(),
 		limit: z.number().int(),
-		searchBefore: z.tuple([z.number(), z.number()]),
-		searchAfter: z.tuple([z.number(), z.number()]),
+		searchBefore: z.string().optional(),
+		searchAfter: z.string().optional(),
 	})
 	.partial();
 type QueryPage = z.infer<typeof queryPageSchema>;
 
 const queryResponsePageSchema = z.object({
 	totalItems: z.number(),
-	firstSortValues: z.tuple([z.number(), z.number()]),
-	lastSortValues: z.tuple([z.number(), z.number()]),
+	searchBeforeCursor: z.string().optional(),
+	searchAfterCursor: z.string().optional(),
 });
 type QueryResponsePage = z.infer<typeof queryResponsePageSchema>;
 
