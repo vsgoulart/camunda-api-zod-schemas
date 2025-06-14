@@ -28,10 +28,10 @@ const adHocSubProcessActivityFilterSchema = z.object({
 	adHocSubProcessId: z.string(),
 });
 
-const queryActivatableActivitiesRequestSchema = z.object({
+const queryActivatableActivitiesRequestBodySchema = z.object({
 	filter: adHocSubProcessActivityFilterSchema,
 });
-type QueryActivatableActivitiesRequest = z.infer<typeof queryActivatableActivitiesRequestSchema>;
+type QueryActivatableActivitiesRequestBody = z.infer<typeof queryActivatableActivitiesRequestBodySchema>;
 
 const activatableActivitySchema = z.object({
 	processDefinitionKey: z.string(),
@@ -45,17 +45,26 @@ const activatableActivitySchema = z.object({
 });
 type ActivatableActivity = z.infer<typeof activatableActivitySchema>;
 
-const queryActivatableActivitiesResultSchema = getCollectionResponseBodySchema(activatableActivitySchema);
-type QueryActivatableActivitiesResult = z.infer<typeof queryActivatableActivitiesResultSchema>;
+const queryActivatableActivitiesResponseBodySchema = getCollectionResponseBodySchema(activatableActivitySchema);
+type QueryActivatableActivitiesResponseBody = z.infer<typeof queryActivatableActivitiesResponseBodySchema>;
 
-const activateActivityWithinAdHocSubProcessResultSchema = z.object({
+const activateActivityWithinAdHocSubProcessRequestBodySchema = z.object({
+	elementId: z.string(),
+});
+type ActivateActivityWithinAdHocSubProcessRequestBody = z.infer<
+	typeof activateActivityWithinAdHocSubProcessRequestBodySchema
+>;
+
+const activateActivityWithinAdHocSubProcessResponseBodySchema = z.object({
 	elements: z.array(
 		z.object({
 			elementId: z.string(),
 		}),
 	),
 });
-type ActivateActivityWithinAdHocSubProcessResult = z.infer<typeof activateActivityWithinAdHocSubProcessResultSchema>;
+type ActivateActivityWithinAdHocSubProcessResponseBody = z.infer<
+	typeof activateActivityWithinAdHocSubProcessResponseBodySchema
+>;
 
 const queryActivatableActivities: Endpoint = {
 	method: 'POST',
@@ -70,16 +79,19 @@ const activateAdHocSubProcessActivities: Endpoint<{ adHocSubProcessInstanceKey: 
 
 export {
 	activityTypeSchema,
-	queryActivatableActivitiesResultSchema,
-	activateActivityWithinAdHocSubProcessResultSchema,
+	queryActivatableActivitiesRequestBodySchema,
+	queryActivatableActivitiesResponseBodySchema,
+	activateActivityWithinAdHocSubProcessRequestBodySchema,
+	activateActivityWithinAdHocSubProcessResponseBodySchema,
 	queryActivatableActivities,
 	activateAdHocSubProcessActivities,
 };
 
 export type {
 	ActivityType,
-	QueryActivatableActivitiesRequest,
+	QueryActivatableActivitiesRequestBody,
 	ActivatableActivity,
-	QueryActivatableActivitiesResult,
-	ActivateActivityWithinAdHocSubProcessResult,
+	QueryActivatableActivitiesResponseBody,
+	ActivateActivityWithinAdHocSubProcessRequestBody,
+	ActivateActivityWithinAdHocSubProcessResponseBody,
 };

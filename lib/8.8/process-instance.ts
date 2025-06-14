@@ -109,11 +109,7 @@ type QueryProcessInstanceIncidentsRequestBody = z.infer<typeof queryProcessInsta
 
 const getProcessInstance: Endpoint<Pick<ProcessInstance, 'processInstanceKey'>> = {
 	method: 'GET',
-	getUrl(params) {
-		const { processInstanceKey } = params;
-
-		return `/${API_VERSION}/process-instances/${processInstanceKey}`;
-	},
+	getUrl: ({ processInstanceKey }) => `/${API_VERSION}/process-instances/${processInstanceKey}`,
 };
 
 const createProcessInstanceRequestBodySchema = processInstanceSchema
@@ -153,43 +149,27 @@ type CreateProcessInstanceResponseBody = z.infer<typeof createProcessInstanceRes
 
 const createProcessInstance: Endpoint = {
 	method: 'POST',
-	getUrl() {
-		return `/${API_VERSION}/process-instances`;
-	},
+	getUrl: () => `/${API_VERSION}/process-instances`,
 };
 
 const queryProcessInstances: Endpoint = {
 	method: 'POST',
-	getUrl() {
-		return `/${API_VERSION}/process-instances/search`;
-	},
+	getUrl: () => `/${API_VERSION}/process-instances/search`,
 };
 
 const cancelProcessInstance: Endpoint<Pick<ProcessInstance, 'processInstanceKey'>> = {
 	method: 'POST',
-	getUrl(params) {
-		const { processInstanceKey } = params;
-
-		return `/${API_VERSION}/process-instances/${processInstanceKey}/cancellation`;
-	},
+	getUrl: ({ processInstanceKey }) => `/${API_VERSION}/process-instances/${processInstanceKey}/cancellation`,
 };
 
 const queryProcessInstanceIncidents: Endpoint<Pick<ProcessInstance, 'processInstanceKey'>> = {
 	method: 'POST',
-	getUrl(params) {
-		const { processInstanceKey } = params;
-
-		return `/${API_VERSION}/process-instances/${processInstanceKey}/incidents/search`;
-	},
+	getUrl: ({ processInstanceKey }) => `/${API_VERSION}/process-instances/${processInstanceKey}/incidents/search`,
 };
 
 const getProcessInstanceCallHierarchy: Endpoint<Pick<ProcessInstance, 'processInstanceKey'>> = {
 	method: 'GET',
-	getUrl(params) {
-		const { processInstanceKey } = params;
-
-		return `/${API_VERSION}/process-instances/${processInstanceKey}/call-hierarchy`;
-	},
+	getUrl: ({ processInstanceKey }) => `/${API_VERSION}/process-instances/${processInstanceKey}/call-hierarchy`,
 };
 
 const callHierarchySchema = z.object({
@@ -203,11 +183,8 @@ type GetProcessInstanceCallHierarchyResponseBody = z.infer<typeof getProcessInst
 
 const getProcessInstanceStatistics: Endpoint<GetProcessInstanceStatisticsParams> = {
 	method: 'GET',
-	getUrl(params) {
-		const { processInstanceKey, statisticName = 'element-instances' } = params;
-
-		return `/${API_VERSION}/process-instances/${processInstanceKey}/statistics/${statisticName}`;
-	},
+	getUrl: ({ processInstanceKey, statisticName = 'element-instances' }) =>
+		`/${API_VERSION}/process-instances/${processInstanceKey}/statistics/${statisticName}`,
 };
 
 const getProcessInstanceStatisticsResponseBodySchema = getCollectionResponseBodySchema(
@@ -221,11 +198,7 @@ type GetProcessInstanceStatisticsParams = Pick<ProcessInstance, 'processInstance
 
 const getProcessInstanceSequenceFlows: Endpoint<Pick<ProcessInstance, 'processInstanceKey'>> = {
 	method: 'GET',
-	getUrl(params) {
-		const { processInstanceKey } = params;
-
-		return `/${API_VERSION}/process-instances/${processInstanceKey}/sequence-flows`;
-	},
+	getUrl: ({ processInstanceKey }) => `/${API_VERSION}/process-instances/${processInstanceKey}/sequence-flows`,
 };
 
 const sequenceFlowSchema = z.object({

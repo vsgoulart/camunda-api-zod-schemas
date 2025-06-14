@@ -31,25 +31,17 @@ type GetDecisionRequirementsXmlResponseBody = z.infer<typeof getDecisionRequirem
 
 const queryDecisionRequirements: Endpoint = {
 	method: 'POST',
-	getUrl() {
-		return `/${API_VERSION}/decision-requirements/search`;
-	},
+	getUrl: () => `/${API_VERSION}/decision-requirements/search`,
 };
 
 const getDecisionRequirements: Endpoint<Pick<DecisionRequirements, 'decisionRequirementsKey'>> = {
 	method: 'GET',
-	getUrl(params) {
-		const { decisionRequirementsKey } = params;
-		return `/${API_VERSION}/decision-requirements/${decisionRequirementsKey}`;
-	},
+	getUrl: ({ decisionRequirementsKey }) => `/${API_VERSION}/decision-requirements/${decisionRequirementsKey}`,
 };
 
 const getDecisionRequirementsXml: Endpoint<Pick<DecisionRequirements, 'decisionRequirementsKey'>> = {
 	method: 'GET',
-	getUrl(params) {
-		const { decisionRequirementsKey } = params;
-		return `/${API_VERSION}/decision-requirements/${decisionRequirementsKey}/xml`;
-	},
+	getUrl: ({ decisionRequirementsKey }) => `/${API_VERSION}/decision-requirements/${decisionRequirementsKey}/xml`,
 };
 
 export {

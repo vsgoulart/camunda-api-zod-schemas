@@ -21,10 +21,7 @@ type Variable = z.infer<typeof variableSchema>;
 
 const getVariable: Endpoint<Pick<Variable, 'variableKey'>> = {
 	method: 'GET',
-	getUrl(params) {
-		const { variableKey } = params;
-		return `/${API_VERSION}/variables/${variableKey}`;
-	},
+	getUrl: ({ variableKey }) => `/${API_VERSION}/variables/${variableKey}`,
 };
 
 const queryVariablesRequestBodySchema = getQueryRequestBodySchema({
@@ -52,9 +49,7 @@ type QueryVariablesResponseBody = z.infer<typeof queryVariablesResponseBodySchem
 
 const queryVariables: Endpoint = {
 	method: 'POST',
-	getUrl() {
-		return `/${API_VERSION}/variables/search`;
-	},
+	getUrl: () => `/${API_VERSION}/variables/search`,
 };
 
 export {

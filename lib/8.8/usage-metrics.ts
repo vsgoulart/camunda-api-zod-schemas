@@ -18,15 +18,8 @@ type GetUsageMetricsParams = {
 
 const getUsageMetrics: Endpoint<GetUsageMetricsParams> = {
 	method: 'GET',
-	getUrl(params) {
-		const { startTime, endTime } = params;
-		const searchParams = new URLSearchParams({
-			startTime,
-			endTime,
-		});
-
-		return `/${API_VERSION}/usage-metrics?${searchParams.toString()}`;
-	},
+	getUrl: ({ startTime, endTime }) =>
+		`/${API_VERSION}/usage-metrics?${new URLSearchParams({ startTime, endTime }).toString()}`,
 };
 
 export { getUsageMetrics, usageMetricsSchema, getUsageMetricsResponseBodySchema };

@@ -48,20 +48,12 @@ type Incident = z.infer<typeof incidentSchema>;
 
 const resolveIncident: Endpoint<Pick<Incident, 'incidentKey'>> = {
 	method: 'POST',
-	getUrl(params) {
-		const { incidentKey } = params;
-
-		return `/${API_VERSION}/incidents/${incidentKey}/resolution`;
-	},
+	getUrl: ({ incidentKey }) => `/${API_VERSION}/incidents/${incidentKey}/resolution`,
 };
 
 const getIncident: Endpoint<Pick<Incident, 'incidentKey'>> = {
 	method: 'GET',
-	getUrl(params) {
-		const { incidentKey } = params;
-
-		return `/${API_VERSION}/incidents/${incidentKey}`;
-	},
+	getUrl: ({ incidentKey }) => `/${API_VERSION}/incidents/${incidentKey}`,
 };
 
 const getIncidentResponseBodySchema = incidentSchema;
@@ -113,9 +105,7 @@ type QueryIncidentsResponseBody = z.infer<typeof queryIncidentsResponseBodySchem
 
 const queryIncidents: Endpoint = {
 	method: 'POST',
-	getUrl() {
-		return `/${API_VERSION}/incidents/search`;
-	},
+	getUrl: () => `/${API_VERSION}/incidents/search`,
 };
 
 export {
