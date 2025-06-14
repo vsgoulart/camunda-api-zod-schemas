@@ -39,11 +39,7 @@ type UserTask = z.infer<typeof userTaskSchema>;
 
 const getUserTask: Endpoint<Pick<UserTask, 'userTaskKey'>> = {
 	method: 'GET',
-	getUrl(params) {
-		const { userTaskKey } = params;
-
-		return `/${API_VERSION}/user-tasks/${userTaskKey}`;
-	},
+	getUrl: ({ userTaskKey }) => `/${API_VERSION}/user-tasks/${userTaskKey}`,
 };
 
 const queryUserTasksRequestBodySchema = getQueryRequestBodySchema({
@@ -83,9 +79,7 @@ type QueryUserTasksResponseBody = z.infer<typeof queryUserTasksResponseBodySchem
 
 const queryUserTasks: Endpoint = {
 	method: 'POST',
-	getUrl() {
-		return `/${API_VERSION}/user-tasks/search`;
-	},
+	getUrl: () => `/${API_VERSION}/user-tasks/search`,
 };
 
 const formSchema = z.object({
@@ -99,11 +93,7 @@ type Form = z.infer<typeof formSchema>;
 
 const getUserTaskForm: Endpoint<Pick<UserTask, 'userTaskKey'>> = {
 	method: 'GET',
-	getUrl(params) {
-		const { userTaskKey } = params;
-
-		return `/${API_VERSION}/user-tasks/${userTaskKey}/form`;
-	},
+	getUrl: ({ userTaskKey }) => `/${API_VERSION}/user-tasks/${userTaskKey}/form`,
 };
 
 const updateUserTaskRequestBodySchema = z.object({
@@ -122,19 +112,12 @@ type UpdateUserTaskRequestBody = z.infer<typeof updateUserTaskRequestBodySchema>
 
 const updateUserTask: Endpoint<Pick<UserTask, 'userTaskKey'>> = {
 	method: 'PATCH',
-	getUrl(params) {
-		const { userTaskKey } = params;
-
-		return `/${API_VERSION}/user-tasks/${userTaskKey}`;
-	},
+	getUrl: ({ userTaskKey }) => `/${API_VERSION}/user-tasks/${userTaskKey}`,
 };
 
 const getTask: Endpoint<Pick<UserTask, 'userTaskKey'>> = {
 	method: 'GET',
-	getUrl(params) {
-		const { userTaskKey } = params;
-		return `/${API_VERSION}/user-tasks/${userTaskKey}`;
-	},
+	getUrl: ({ userTaskKey }) => `/${API_VERSION}/user-tasks/${userTaskKey}`,
 };
 
 const assignTaskRequestBodySchema = z.object({
@@ -146,10 +129,7 @@ type AssignTaskRequestBody = z.infer<typeof assignTaskRequestBodySchema>;
 
 const assignTask: Endpoint<Pick<UserTask, 'userTaskKey'>> = {
 	method: 'POST',
-	getUrl(params) {
-		const { userTaskKey } = params;
-		return `/${API_VERSION}/user-tasks/${userTaskKey}/assignment`;
-	},
+	getUrl: ({ userTaskKey }) => `/${API_VERSION}/user-tasks/${userTaskKey}/assignment`,
 };
 
 const unassignTaskRequestBodySchema = z.object({
@@ -159,10 +139,7 @@ type UnassignTaskRequestBody = z.infer<typeof unassignTaskRequestBodySchema>;
 
 const unassignTask: Endpoint<Pick<UserTask, 'userTaskKey'>> = {
 	method: 'DELETE',
-	getUrl(params) {
-		const { userTaskKey } = params;
-		return `/${API_VERSION}/user-tasks/${userTaskKey}/assignee`;
-	},
+	getUrl: ({ userTaskKey }) => `/${API_VERSION}/user-tasks/${userTaskKey}/assignee`,
 };
 
 const completeTaskRequestBodySchema = z.object({
@@ -173,10 +150,7 @@ type CompleteTaskRequestBody = z.infer<typeof completeTaskRequestBodySchema>;
 
 const completeTask: Endpoint<Pick<UserTask, 'userTaskKey'>> = {
 	method: 'POST',
-	getUrl(params) {
-		const { userTaskKey } = params;
-		return `/${API_VERSION}/user-tasks/${userTaskKey}/completion`;
-	},
+	getUrl: ({ userTaskKey }) => `/${API_VERSION}/user-tasks/${userTaskKey}/completion`,
 };
 
 const queryVariablesByUserTaskRequestBodySchema = getQueryRequestBodySchema({
@@ -192,11 +166,7 @@ type QueryVariablesByUserTaskResponseBody = z.infer<typeof queryVariablesByUserT
 
 const queryVariablesByUserTask: Endpoint<Pick<UserTask, 'userTaskKey'>> = {
 	method: 'POST',
-	getUrl(params) {
-		const { userTaskKey } = params;
-
-		return `/${API_VERSION}/user-tasks/${userTaskKey}/variables/search`;
-	},
+	getUrl: ({ userTaskKey }) => `/${API_VERSION}/user-tasks/${userTaskKey}/variables/search`,
 };
 
 export {

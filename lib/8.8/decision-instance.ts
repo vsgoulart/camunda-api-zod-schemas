@@ -91,17 +91,12 @@ type GetDecisionInstanceResponseBody = z.infer<typeof getDecisionInstanceRespons
 
 const queryDecisionInstances: Endpoint = {
 	method: 'POST',
-	getUrl() {
-		return `/${API_VERSION}/decision-instances/search`;
-	},
+	getUrl: () => `/${API_VERSION}/decision-instances/search`,
 };
 
 const getDecisionInstance: Endpoint<Pick<DecisionInstance, 'decisionInstanceId'>> = {
 	method: 'GET',
-	getUrl(params) {
-		const { decisionInstanceId } = params;
-		return `/${API_VERSION}/decision-instances/${decisionInstanceId}`;
-	},
+	getUrl: ({ decisionInstanceId }) => `/${API_VERSION}/decision-instances/${decisionInstanceId}`,
 };
 
 export {

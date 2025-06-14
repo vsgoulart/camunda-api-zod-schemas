@@ -33,29 +33,17 @@ type ProcessDefinitionStatistic = z.infer<typeof processDefinitionStatisticSchem
 
 const getProcessDefinition: Endpoint<Pick<ProcessDefinition, 'processDefinitionKey'>> = {
 	method: 'GET',
-	getUrl(params) {
-		const { processDefinitionKey } = params;
-
-		return `/${API_VERSION}/process-definitions/${processDefinitionKey}`;
-	},
+	getUrl: ({ processDefinitionKey }) => `/${API_VERSION}/process-definitions/${processDefinitionKey}`,
 };
 
 const getProcessDefinitionXml: Endpoint<Pick<ProcessDefinition, 'processDefinitionKey'>> = {
 	method: 'GET',
-	getUrl(params) {
-		const { processDefinitionKey } = params;
-
-		return `/${API_VERSION}/process-definitions/${processDefinitionKey}/xml`;
-	},
+	getUrl: ({ processDefinitionKey }) => `/${API_VERSION}/process-definitions/${processDefinitionKey}/xml`,
 };
 
 const getProcessStartForm: Endpoint<Pick<ProcessDefinition, 'processDefinitionKey'>> = {
 	method: 'GET',
-	getUrl(params) {
-		const { processDefinitionKey } = params;
-
-		return `/${API_VERSION}/process-definitions/${processDefinitionKey}/form`;
-	},
+	getUrl: ({ processDefinitionKey }) => `/${API_VERSION}/process-definitions/${processDefinitionKey}/form`,
 };
 
 const advancedProcessInstanceStateFilterSchema = z
@@ -112,11 +100,8 @@ type GetProcessDefinitionStatisticsParams = Pick<ProcessDefinition, 'processDefi
 
 const getProcessDefinitionStatistics: Endpoint<GetProcessDefinitionStatisticsParams> = {
 	method: 'POST',
-	getUrl(params) {
-		const { processDefinitionKey, statisticName = 'element-instances' } = params;
-
-		return `/${API_VERSION}/process-definitions/${processDefinitionKey}/statistics/${statisticName}`;
-	},
+	getUrl: ({ processDefinitionKey, statisticName = 'element-instances' }) =>
+		`/${API_VERSION}/process-definitions/${processDefinitionKey}/statistics/${statisticName}`,
 };
 
 const queryProcessDefinitionsRequestBodySchema = getQueryRequestBodySchema({
@@ -138,9 +123,7 @@ type QueryProcessDefinitionsResponseBody = z.infer<typeof queryProcessDefinition
 
 const queryProcessDefinitions: Endpoint = {
 	method: 'POST',
-	getUrl() {
-		return `/${API_VERSION}/process-definitions/search`;
-	},
+	getUrl: () => `/${API_VERSION}/process-definitions/search`,
 };
 
 export {
