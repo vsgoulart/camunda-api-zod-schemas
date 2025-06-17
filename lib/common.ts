@@ -67,16 +67,16 @@ const queryPageSchema = z
 	.object({
 		from: z.number().int(),
 		limit: z.number().int(),
-		searchBefore: z.string().optional(),
-		searchAfter: z.string().optional(),
+		before: z.string().optional(),
+		after: z.string().optional(),
 	})
 	.partial();
 type QueryPage = z.infer<typeof queryPageSchema>;
 
 const queryResponsePageSchema = z.object({
 	totalItems: z.number(),
-	searchBeforeCursor: z.string().optional(),
-	searchAfterCursor: z.string().optional(),
+	previousCursor: z.string().optional(),
+	nextCursor: z.string().optional(),
 });
 type QueryResponsePage = z.infer<typeof queryResponsePageSchema>;
 
