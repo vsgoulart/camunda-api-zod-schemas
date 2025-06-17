@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import { z } from 'zod/v4';
 import {
 	API_VERSION,
 	getQueryRequestBodySchema,
@@ -114,7 +114,7 @@ const getElementInstanceResponseBodySchema = elementInstanceSchema;
 type GetElementInstanceResponseBody = z.infer<typeof getElementInstanceResponseBodySchema>;
 
 const updateElementInstanceVariablesRequestBodySchema = z.object({
-	variables: z.record(z.unknown()),
+	variables: z.record(z.string(), z.unknown()),
 	local: z.boolean().optional(),
 });
 type UpdateElementInstanceVariablesRequestBody = z.infer<typeof updateElementInstanceVariablesRequestBodySchema>;

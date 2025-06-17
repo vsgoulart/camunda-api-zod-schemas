@@ -1,4 +1,5 @@
-import { z } from 'zod';
+import type { EnumLike } from 'zod';
+import { z } from 'zod/v4';
 
 const API_VERSION = 'v2';
 
@@ -111,7 +112,7 @@ function getQueryRequestSortSchema<Fields extends [string, ...string[]]>(fields:
 	);
 }
 
-function getEnumFilterSchema<Fields extends [string, ...string[]]>(fields: z.ZodEnum<Fields>) {
+function getEnumFilterSchema<Fields extends EnumLike>(fields: z.ZodEnum<Fields>) {
 	return z.object({
 		$eq: fields.optional(),
 		$neq: fields.optional(),
@@ -124,10 +125,7 @@ function getEnumFilterSchema<Fields extends [string, ...string[]]>(fields: z.Zod
 function getQueryRequestBodySchema<
 	FilterSchema extends z.ZodTypeAny,
 	SortFields extends [string, ...string[]],
->(options: {
-	sortFields: SortFields;
-	filter: FilterSchema;
-}) {
+>(options: { sortFields: SortFields; filter: FilterSchema }) {
 	const { sortFields, filter } = options;
 
 	return z
@@ -140,7 +138,11 @@ function getQueryRequestBodySchema<
 }
 
 interface Endpoint<URLParams extends object | undefined = undefined> {
-	getUrl: URLParams extends undefined ? () => string : (params: URLParams) => string;
+	getUrl: URLParams extends undefined
+		? () => string
+		: {} extends URLParams
+			? (params?: URLParams) => string
+			: (params: URLParams) => string;
 	method: string;
 }
 
