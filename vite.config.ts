@@ -1,12 +1,14 @@
 import { resolve } from 'node:path';
 import { defineConfig } from 'vite';
 import dts from 'vite-plugin-dts';
+import circleDependency from 'vite-plugin-circular-dependency';
 
 export default defineConfig({
 	plugins: [
 		dts({
 			insertTypesEntry: true,
 		}),
+		circleDependency(),
 	],
 	build: {
 		lib: {

@@ -2,14 +2,7 @@ import { z } from 'zod/v4';
 import { API_VERSION, getQueryResponseBodySchema, getQueryRequestBodySchema, type Endpoint } from './common';
 import { mappingRuleSchema, type MappingRule } from './mapping-rule';
 import { userSchema } from './user';
-import { roleSchema } from './role';
-
-const groupSchema = z.object({
-	groupId: z.string(),
-	name: z.string(),
-	description: z.string(),
-});
-type Group = z.infer<typeof groupSchema>;
+import { roleSchema, groupSchema, type Group } from './group-role';
 
 const createGroupRequestBodySchema = groupSchema;
 type CreateGroupRequestBody = z.infer<typeof createGroupRequestBodySchema>;

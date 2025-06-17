@@ -1,15 +1,8 @@
 import { z } from 'zod/v4';
 import { API_VERSION, getQueryRequestBodySchema, getQueryResponseBodySchema, type Endpoint } from './common';
-import { groupSchema, type Group } from './group';
+import { groupSchema, roleSchema, type Group, type Role } from './group-role';
 import { mappingRuleSchema, type MappingRule } from './mapping-rule';
 import { userSchema } from './user';
-
-const roleSchema = z.object({
-	roleId: z.string(),
-	name: z.string(),
-	description: z.string(),
-});
-type Role = z.infer<typeof roleSchema>;
 
 const createRoleRequestBodySchema = roleSchema;
 type CreateRoleRequestBody = z.infer<typeof createRoleRequestBodySchema>;
