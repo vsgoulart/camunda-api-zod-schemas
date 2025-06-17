@@ -9,27 +9,14 @@ import {
 	type Endpoint,
 	basicStringFilterSchema,
 } from './common';
-import { processInstanceStateSchema, type StatisticName } from './process-instance';
-
-const processDefinitionSchema = z.object({
-	name: z.string().optional(),
-	resourceName: z.string().optional(),
-	version: z.number(),
-	versionTag: z.string().optional(),
-	processDefinitionId: z.string(),
-	tenantId: z.string(),
-	processDefinitionKey: z.string(),
-});
-type ProcessDefinition = z.infer<typeof processDefinitionSchema>;
-
-const processDefinitionStatisticSchema = z.object({
-	elementId: z.string(),
-	active: z.number(),
-	canceled: z.number(),
-	incidents: z.number(),
-	completed: z.number(),
-});
-type ProcessDefinitionStatistic = z.infer<typeof processDefinitionStatisticSchema>;
+import {
+	processDefinitionSchema,
+	processDefinitionStatisticSchema,
+	processInstanceStateSchema,
+	type ProcessDefinition,
+	type StatisticName,
+	type ProcessDefinitionStatistic,
+} from './processes';
 
 const getProcessDefinition: Endpoint<Pick<ProcessDefinition, 'processDefinitionKey'>> = {
 	method: 'GET',

@@ -10,28 +10,14 @@ import {
 	type Endpoint,
 } from './common';
 import { variableSchema } from './variable';
-import { processDefinitionStatisticSchema } from './process-definition';
-
-const processInstanceStateSchema = z.enum(['ACTIVE', 'COMPLETED', 'TERMINATED']);
-type ProcessInstanceState = z.infer<typeof processInstanceStateSchema>;
-type StatisticName = 'element-instances';
-
-const processInstanceSchema = z.object({
-	processDefinitionId: z.string(),
-	processDefinitionName: z.string(),
-	processDefinitionVersion: z.number(),
-	processDefinitionVersionTag: z.string().optional(),
-	startDate: z.string(),
-	endDate: z.string().optional(),
-	state: processInstanceStateSchema,
-	hasIncident: z.boolean(),
-	tenantId: z.string(),
-	processInstanceKey: z.string(),
-	processDefinitionKey: z.string(),
-	parentProcessInstanceKey: z.string().optional(),
-	parentElementInstanceKey: z.string().optional(),
-});
-type ProcessInstance = z.infer<typeof processInstanceSchema>;
+import {
+	processInstanceSchema,
+	processInstanceStateSchema,
+	processDefinitionStatisticSchema,
+	type ProcessInstance,
+	type ProcessInstanceState,
+	type StatisticName,
+} from './processes';
 
 const processInstanceVariableFilterSchema = z.object({
 	name: z.string(),
