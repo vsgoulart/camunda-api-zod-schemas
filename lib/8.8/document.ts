@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import { z } from 'zod/v4';
 import { API_VERSION, type Endpoint } from './common';
 
 const documentMetadataSchema = z.object({
@@ -8,7 +8,7 @@ const documentMetadataSchema = z.object({
 	size: z.number(),
 	processDefinitionId: z.string(),
 	processInstanceKey: z.string(),
-	customProperties: z.record(z.unknown()),
+	customProperties: z.record(z.string(), z.unknown()),
 });
 type DocumentMetadata = z.infer<typeof documentMetadataSchema>;
 
@@ -66,7 +66,7 @@ const createDocuments: Endpoint<{
 	storeId?: string;
 }> = {
 	method: 'POST',
-	getUrl({ storeId }) {
+	getUrl({ storeId } = {}) {
 		const searchParams = new URLSearchParams();
 		if (storeId) {
 			searchParams.set('storeId', storeId);

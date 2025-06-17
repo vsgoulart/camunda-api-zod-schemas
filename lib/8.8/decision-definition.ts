@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import { z } from 'zod/v4';
 import { API_VERSION, getQueryRequestBodySchema, getQueryResponseBodySchema, type Endpoint } from './common';
 
 const decisionDefinitionSchema = z.object({
@@ -68,7 +68,7 @@ type EvaluatedDecisionResult = z.infer<typeof evaluatedDecisionResultSchema>;
 
 const evaluateDecisionRequestBodySchema = z.object({
 	decisionDefinitionId: z.string().optional(),
-	variables: z.record(z.unknown()).optional(),
+	variables: z.record(z.string(), z.unknown()).optional(),
 	tenantId: z.string().optional(),
 	decisionDefinitionKey: z.string().optional(),
 });

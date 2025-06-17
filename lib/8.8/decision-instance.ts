@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import { z } from 'zod/v4';
 import {
 	API_VERSION,
 	getQueryRequestBodySchema,
@@ -50,43 +50,36 @@ const queryDecisionInstancesRequestBodySchema = getQueryRequestBodySchema({
 		'decisionDefinitionType',
 		'tenantId',
 	] as const,
-	filter: decisionInstanceSchema
-		.pick({
-			decisionInstanceId: true,
-			state: true,
-			evaluationFailure: true,
-			evaluationDate: true,
-			decisionDefinitionId: true,
-			decisionDefinitionName: true,
-			decisionDefinitionVersion: true,
-			decisionDefinitionType: true,
-			tenantId: true,
-			decisionInstanceKey: true,
-			processDefinitionKey: true,
-			processInstanceKey: true,
-			decisionDefinitionKey: true,
+	filter: z
+		.object({
+			evaluationDate: z.union([advancedDateTimeFilterSchema, decisionInstanceSchema.shape.evaluationDate]),
+			decisionDefinitionKey: z.union([basicStringFilterSchema, decisionInstanceSchema.shape.decisionDefinitionKey]),
+			...decisionInstanceSchema.pick({
+				decisionInstanceId: true,
+				state: true,
+				evaluationFailure: true,
+				decisionDefinitionId: true,
+				decisionDefinitionName: true,
+				decisionDefinitionVersion: true,
+				decisionDefinitionType: true,
+				tenantId: true,
+				decisionInstanceKey: true,
+				processDefinitionKey: true,
+				processInstanceKey: true,
+			}).shape,
 		})
-		.partial()
-		.merge(
-			z.object({
-				evaluationDate: z.union([advancedDateTimeFilterSchema, decisionInstanceSchema.shape.evaluationDate]).optional(),
-				decisionDefinitionKey: z
-					.union([basicStringFilterSchema, decisionInstanceSchema.shape.decisionDefinitionKey])
-					.optional(),
-			}),
-		),
+		.partial(),
 });
 type QueryDecisionInstancesRequestBody = z.infer<typeof queryDecisionInstancesRequestBodySchema>;
 
 const queryDecisionInstancesResponseBodySchema = getQueryResponseBodySchema(decisionInstanceSchema);
 type QueryDecisionInstancesResponseBody = z.infer<typeof queryDecisionInstancesResponseBodySchema>;
 
-const getDecisionInstanceResponseBodySchema = decisionInstanceSchema.merge(
-	z.object({
-		evaluatedInputs: z.array(evaluatedDecisionInputItemSchema).optional(),
-		matchedRules: z.array(matchedDecisionRuleItemSchema).optional(),
-	}),
-);
+const getDecisionInstanceResponseBodySchema = z.object({
+	evaluatedInputs: z.array(evaluatedDecisionInputItemSchema).optional(),
+	matchedRules: z.array(matchedDecisionRuleItemSchema).optional(),
+	...decisionInstanceSchema.shape,
+});
 type GetDecisionInstanceResponseBody = z.infer<typeof getDecisionInstanceResponseBodySchema>;
 
 const queryDecisionInstances: Endpoint = {

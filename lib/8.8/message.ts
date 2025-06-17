@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import { z } from 'zod/v4';
 import { API_VERSION, type Endpoint } from './common';
 
 const publishMessageRequestBodySchema = z.object({
@@ -6,7 +6,7 @@ const publishMessageRequestBodySchema = z.object({
 	correlationKey: z.string(),
 	timeToLive: z.number().int().optional(),
 	messageId: z.string().optional(),
-	variables: z.record(z.unknown()).optional(),
+	variables: z.record(z.string(), z.unknown()).optional(),
 	tenantId: z.string().optional(),
 });
 type PublishMessageRequestBody = z.infer<typeof publishMessageRequestBodySchema>;
@@ -20,7 +20,7 @@ type PublishMessageResponseBody = z.infer<typeof publishMessageResponseBodySchem
 const correlateMessageRequestBodySchema = z.object({
 	name: z.string(),
 	correlationKey: z.string(),
-	variables: z.record(z.unknown()).optional(),
+	variables: z.record(z.string(), z.unknown()).optional(),
 	tenantId: z.string().optional(),
 });
 type CorrelateMessageRequestBody = z.infer<typeof correlateMessageRequestBodySchema>;

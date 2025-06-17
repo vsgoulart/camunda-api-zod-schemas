@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import { z } from 'zod/v4';
 import {
 	API_VERSION,
 	getQueryResponseBodySchema,
@@ -74,29 +74,24 @@ const queryIncidentsRequestBodySchema = getQueryRequestBodySchema({
 		'jobKey',
 		'tenantId',
 	] as const,
-	filter: incidentSchema
-		.pick({
-			processDefinitionId: true,
-			errorType: true,
-			errorMessage: true,
-			elementId: true,
-			creationTime: true,
-			state: true,
-			tenantId: true,
-			incidentKey: true,
-			processDefinitionKey: true,
-			processInstanceKey: true,
-			elementInstanceKey: true,
-			jobKey: true,
+	filter: z
+		.object({
+			errorType: z.union([incidentErrorTypeSchema, getEnumFilterSchema(incidentErrorTypeSchema)]),
+			creationTime: z.union([z.string(), advancedDateTimeFilterSchema]),
+			state: z.union([incidentStateSchema, getEnumFilterSchema(incidentStateSchema)]),
+			...incidentSchema.pick({
+				processDefinitionId: true,
+				errorMessage: true,
+				elementId: true,
+				tenantId: true,
+				incidentKey: true,
+				processDefinitionKey: true,
+				processInstanceKey: true,
+				elementInstanceKey: true,
+				jobKey: true,
+			}).shape,
 		})
-		.partial()
-		.merge(
-			z.object({
-				errorType: z.union([incidentErrorTypeSchema, getEnumFilterSchema(incidentErrorTypeSchema)]).optional(),
-				creationTime: z.union([z.string(), advancedDateTimeFilterSchema]).optional(),
-				state: z.union([incidentStateSchema, getEnumFilterSchema(incidentStateSchema)]).optional(),
-			}),
-		),
+		.partial(),
 });
 type QueryIncidentsRequestBody = z.infer<typeof queryIncidentsRequestBodySchema>;
 

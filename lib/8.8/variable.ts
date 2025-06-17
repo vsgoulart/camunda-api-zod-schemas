@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import { z } from 'zod/v4';
 import {
 	advancedStringFilterSchema,
 	API_VERSION,
@@ -26,21 +26,19 @@ const getVariable: Endpoint<Pick<Variable, 'variableKey'>> = {
 
 const queryVariablesRequestBodySchema = getQueryRequestBodySchema({
 	sortFields: ['name', 'value', 'fullValue', 'tenantId', 'variableKey', 'scopeKey', 'processInstanceKey'] as const,
-	filter: variableSchema
-		.pick({
-			tenantId: true,
-			isTruncated: true,
+	filter: z
+		.object({
+			name: advancedStringFilterSchema,
+			value: advancedStringFilterSchema,
+			variableKey: advancedStringFilterSchema,
+			scopeKey: advancedStringFilterSchema,
+			processInstanceKey: advancedStringFilterSchema,
+			...variableSchema.pick({
+				tenantId: true,
+				isTruncated: true,
+			}).shape,
 		})
-		.partial()
-		.merge(
-			z.object({
-				name: advancedStringFilterSchema.optional(),
-				value: advancedStringFilterSchema.optional(),
-				variableKey: advancedStringFilterSchema.optional(),
-				scopeKey: advancedStringFilterSchema.optional(),
-				processInstanceKey: advancedStringFilterSchema.optional(),
-			}),
-		),
+		.partial(),
 });
 type QueryVariablesRequestBody = z.infer<typeof queryVariablesRequestBodySchema>;
 

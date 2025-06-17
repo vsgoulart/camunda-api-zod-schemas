@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import { z } from 'zod/v4';
 import { API_VERSION, getQueryResponseBodySchema, getQueryRequestBodySchema, type Endpoint } from './common';
 
 const permissionTypeSchema = z.enum([
@@ -82,14 +82,12 @@ const queryAuthorizationsRequestBodySchema = getQueryRequestBodySchema({
 	filter: z
 		.object({
 			resourceId: z.array(z.string()),
-		})
-		.merge(
-			authorizationSchema.pick({
+			...authorizationSchema.pick({
 				ownerId: true,
 				ownerType: true,
 				resourceType: true,
-			}),
-		)
+			}).shape,
+		})
 		.partial(),
 });
 type QueryAuthorizationsRequestBody = z.infer<typeof queryAuthorizationsRequestBodySchema>;

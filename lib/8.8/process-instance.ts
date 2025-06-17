@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import { z } from 'zod/v4';
 import {
 	API_VERSION,
 	getCollectionResponseBodySchema,
@@ -112,39 +112,36 @@ const getProcessInstance: Endpoint<Pick<ProcessInstance, 'processInstanceKey'>> 
 	getUrl: ({ processInstanceKey }) => `/${API_VERSION}/process-instances/${processInstanceKey}`,
 };
 
-const createProcessInstanceRequestBodySchema = processInstanceSchema
-	.pick({
-		processDefinitionId: true,
-		processDefinitionVersion: true,
-		tenantId: true,
-		processDefinitionKey: true,
-	})
-	.partial()
-	.merge(
-		z.object({
-			variables: z.record(variableSchema).optional(),
-			operationReference: z.number().optional(),
-			startInstructions: z.array(z.string()).optional(),
-			awaitCompletion: z.boolean().optional(),
-			fetchVariables: z.array(z.string()).optional(),
-			requestTimeout: z.number().optional(),
-		}),
-	);
+const createProcessInstanceRequestBodySchema = z.object({
+	variables: z.record(z.string(), variableSchema).optional(),
+	operationReference: z.number().optional(),
+	startInstructions: z.array(z.string()).optional(),
+	awaitCompletion: z.boolean().optional(),
+	fetchVariables: z.array(z.string()).optional(),
+	requestTimeout: z.number().optional(),
+	...processInstanceSchema
+		.pick({
+			processDefinitionId: true,
+			processDefinitionVersion: true,
+			tenantId: true,
+			processDefinitionKey: true,
+		})
+		.partial().shape,
+});
+
 type CreateProcessInstanceRequestBody = z.infer<typeof createProcessInstanceRequestBodySchema>;
 
-const createProcessInstanceResponseBodySchema = processInstanceSchema
-	.pick({
+const createProcessInstanceResponseBodySchema = z.object({
+	variables: z.record(z.string(), variableSchema).optional(),
+	...processInstanceSchema.pick({
 		processDefinitionId: true,
 		processDefinitionVersion: true,
 		tenantId: true,
 		processDefinitionKey: true,
 		processInstanceKey: true,
-	})
-	.merge(
-		z.object({
-			variables: z.record(variableSchema).optional(),
-		}),
-	);
+	}).shape,
+});
+
 type CreateProcessInstanceResponseBody = z.infer<typeof createProcessInstanceResponseBodySchema>;
 
 const createProcessInstance: Endpoint = {

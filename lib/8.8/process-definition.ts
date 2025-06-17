@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import { z } from 'zod/v4';
 import {
 	advancedDateTimeFilterSchema,
 	API_VERSION,
@@ -81,11 +81,12 @@ const processDefinitionStatisticsFilterFieldsSchema = z.object({
 });
 
 const getProcessDefinitionStatisticsRequestBodySchema = z.object({
-	filter: processDefinitionStatisticsFilterFieldsSchema.partial().merge(
-		z.object({
-			$or: z.array(processDefinitionStatisticsFilterFieldsSchema.partial()).optional(),
-		}),
-	),
+	filter: z
+		.object({
+			$or: z.array(processDefinitionStatisticsFilterFieldsSchema.partial()),
+			...processDefinitionStatisticsFilterFieldsSchema.shape,
+		})
+		.partial(),
 });
 type GetProcessDefinitionStatisticsRequestBody = z.infer<typeof getProcessDefinitionStatisticsRequestBodySchema>;
 

@@ -1,9 +1,9 @@
-import { z } from 'zod';
+import { z } from 'zod/v4';
 import { API_VERSION, type Endpoint } from './common';
 
 const broadcastSignalRequestBodySchema = z.object({
 	signalName: z.string(),
-	variables: z.record(z.unknown()).optional(),
+	variables: z.record(z.string(), z.unknown()).optional(),
 	tenantId: z.string().optional(),
 });
 type BroadcastSignalRequestBody = z.infer<typeof broadcastSignalRequestBodySchema>;

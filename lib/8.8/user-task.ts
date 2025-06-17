@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import { z } from 'zod/v4';
 import {
 	advancedDateTimeFilterSchema,
 	advancedIntegerFilterSchema,
@@ -55,21 +55,18 @@ const queryUserTasksRequestBodySchema = getQueryRequestBodySchema({
 			processInstanceKey: true,
 			elementInstanceKey: true,
 		})
-		.partial()
-		.merge(
-			z.object({
-				assignee: z.union([userTaskSchema.shape.assignee, advancedStringFilterSchema]),
-				priority: z.union([userTaskSchema.shape.priority, advancedIntegerFilterSchema]),
-				candidateGroup: z.union([z.string(), advancedStringFilterSchema]),
-				candidateUser: z.union([z.string(), advancedStringFilterSchema]),
-				creationDate: z.union([userTaskSchema.shape.creationDate, advancedDateTimeFilterSchema]),
-				completionDate: z.union([userTaskSchema.shape.completionDate, advancedDateTimeFilterSchema]),
-				followUpDate: z.union([userTaskSchema.shape.followUpDate, advancedDateTimeFilterSchema]),
-				dueDate: z.union([userTaskSchema.shape.dueDate, advancedDateTimeFilterSchema]),
-				localVariables: z.array(userTaskVariableFilterSchema),
-				processInstanceVariables: z.array(userTaskVariableFilterSchema),
-			}),
-		)
+		.extend({
+			assignee: z.union([userTaskSchema.shape.assignee, advancedStringFilterSchema]),
+			priority: z.union([userTaskSchema.shape.priority, advancedIntegerFilterSchema]),
+			candidateGroup: z.union([z.string(), advancedStringFilterSchema]),
+			candidateUser: z.union([z.string(), advancedStringFilterSchema]),
+			creationDate: z.union([userTaskSchema.shape.creationDate, advancedDateTimeFilterSchema]),
+			completionDate: z.union([userTaskSchema.shape.completionDate, advancedDateTimeFilterSchema]),
+			followUpDate: z.union([userTaskSchema.shape.followUpDate, advancedDateTimeFilterSchema]),
+			dueDate: z.union([userTaskSchema.shape.dueDate, advancedDateTimeFilterSchema]),
+			localVariables: z.array(userTaskVariableFilterSchema),
+			processInstanceVariables: z.array(userTaskVariableFilterSchema),
+		})
 		.partial(),
 });
 type QueryUserTasksRequestBody = z.infer<typeof queryUserTasksRequestBodySchema>;
