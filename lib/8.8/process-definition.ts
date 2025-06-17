@@ -67,14 +67,16 @@ const processDefinitionStatisticsFilterFieldsSchema = z.object({
 	incidentErrorHashCode: z.number(),
 });
 
-const getProcessDefinitionStatisticsRequestBodySchema = z.object({
-	filter: z
-		.object({
-			$or: z.array(processDefinitionStatisticsFilterFieldsSchema.partial()),
-			...processDefinitionStatisticsFilterFieldsSchema.shape,
-		})
-		.partial(),
-});
+const getProcessDefinitionStatisticsRequestBodySchema = z
+	.object({
+		filter: z
+			.object({
+				$or: z.array(processDefinitionStatisticsFilterFieldsSchema.partial()),
+				...processDefinitionStatisticsFilterFieldsSchema.shape,
+			})
+			.partial(),
+	})
+	.partial();
 type GetProcessDefinitionStatisticsRequestBody = z.infer<typeof getProcessDefinitionStatisticsRequestBodySchema>;
 
 const getProcessDefinitionStatisticsResponseBodySchema = getCollectionResponseBodySchema(
