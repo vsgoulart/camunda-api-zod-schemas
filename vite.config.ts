@@ -14,6 +14,7 @@ export default defineConfig({
 		lib: {
 			entry: {
 				'8.8': resolve(__dirname, 'lib/8.8/index.ts'),
+				'8.8/index': resolve(__dirname, 'lib/8.8/index.ts'),
 				'8.8/ad-hoc-sub-process': resolve(__dirname, 'lib/8.8/ad-hoc-sub-process.ts'),
 				'8.8/authentication': resolve(__dirname, 'lib/8.8/authentication.ts'),
 				'8.8/authorization': resolve(__dirname, 'lib/8.8/authorization.ts'),
@@ -49,10 +50,7 @@ export default defineConfig({
 			external: ['zod/v4'],
 			preserveEntrySignatures: 'strict',
 			output: {
-				format: 'es',
-				entryFileNames: '[name].js',
 				preserveModules: true,
-				preserveModulesRoot: 'lib',
 			},
 		},
 	},

@@ -32,6 +32,16 @@
 		"dist"
 	],
 	"exports": {
+		".": {
+			"import": {
+				"types": "./dist/8.8.d.ts",
+				"default": "./dist/8.8.js"
+			},
+			"require": {
+				"types": "./dist/8.8.d.ts",
+				"default": "./dist/8.8.cjs"
+			}
+		},
 		"./8.8": {
 			"import": {
 				"types": "./dist/8.8.d.ts",
