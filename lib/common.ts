@@ -75,8 +75,8 @@ type QueryPage = z.infer<typeof queryPageSchema>;
 
 const queryResponsePageSchema = z.object({
 	totalItems: z.number(),
-	previousCursor: z.string().optional(),
-	nextCursor: z.string().optional(),
+	startCursor: z.string().optional(),
+	endCursor: z.string().optional(),
 });
 type QueryResponsePage = z.infer<typeof queryResponsePageSchema>;
 
