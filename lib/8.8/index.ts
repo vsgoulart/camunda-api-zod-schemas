@@ -327,10 +327,7 @@ export {
 	type QueryBatchOperationItemsRequestBody,
 	type QueryBatchOperationItemsResponseBody,
 } from './batch-operation';
-export {
-	pinClockRequestBodySchema,
-	type PinClockRequestBody,
-} from './clock';
+export { pinClockRequestBodySchema, type PinClockRequestBody } from './clock';
 export {
 	partitionRoleSchema,
 	partitionHealthSchema,
@@ -540,7 +537,7 @@ export {
 	queryProcessInstanceIncidentsRequestBodySchema,
 	getProcessInstanceCallHierarchyResponseBodySchema,
 	getProcessInstanceStatisticsResponseBodySchema,
-	getProcessSequenceFlowsResponseBodySchema,
+	getProcessInstanceSequenceFlowsResponseBodySchema,
 	processInstanceStateSchema,
 	processInstanceSchema,
 	sequenceFlowSchema,
@@ -554,7 +551,7 @@ export {
 	type CallHierarchy,
 	type GetProcessInstanceCallHierarchyResponseBody,
 	type SequenceFlow,
-	type GetProcessSequenceFlowsResponseBody,
+	type GetProcessInstanceSequenceFlowsResponseBody,
 	type ProcessInstanceState,
 	type StatisticName,
 	type ProcessInstance,
