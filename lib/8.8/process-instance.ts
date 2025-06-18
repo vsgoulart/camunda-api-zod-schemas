@@ -194,8 +194,8 @@ const sequenceFlowSchema = z.object({
 });
 type SequenceFlow = z.infer<typeof sequenceFlowSchema>;
 
-const getProcessSequenceFlowsResponseBodySchema = getCollectionResponseBodySchema(sequenceFlowSchema);
-type GetProcessSequenceFlowsResponseBody = z.infer<typeof getProcessSequenceFlowsResponseBodySchema>;
+const getProcessInstanceSequenceFlowsResponseBodySchema = getCollectionResponseBodySchema(sequenceFlowSchema);
+type GetProcessInstanceSequenceFlowsResponseBody = z.infer<typeof getProcessInstanceSequenceFlowsResponseBodySchema>;
 
 export {
 	createProcessInstance,
@@ -214,7 +214,7 @@ export {
 	queryProcessInstanceIncidentsRequestBodySchema,
 	getProcessInstanceCallHierarchyResponseBodySchema,
 	getProcessInstanceStatisticsResponseBodySchema,
-	getProcessSequenceFlowsResponseBodySchema,
+	getProcessInstanceSequenceFlowsResponseBodySchema,
 	processInstanceStateSchema,
 	processInstanceSchema,
 	sequenceFlowSchema,
@@ -230,7 +230,7 @@ export type {
 	CallHierarchy,
 	GetProcessInstanceCallHierarchyResponseBody,
 	SequenceFlow,
-	GetProcessSequenceFlowsResponseBody,
+	GetProcessInstanceSequenceFlowsResponseBody,
 	ProcessInstanceState,
 	StatisticName,
 	ProcessInstance,
