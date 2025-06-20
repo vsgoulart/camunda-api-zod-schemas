@@ -1,4 +1,4 @@
-import { z } from 'zod/v4';
+import { z } from 'zod';
 import { API_VERSION, getQueryResponseBodySchema, getQueryRequestBodySchema, type Endpoint } from './common';
 
 const permissionTypeSchema = z.enum([

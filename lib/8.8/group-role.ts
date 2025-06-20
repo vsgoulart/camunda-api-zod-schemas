@@ -2,7 +2,7 @@
  * This file exists only to avoid circular dependencies. Do not export it directly.
  */
 
-import { z } from 'zod/v4';
+import { z } from 'zod';
 
 const groupSchema = z.object({
 	groupId: z.string(),

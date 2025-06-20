@@ -1,4 +1,4 @@
-import { z } from 'zod/v4';
+import { z } from 'zod';
 import { API_VERSION, getCollectionResponseBodySchema, type Endpoint } from './common';
 
 const activityTypeSchema = z.enum([

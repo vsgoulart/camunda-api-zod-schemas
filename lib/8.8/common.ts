@@ -1,5 +1,4 @@
-import type { EnumLike } from 'zod';
-import { z } from 'zod/v4';
+import { z } from 'zod';
 
 const API_VERSION = 'v2';
 
@@ -112,7 +111,7 @@ function getQueryRequestSortSchema<Fields extends [string, ...string[]]>(fields:
 	);
 }
 
-function getEnumFilterSchema<Fields extends EnumLike>(fields: z.ZodEnum<Fields>) {
+function getEnumFilterSchema<T extends [string, ...string[]]>(fields: z.ZodEnum<T>) {
 	return z.object({
 		$eq: fields.optional(),
 		$neq: fields.optional(),

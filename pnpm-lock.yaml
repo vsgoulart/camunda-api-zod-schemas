@@ -9,7 +9,7 @@ importers:
   .:
     dependencies:
       zod:
-        specifier: '>=3.25.64'
+        specifier: '>=3.0.0'
         version: 3.25.64
     devDependencies:
       '@biomejs/biome':
