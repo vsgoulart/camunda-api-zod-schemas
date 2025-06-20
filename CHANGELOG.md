@@ -1,5 +1,26 @@
 # Changelog
 
+## v1.1.0
+
+### ⚠️ Breaking Changes
+
+- Temporarily revert to Zod v3
+
+### 🚀 Enhancements
+
+- Temporarily add CJS support
+
+### 🩹 Fixes
+
+- Fixes inconsistency in `getProcessInstanceSequenceFlowsResponseBodySchema` name
+
+### ❤️ Contributors
+
+- Vinicius Goulart
+- Patrick Dehn 
+
+
+
 ## v1.0.0
 
 ### ⚠️ Breaking Changes
