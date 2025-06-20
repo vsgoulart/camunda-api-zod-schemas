@@ -43,7 +43,7 @@ export default defineConfig({
 				'8.8/user-task': resolve(__dirname, 'lib/8.8/user-task.ts'),
 				'8.8/variable': resolve(__dirname, 'lib/8.8/variable.ts'),
 			},
-			formats: ['es'],
+			formats: ['es', 'cjs'],
 		},
 		minify: false,
 		rollupOptions: {
