@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import { z } from 'zod/v4';
 import { API_VERSION, getQueryRequestBodySchema, getQueryResponseBodySchema, type Endpoint } from './common';
 import { groupSchema, roleSchema, type Group, type Role } from './group-role';
 import { mappingRuleSchema, type MappingRule } from './mapping-rule';

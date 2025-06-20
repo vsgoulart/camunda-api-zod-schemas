@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import { z } from 'zod/v4';
 import { API_VERSION, type Endpoint } from './common';
 
 const publishMessageRequestBodySchema = z.object({
