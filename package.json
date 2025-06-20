@@ -36,10 +36,6 @@
 			"import": {
 				"types": "./dist/8.8.d.ts",
 				"default": "./dist/8.8.js"
-			},
-			"require": {
-				"types": "./dist/8.8.d.ts",
-				"default": "./dist/8.8.cjs"
 			}
 		},
 		"./8.8": {
@@ -213,6 +209,7 @@
 		"./package.json": "./package.json"
 	},
 	"main": "./dist/8.8.js",
+	"module": "./dist/8.8.js",
 	"types": "./dist/8.8.d.ts",
 	"publishConfig": {
 		"access": "public"
