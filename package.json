@@ -36,295 +36,179 @@
 			"import": {
 				"types": "./dist/8.8.d.ts",
 				"default": "./dist/8.8.js"
-			},
-			"require": {
-				"types": "./dist/8.8.d.ts",
-				"default": "./dist/8.8.cjs"
 			}
 		},
 		"./8.8": {
 			"import": {
 				"types": "./dist/8.8.d.ts",
 				"default": "./dist/8.8.js"
-			},
-			"require": {
-				"types": "./dist/8.8.d.ts",
-				"default": "./dist/8.8.cjs"
 			}
 		},
 		"./8.8/ad-hoc-sub-process": {
 			"import": {
 				"types": "./dist/8.8/ad-hoc-sub-process.d.ts",
 				"default": "./dist/8.8/ad-hoc-sub-process.js"
-			},
-			"require": {
-				"types": "./dist/8.8/ad-hoc-sub-process.d.ts",
-				"default": "./dist/8.8/ad-hoc-sub-process.cjs"
 			}
 		},
 		"./8.8/authentication": {
 			"import": {
 				"types": "./dist/8.8/authentication.d.ts",
 				"default": "./dist/8.8/authentication.js"
-			},
-			"require": {
-				"types": "./dist/8.8/authentication.d.ts",
-				"default": "./dist/8.8/authentication.cjs"
 			}
 		},
 		"./8.8/authorization": {
 			"import": {
 				"types": "./dist/8.8/authorization.d.ts",
 				"default": "./dist/8.8/authorization.js"
-			},
-			"require": {
-				"types": "./dist/8.8/authorization.d.ts",
-				"default": "./dist/8.8/authorization.cjs"
 			}
 		},
 		"./8.8/batch-operation": {
 			"import": {
 				"types": "./dist/8.8/batch-operation.d.ts",
 				"default": "./dist/8.8/batch-operation.js"
-			},
-			"require": {
-				"types": "./dist/8.8/batch-operation.d.ts",
-				"default": "./dist/8.8/batch-operation.cjs"
 			}
 		},
 		"./8.8/clock": {
 			"import": {
 				"types": "./dist/8.8/clock.d.ts",
 				"default": "./dist/8.8/clock.js"
-			},
-			"require": {
-				"types": "./dist/8.8/clock.d.ts",
-				"default": "./dist/8.8/clock.cjs"
 			}
 		},
 		"./8.8/cluster": {
 			"import": {
 				"types": "./dist/8.8/cluster.d.ts",
 				"default": "./dist/8.8/cluster.js"
-			},
-			"require": {
-				"types": "./dist/8.8/cluster.d.ts",
-				"default": "./dist/8.8/cluster.cjs"
 			}
 		},
 		"./8.8/decision-definition": {
 			"import": {
 				"types": "./dist/8.8/decision-definition.d.ts",
 				"default": "./dist/8.8/decision-definition.js"
-			},
-			"require": {
-				"types": "./dist/8.8/decision-definition.d.ts",
-				"default": "./dist/8.8/decision-definition.cjs"
 			}
 		},
 		"./8.8/decision-instance": {
 			"import": {
 				"types": "./dist/8.8/decision-instance.d.ts",
 				"default": "./dist/8.8/decision-instance.js"
-			},
-			"require": {
-				"types": "./dist/8.8/decision-instance.d.ts",
-				"default": "./dist/8.8/decision-instance.cjs"
 			}
 		},
 		"./8.8/decision-requirements": {
 			"import": {
 				"types": "./dist/8.8/decision-requirements.d.ts",
 				"default": "./dist/8.8/decision-requirements.js"
-			},
-			"require": {
-				"types": "./dist/8.8/decision-requirements.d.ts",
-				"default": "./dist/8.8/decision-requirements.cjs"
 			}
 		},
 		"./8.8/document": {
 			"import": {
 				"types": "./dist/8.8/document.d.ts",
 				"default": "./dist/8.8/document.js"
-			},
-			"require": {
-				"types": "./dist/8.8/document.d.ts",
-				"default": "./dist/8.8/document.cjs"
 			}
 		},
 		"./8.8/element-instance": {
 			"import": {
 				"types": "./dist/8.8/element-instance.d.ts",
 				"default": "./dist/8.8/element-instance.js"
-			},
-			"require": {
-				"types": "./dist/8.8/element-instance.d.ts",
-				"default": "./dist/8.8/element-instance.cjs"
 			}
 		},
 		"./8.8/group": {
 			"import": {
 				"types": "./dist/8.8/group.d.ts",
 				"default": "./dist/8.8/group.js"
-			},
-			"require": {
-				"types": "./dist/8.8/group.d.ts",
-				"default": "./dist/8.8/group.cjs"
 			}
 		},
 		"./8.8/incident": {
 			"import": {
 				"types": "./dist/8.8/incident.d.ts",
 				"default": "./dist/8.8/incident.js"
-			},
-			"require": {
-				"types": "./dist/8.8/incident.d.ts",
-				"default": "./dist/8.8/incident.cjs"
 			}
 		},
 		"./8.8/job": {
 			"import": {
 				"types": "./dist/8.8/job.d.ts",
 				"default": "./dist/8.8/job.js"
-			},
-			"require": {
-				"types": "./dist/8.8/job.d.ts",
-				"default": "./dist/8.8/job.cjs"
 			}
 		},
 		"./8.8/license": {
 			"import": {
 				"types": "./dist/8.8/license.d.ts",
 				"default": "./dist/8.8/license.js"
-			},
-			"require": {
-				"types": "./dist/8.8/license.d.ts",
-				"default": "./dist/8.8/license.cjs"
 			}
 		},
 		"./8.8/mapping-rule": {
 			"import": {
 				"types": "./dist/8.8/mapping-rule.d.ts",
 				"default": "./dist/8.8/mapping-rule.js"
-			},
-			"require": {
-				"types": "./dist/8.8/mapping-rule.d.ts",
-				"default": "./dist/8.8/mapping-rule.cjs"
 			}
 		},
 		"./8.8/message": {
 			"import": {
 				"types": "./dist/8.8/message.d.ts",
 				"default": "./dist/8.8/message.js"
-			},
-			"require": {
-				"types": "./dist/8.8/message.d.ts",
-				"default": "./dist/8.8/message.cjs"
 			}
 		},
 		"./8.8/process-definition": {
 			"import": {
 				"types": "./dist/8.8/process-definition.d.ts",
 				"default": "./dist/8.8/process-definition.js"
-			},
-			"require": {
-				"types": "./dist/8.8/process-definition.d.ts",
-				"default": "./dist/8.8/process-definition.cjs"
 			}
 		},
 		"./8.8/process-instance": {
 			"import": {
 				"types": "./dist/8.8/process-instance.d.ts",
 				"default": "./dist/8.8/process-instance.js"
-			},
-			"require": {
-				"types": "./dist/8.8/process-instance.d.ts",
-				"default": "./dist/8.8/process-instance.cjs"
 			}
 		},
 		"./8.8/resource": {
 			"import": {
 				"types": "./dist/8.8/resource.d.ts",
 				"default": "./dist/8.8/resource.js"
-			},
-			"require": {
-				"types": "./dist/8.8/resource.d.ts",
-				"default": "./dist/8.8/resource.cjs"
 			}
 		},
 		"./8.8/role": {
 			"import": {
 				"types": "./dist/8.8/role.d.ts",
 				"default": "./dist/8.8/role.js"
-			},
-			"require": {
-				"types": "./dist/8.8/role.d.ts",
-				"default": "./dist/8.8/role.cjs"
 			}
 		},
 		"./8.8/signal": {
 			"import": {
 				"types": "./dist/8.8/signal.d.ts",
 				"default": "./dist/8.8/signal.js"
-			},
-			"require": {
-				"types": "./dist/8.8/signal.d.ts",
-				"default": "./dist/8.8/signal.cjs"
 			}
 		},
 		"./8.8/tenant": {
 			"import": {
 				"types": "./dist/8.8/tenant.d.ts",
 				"default": "./dist/8.8/tenant.js"
-			},
-			"require": {
-				"types": "./dist/8.8/tenant.d.ts",
-				"default": "./dist/8.8/tenant.cjs"
 			}
 		},
 		"./8.8/usage-metrics": {
 			"import": {
 				"types": "./dist/8.8/usage-metrics.d.ts",
 				"default": "./dist/8.8/usage-metrics.js"
-			},
-			"require": {
-				"types": "./dist/8.8/usage-metrics.d.ts",
-				"default": "./dist/8.8/usage-metrics.cjs"
 			}
 		},
 		"./8.8/user": {
 			"import": {
 				"types": "./dist/8.8/user.d.ts",
 				"default": "./dist/8.8/user.js"
-			},
-			"require": {
-				"types": "./dist/8.8/user.d.ts",
-				"default": "./dist/8.8/user.cjs"
 			}
 		},
 		"./8.8/user-task": {
 			"import": {
 				"types": "./dist/8.8/user-task.d.ts",
 				"default": "./dist/8.8/user-task.js"
-			},
-			"require": {
-				"types": "./dist/8.8/user-task.d.ts",
-				"default": "./dist/8.8/user-task.cjs"
 			}
 		},
 		"./8.8/variable": {
 			"import": {
 				"types": "./dist/8.8/variable.d.ts",
 				"default": "./dist/8.8/variable.js"
-			},
-			"require": {
-				"types": "./dist/8.8/variable.d.ts",
-				"default": "./dist/8.8/variable.cjs"
 			}
 		},
 		"./package.json": "./package.json"
 	},
-	"main": "./dist/8.8.cjs",
+	"main": "./dist/8.8.js",
 	"module": "./dist/8.8.js",
 	"types": "./dist/8.8.d.ts",
 	"publishConfig": {
