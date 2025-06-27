@@ -331,7 +331,7 @@
 		"access": "public"
 	},
 	"devDependencies": {
-		"@biomejs/biome": "2.0.0",
+		"@biomejs/biome": "2.0.6",
 		"@types/node": "22.15.27",
 		"changelogen": "0.6.1",
 		"typescript": "5.8.3",
