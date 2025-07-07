@@ -14,13 +14,16 @@ const advancedDateTimeFilterSchema = z.object({
 });
 type AdvancedDateTimeFilter = z.infer<typeof advancedDateTimeFilterSchema>;
 
-const basicStringFilterSchema = z.object({
-	$eq: z.string().optional(),
-	$neq: z.string().optional(),
-	$exists: z.boolean().optional(),
-	$in: z.array(z.string()).optional(),
-	$notIn: z.array(z.string()).optional(),
-});
+const basicStringFilterSchema = z.union([
+	z.string(),
+	z.object({
+		$eq: z.string().optional(),
+		$neq: z.string().optional(),
+		$exists: z.boolean().optional(),
+		$in: z.array(z.string()).optional(),
+		$notIn: z.array(z.string()).optional(),
+	}),
+]);
 type BasicStringFilter = z.infer<typeof basicStringFilterSchema>;
 
 const advancedStringFilterSchema = z.object({
@@ -140,8 +143,8 @@ interface Endpoint<URLParams extends object | undefined = undefined> {
 	getUrl: URLParams extends undefined
 		? () => string
 		: {} extends URLParams
-			? (params?: URLParams) => string
-			: (params: URLParams) => string;
+		? (params?: URLParams) => string
+		: (params: URLParams) => string;
 	method: string;
 }
 
