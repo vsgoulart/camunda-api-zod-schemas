@@ -232,6 +232,15 @@ const createCancellationBatchOperation: Endpoint = {
 
 const createMigrationBatchOperationRequestBodySchema = z.object({
 	filter: queryProcessInstancesFilterSchema,
+	migrationPlan: z.object({
+		mappingInstructions: z.array(
+			z.object({
+				sourceElementId: z.string(),
+				targetElementId: z.string(),
+			}),
+		),
+		targetProcessDefinitionKey: z.string(),
+	}),
 });
 
 type CreateMigrationBatchOperationRequestBody = z.infer<typeof createMigrationBatchOperationRequestBodySchema>;
@@ -250,6 +259,12 @@ const createMigrationBatchOperation: Endpoint = {
 
 const createModificationBatchOperationRequestBodySchema = z.object({
 	filter: queryProcessInstancesFilterSchema,
+	moveInstructions: z.array(
+		z.object({
+			sourceElementId: z.string(),
+			targetElementId: z.string(),
+		}),
+	),
 });
 
 type CreateModificationBatchOperationRequestBody = z.infer<typeof createModificationBatchOperationRequestBodySchema>;
