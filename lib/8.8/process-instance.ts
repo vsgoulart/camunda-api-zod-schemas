@@ -200,13 +200,7 @@ type SequenceFlow = z.infer<typeof sequenceFlowSchema>;
 const getProcessInstanceSequenceFlowsResponseBodySchema = getCollectionResponseBodySchema(sequenceFlowSchema);
 type GetProcessInstanceSequenceFlowsResponseBody = z.infer<typeof getProcessInstanceSequenceFlowsResponseBodySchema>;
 
-const createIncidentResolutionBatchOperationRequestBodySchema = z.object({
-	filter: queryProcessInstancesFilterSchema,
-});
-
-type CreateIncidentResolutionBatchOperationRequestBody = z.infer<
-	typeof createIncidentResolutionBatchOperationRequestBodySchema
->;
+type CreateIncidentResolutionBatchOperationRequestBody = z.infer<typeof queryProcessInstancesFilterSchema>;
 
 const createIncidentResolutionBatchOperationResponseBodySchema = z.object({
 	batchOperationId: z.string(),
@@ -222,11 +216,7 @@ const createIncidentResolutionBatchOperation: Endpoint = {
 	getUrl: () => `/${API_VERSION}/process-instances/incident-resolution`,
 };
 
-const createCancellationBatchOperationRequestBodySchema = z.object({
-	filter: queryProcessInstancesFilterSchema,
-});
-
-type CreateCancellationBatchOperationRequestBody = z.infer<typeof createCancellationBatchOperationRequestBodySchema>;
+type CreateCancellationBatchOperationRequestBody = z.infer<typeof queryProcessInstancesFilterSchema>;
 
 const createCancellationBatchOperationResponseBodySchema = z.object({
 	batchOperationId: z.string(),
