@@ -8,6 +8,7 @@ import {
 	getQueryResponseBodySchema,
 	type Endpoint,
 	basicStringFilterSchema,
+	getOrFilterSchema,
 } from './common';
 import {
 	processDefinitionSchema,
@@ -69,12 +70,7 @@ const processDefinitionStatisticsFilterFieldsSchema = z.object({
 
 const getProcessDefinitionStatisticsRequestBodySchema = z
 	.object({
-		filter: z
-			.object({
-				$or: z.array(processDefinitionStatisticsFilterFieldsSchema.partial()),
-				...processDefinitionStatisticsFilterFieldsSchema.shape,
-			})
-			.partial(),
+		filter: getOrFilterSchema(processDefinitionStatisticsFilterFieldsSchema.partial()),
 	})
 	.partial();
 type GetProcessDefinitionStatisticsRequestBody = z.infer<typeof getProcessDefinitionStatisticsRequestBodySchema>;

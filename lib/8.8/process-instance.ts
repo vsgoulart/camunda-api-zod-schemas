@@ -7,6 +7,7 @@ import {
 	advancedDateTimeFilterSchema,
 	advancedStringFilterSchema,
 	basicStringFilterSchema,
+	getOrFilterSchema,
 	type Endpoint,
 } from './common';
 import { variableSchema } from './variable';
@@ -51,6 +52,13 @@ const queryProcessInstancesFilterSchema = z
 		hasIncident: z.boolean(),
 		tenantId: advancedStringFilterSchema,
 		variables: z.array(processInstanceVariableFilterSchema),
+		batchOperationId: z.string(),
+		errorMessage: advancedStringFilterSchema,
+		hasRetriesLeft: z.boolean(),
+		elementInstanceState: advancedProcessInstanceStateFilterSchema,
+		elementId: advancedStringFilterSchema,
+		hasElementInstanceIncidents: z.boolean(),
+		incidentErrorHashCode: z.number().int(),
 	})
 	.partial();
 
@@ -60,12 +68,17 @@ const queryProcessInstancesRequestBodySchema = getQueryRequestBodySchema({
 		'processDefinitionId',
 		'processDefinitionName',
 		'processDefinitionVersion',
+		'processDefinitionVersionTag',
+		'processDefinitionKey',
+		'parentProcessInstanceKey',
+		'parentElementInstanceKey',
 		'startDate',
 		'endDate',
 		'state',
+		'hasIncident',
 		'tenantId',
 	] as const,
-	filter: queryProcessInstancesFilterSchema,
+	filter: getOrFilterSchema(queryProcessInstancesFilterSchema),
 });
 type QueryProcessInstancesRequestBody = z.infer<typeof queryProcessInstancesRequestBodySchema>;
 
@@ -231,7 +244,7 @@ const createCancellationBatchOperation: Endpoint = {
 };
 
 const createMigrationBatchOperationRequestBodySchema = z.object({
-	filter: queryProcessInstancesFilterSchema,
+	filter: getOrFilterSchema(queryProcessInstancesFilterSchema),
 	migrationPlan: z.object({
 		mappingInstructions: z.array(
 			z.object({
@@ -258,7 +271,7 @@ const createMigrationBatchOperation: Endpoint = {
 };
 
 const createModificationBatchOperationRequestBodySchema = z.object({
-	filter: queryProcessInstancesFilterSchema,
+	filter: getOrFilterSchema(queryProcessInstancesFilterSchema),
 	moveInstructions: z.array(
 		z.object({
 			sourceElementId: z.string(),
