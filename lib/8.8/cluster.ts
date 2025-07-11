@@ -1,5 +1,5 @@
-import { z } from 'zod';
-import { API_VERSION, type Endpoint } from './common';
+import {z} from 'zod';
+import {API_VERSION, type Endpoint} from './common';
 
 const partitionRoleSchema = z.enum(['leader', 'follower', 'inactive']);
 type PartitionRole = z.infer<typeof partitionRoleSchema>;
@@ -47,4 +47,4 @@ export {
 	getTopology,
 };
 
-export type { PartitionRole, PartitionHealth, Partition, BrokerInfo, GetTopologyResponseBody };
+export type {PartitionRole, PartitionHealth, Partition, BrokerInfo, GetTopologyResponseBody};

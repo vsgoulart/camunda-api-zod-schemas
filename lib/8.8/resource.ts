@@ -1,5 +1,5 @@
-import { z } from 'zod';
-import { API_VERSION, type Endpoint } from './common';
+import {z} from 'zod';
+import {API_VERSION, type Endpoint} from './common';
 
 const processDeploymentSchema = z.object({
 	processDefinitionId: z.string(),
@@ -91,28 +91,28 @@ const createDeployment: Endpoint = {
 	},
 };
 
-const deleteResource: Endpoint<{ resourceKey: string }> = {
+const deleteResource: Endpoint<{resourceKey: string}> = {
 	method: 'POST',
 	getUrl(params) {
-		const { resourceKey } = params;
+		const {resourceKey} = params;
 
 		return `/${API_VERSION}/resources/${resourceKey}/deletion`;
 	},
 };
 
-const getResource: Endpoint<{ resourceKey: string }> = {
+const getResource: Endpoint<{resourceKey: string}> = {
 	method: 'GET',
 	getUrl(params) {
-		const { resourceKey } = params;
+		const {resourceKey} = params;
 
 		return `/${API_VERSION}/resources/${resourceKey}`;
 	},
 };
 
-const getResourceContent: Endpoint<{ resourceKey: string }> = {
+const getResourceContent: Endpoint<{resourceKey: string}> = {
 	method: 'GET',
 	getUrl(params) {
-		const { resourceKey } = params;
+		const {resourceKey} = params;
 
 		return `/${API_VERSION}/resources/${resourceKey}/content`;
 	},

@@ -1,5 +1,5 @@
-import { z } from 'zod';
-import { API_VERSION, type Endpoint } from './common';
+import {z} from 'zod';
+import {API_VERSION, type Endpoint} from './common';
 
 const documentMetadataSchema = z.object({
 	contentType: z.string(),
@@ -49,7 +49,7 @@ const createDocument: Endpoint<{
 	documentId: string;
 }> = {
 	method: 'POST',
-	getUrl({ storeId, documentId }) {
+	getUrl({storeId, documentId}) {
 		const searchParams = new URLSearchParams();
 		if (storeId) {
 			searchParams.set('storeId', storeId);
@@ -66,7 +66,7 @@ const createDocuments: Endpoint<{
 	storeId?: string;
 }> = {
 	method: 'POST',
-	getUrl({ storeId } = {}) {
+	getUrl({storeId} = {}) {
 		const searchParams = new URLSearchParams();
 		if (storeId) {
 			searchParams.set('storeId', storeId);
@@ -82,7 +82,7 @@ const getDocument: Endpoint<{
 	contentHash?: string;
 }> = {
 	method: 'GET',
-	getUrl({ documentId, storeId, contentHash }) {
+	getUrl({documentId, storeId, contentHash}) {
 		const searchParams = new URLSearchParams();
 		if (storeId) {
 			searchParams.set('storeId', storeId);
@@ -100,7 +100,7 @@ const deleteDocument: Endpoint<{
 	storeId?: string;
 }> = {
 	method: 'DELETE',
-	getUrl({ documentId, storeId }) {
+	getUrl({documentId, storeId}) {
 		const searchParams = new URLSearchParams();
 		if (storeId) {
 			searchParams.set('storeId', storeId);
@@ -116,7 +116,7 @@ const createDocumentLink: Endpoint<{
 	contentHash?: string;
 }> = {
 	method: 'POST',
-	getUrl({ documentId, storeId, contentHash }) {
+	getUrl({documentId, storeId, contentHash}) {
 		const searchParams = new URLSearchParams();
 		if (storeId) {
 			searchParams.set('storeId', storeId);

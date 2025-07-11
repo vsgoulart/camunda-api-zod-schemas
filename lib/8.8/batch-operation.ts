@@ -1,5 +1,5 @@
-import { z } from 'zod';
-import { API_VERSION, getQueryRequestBodySchema, getQueryResponseBodySchema, type Endpoint } from './common';
+import {z} from 'zod';
+import {API_VERSION, getQueryRequestBodySchema, getQueryResponseBodySchema, type Endpoint} from './common';
 
 const batchOperationTypeSchema = z.enum([
 	'CANCEL_PROCESS_INSTANCE',
@@ -76,9 +76,9 @@ type QueryBatchOperationItemsRequestBody = z.infer<typeof queryBatchOperationIte
 const queryBatchOperationItemsResponseBodySchema = getQueryResponseBodySchema(batchOperationItemSchema);
 type QueryBatchOperationItemsResponseBody = z.infer<typeof queryBatchOperationItemsResponseBodySchema>;
 
-const getBatchOperation: Endpoint<{ batchOperationId: string }> = {
+const getBatchOperation: Endpoint<{batchOperationId: string}> = {
 	method: 'GET',
-	getUrl: ({ batchOperationId }) => `/${API_VERSION}/batch-operations/${batchOperationId}`,
+	getUrl: ({batchOperationId}) => `/${API_VERSION}/batch-operations/${batchOperationId}`,
 };
 
 const queryBatchOperations: Endpoint = {
@@ -86,19 +86,19 @@ const queryBatchOperations: Endpoint = {
 	getUrl: () => `/${API_VERSION}/batch-operations/search`,
 };
 
-const cancelBatchOperation: Endpoint<{ batchOperationId: string }> = {
+const cancelBatchOperation: Endpoint<{batchOperationId: string}> = {
 	method: 'PUT',
-	getUrl: ({ batchOperationId }) => `/${API_VERSION}/batch-operations/${batchOperationId}/cancellation`,
+	getUrl: ({batchOperationId}) => `/${API_VERSION}/batch-operations/${batchOperationId}/cancellation`,
 };
 
-const suspendBatchOperation: Endpoint<{ batchOperationId: string }> = {
+const suspendBatchOperation: Endpoint<{batchOperationId: string}> = {
 	method: 'PUT',
-	getUrl: ({ batchOperationId }) => `/${API_VERSION}/batch-operations/${batchOperationId}/suspension`,
+	getUrl: ({batchOperationId}) => `/${API_VERSION}/batch-operations/${batchOperationId}/suspension`,
 };
 
-const resumeBatchOperation: Endpoint<{ batchOperationId: string }> = {
+const resumeBatchOperation: Endpoint<{batchOperationId: string}> = {
 	method: 'PUT',
-	getUrl: ({ batchOperationId }) => `/${API_VERSION}/batch-operations/${batchOperationId}/resumption`,
+	getUrl: ({batchOperationId}) => `/${API_VERSION}/batch-operations/${batchOperationId}/resumption`,
 };
 
 const queryBatchOperationItems: Endpoint = {

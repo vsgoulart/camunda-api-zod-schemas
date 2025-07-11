@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import {z} from 'zod';
 import {
 	API_VERSION,
 	getQueryRequestBodySchema,
@@ -105,7 +105,7 @@ const queryElementInstances: Endpoint = {
 const getElementInstance: Endpoint<Pick<ElementInstance, 'elementInstanceKey'>> = {
 	method: 'GET',
 	getUrl(params) {
-		const { elementInstanceKey } = params;
+		const {elementInstanceKey} = params;
 		return `/${API_VERSION}/element-instances/${elementInstanceKey}`;
 	},
 };
@@ -122,7 +122,7 @@ type UpdateElementInstanceVariablesRequestBody = z.infer<typeof updateElementIns
 const updateElementInstanceVariables: Endpoint<Pick<ElementInstance, 'elementInstanceKey'>> = {
 	method: 'PUT',
 	getUrl(params) {
-		const { elementInstanceKey } = params;
+		const {elementInstanceKey} = params;
 		return `/${API_VERSION}/element-instances/${elementInstanceKey}/variables`;
 	},
 };

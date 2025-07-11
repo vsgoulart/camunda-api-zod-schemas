@@ -1,8 +1,8 @@
-import { z } from 'zod';
-import { API_VERSION, getQueryRequestBodySchema, getQueryResponseBodySchema, type Endpoint } from './common';
-import { groupSchema, roleSchema, type Group, type Role } from './group-role';
-import { mappingRuleSchema, type MappingRule } from './mapping-rule';
-import { userSchema } from './user';
+import {z} from 'zod';
+import {API_VERSION, getQueryRequestBodySchema, getQueryResponseBodySchema, type Endpoint} from './common';
+import {groupSchema, roleSchema, type Group, type Role} from './group-role';
+import {mappingRuleSchema, type MappingRule} from './mapping-rule';
+import {userSchema} from './user';
 
 const createRoleRequestBodySchema = roleSchema;
 type CreateRoleRequestBody = z.infer<typeof createRoleRequestBodySchema>;
@@ -39,7 +39,7 @@ const queryUsersByRoleRequestBodySchema = getQueryRequestBodySchema({
 });
 type QueryUsersByRoleRequestBody = z.infer<typeof queryUsersByRoleRequestBodySchema>;
 
-const queryUsersByRoleResponseBodySchema = getQueryResponseBodySchema(userSchema.pick({ username: true }));
+const queryUsersByRoleResponseBodySchema = getQueryResponseBodySchema(userSchema.pick({username: true}));
 type QueryUsersByRoleResponseBody = z.infer<typeof queryUsersByRoleResponseBodySchema>;
 
 const queryClientsByRoleRequestBodySchema = getQueryRequestBodySchema({
@@ -94,7 +94,7 @@ const createRole: Endpoint = {
 const getRole: Endpoint<Pick<Role, 'roleId'>> = {
 	method: 'GET',
 	getUrl(params) {
-		const { roleId } = params;
+		const {roleId} = params;
 
 		return `/${API_VERSION}/roles/${roleId}`;
 	},
@@ -103,7 +103,7 @@ const getRole: Endpoint<Pick<Role, 'roleId'>> = {
 const updateRole: Endpoint<Pick<Role, 'roleId'>> = {
 	method: 'PUT',
 	getUrl(params) {
-		const { roleId } = params;
+		const {roleId} = params;
 
 		return `/${API_VERSION}/roles/${roleId}`;
 	},
@@ -112,7 +112,7 @@ const updateRole: Endpoint<Pick<Role, 'roleId'>> = {
 const deleteRole: Endpoint<Pick<Role, 'roleId'>> = {
 	method: 'DELETE',
 	getUrl(params) {
-		const { roleId } = params;
+		const {roleId} = params;
 
 		return `/${API_VERSION}/roles/${roleId}`;
 	},
@@ -128,7 +128,7 @@ const queryRoles: Endpoint = {
 const queryUsersByRole: Endpoint<Pick<Role, 'roleId'>> = {
 	method: 'POST',
 	getUrl(params) {
-		const { roleId } = params;
+		const {roleId} = params;
 
 		return `/${API_VERSION}/roles/${roleId}/users/search`;
 	},
@@ -137,43 +137,43 @@ const queryUsersByRole: Endpoint<Pick<Role, 'roleId'>> = {
 const queryClientsByRole: Endpoint<Pick<Role, 'roleId'>> = {
 	method: 'POST',
 	getUrl(params) {
-		const { roleId } = params;
+		const {roleId} = params;
 
 		return `/${API_VERSION}/roles/${roleId}/clients/search`;
 	},
 };
 
-const assignUserToRole: Endpoint<Pick<Role, 'roleId'> & { username: string }> = {
+const assignUserToRole: Endpoint<Pick<Role, 'roleId'> & {username: string}> = {
 	method: 'PUT',
 	getUrl(params) {
-		const { roleId, username } = params;
+		const {roleId, username} = params;
 
 		return `/${API_VERSION}/roles/${roleId}/users/${username}`;
 	},
 };
 
-const unassignUserFromRole: Endpoint<Pick<Role, 'roleId'> & { username: string }> = {
+const unassignUserFromRole: Endpoint<Pick<Role, 'roleId'> & {username: string}> = {
 	method: 'DELETE',
 	getUrl(params) {
-		const { roleId, username } = params;
+		const {roleId, username} = params;
 
 		return `/${API_VERSION}/roles/${roleId}/users/${username}`;
 	},
 };
 
-const assignClientToRole: Endpoint<Pick<Role, 'roleId'> & { clientId: string }> = {
+const assignClientToRole: Endpoint<Pick<Role, 'roleId'> & {clientId: string}> = {
 	method: 'PUT',
 	getUrl(params) {
-		const { roleId, clientId } = params;
+		const {roleId, clientId} = params;
 
 		return `/${API_VERSION}/roles/${roleId}/clients/${clientId}`;
 	},
 };
 
-const unassignClientFromRole: Endpoint<Pick<Role, 'roleId'> & { clientId: string }> = {
+const unassignClientFromRole: Endpoint<Pick<Role, 'roleId'> & {clientId: string}> = {
 	method: 'DELETE',
 	getUrl(params) {
-		const { roleId, clientId } = params;
+		const {roleId, clientId} = params;
 
 		return `/${API_VERSION}/roles/${roleId}/clients/${clientId}`;
 	},
@@ -182,7 +182,7 @@ const unassignClientFromRole: Endpoint<Pick<Role, 'roleId'> & { clientId: string
 const assignGroupToRole: Endpoint<Pick<Role, 'roleId'> & Pick<Group, 'groupId'>> = {
 	method: 'PUT',
 	getUrl(params) {
-		const { roleId, groupId } = params;
+		const {roleId, groupId} = params;
 
 		return `/${API_VERSION}/roles/${roleId}/groups/${groupId}`;
 	},
@@ -191,7 +191,7 @@ const assignGroupToRole: Endpoint<Pick<Role, 'roleId'> & Pick<Group, 'groupId'>>
 const unassignGroupFromRole: Endpoint<Pick<Role, 'roleId'> & Pick<Group, 'groupId'>> = {
 	method: 'DELETE',
 	getUrl(params) {
-		const { roleId, groupId } = params;
+		const {roleId, groupId} = params;
 
 		return `/${API_VERSION}/roles/${roleId}/groups/${groupId}`;
 	},
@@ -200,7 +200,7 @@ const unassignGroupFromRole: Endpoint<Pick<Role, 'roleId'> & Pick<Group, 'groupI
 const queryGroupsByRole: Endpoint<Pick<Role, 'roleId'>> = {
 	method: 'POST',
 	getUrl(params) {
-		const { roleId } = params;
+		const {roleId} = params;
 
 		return `/${API_VERSION}/roles/${roleId}/groups/search`;
 	},
@@ -209,7 +209,7 @@ const queryGroupsByRole: Endpoint<Pick<Role, 'roleId'>> = {
 const assignMappingToRole: Endpoint<Pick<Role, 'roleId'> & Pick<MappingRule, 'mappingId'>> = {
 	method: 'PUT',
 	getUrl(params) {
-		const { roleId, mappingId } = params;
+		const {roleId, mappingId} = params;
 
 		return `/${API_VERSION}/roles/${roleId}/mappings/${mappingId}`;
 	},
@@ -218,7 +218,7 @@ const assignMappingToRole: Endpoint<Pick<Role, 'roleId'> & Pick<MappingRule, 'ma
 const unassignMappingFromRole: Endpoint<Pick<Role, 'roleId'> & Pick<MappingRule, 'mappingId'>> = {
 	method: 'DELETE',
 	getUrl(params) {
-		const { roleId, mappingId } = params;
+		const {roleId, mappingId} = params;
 
 		return `/${API_VERSION}/roles/${roleId}/mappings/${mappingId}`;
 	},
@@ -227,7 +227,7 @@ const unassignMappingFromRole: Endpoint<Pick<Role, 'roleId'> & Pick<MappingRule,
 const queryMappingRulesByRole: Endpoint<Pick<Role, 'roleId'>> = {
 	method: 'POST',
 	getUrl(params) {
-		const { roleId } = params;
+		const {roleId} = params;
 
 		return `/${API_VERSION}/roles/${roleId}/mapping-rules/search`;
 	},

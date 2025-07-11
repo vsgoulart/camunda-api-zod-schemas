@@ -1,5 +1,5 @@
-import { resolve } from 'node:path';
-import { defineConfig } from 'vite';
+import {resolve} from 'node:path';
+import {defineConfig} from 'vite';
 import dts from 'vite-plugin-dts';
 import circleDependency from 'vite-plugin-circular-dependency';
 

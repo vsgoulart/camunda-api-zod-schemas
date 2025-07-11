@@ -1,5 +1,5 @@
-import { z } from 'zod';
-import { API_VERSION, type Endpoint } from './common';
+import {z} from 'zod';
+import {API_VERSION, type Endpoint} from './common';
 
 const pinClockRequestBodySchema = z.object({
 	timestamp: z.number().int(),
@@ -16,6 +16,6 @@ const resetClock: Endpoint = {
 	getUrl: () => `/${API_VERSION}/clock/reset`,
 };
 
-export { pinClockRequestBodySchema, pinClock, resetClock };
+export {pinClockRequestBodySchema, pinClock, resetClock};
 
-export type { PinClockRequestBody };
+export type {PinClockRequestBody};

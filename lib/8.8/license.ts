@@ -1,5 +1,5 @@
-import { z } from 'zod';
-import { API_VERSION, type Endpoint } from './common';
+import {z} from 'zod';
+import {API_VERSION, type Endpoint} from './common';
 
 const licenseSchema = z.object({
 	validLicense: z.boolean(),
@@ -15,5 +15,5 @@ const getLicense: Endpoint = {
 	getUrl: () => `/${API_VERSION}/license`,
 };
 
-export { licenseSchema, getLicense };
-export type { License };
+export {licenseSchema, getLicense};
+export type {License};

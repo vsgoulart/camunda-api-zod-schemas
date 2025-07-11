@@ -1,5 +1,5 @@
-import { z } from 'zod';
-import { API_VERSION, type Endpoint } from './common';
+import {z} from 'zod';
+import {API_VERSION, type Endpoint} from './common';
 
 const broadcastSignalRequestBodySchema = z.object({
 	signalName: z.string(),
@@ -21,5 +21,5 @@ const broadcastSignal: Endpoint = {
 	},
 };
 
-export { broadcastSignal, broadcastSignalRequestBodySchema, broadcastSignalResponseBodySchema };
-export type { BroadcastSignalRequestBody, BroadcastSignalResponseBody };
+export {broadcastSignal, broadcastSignalRequestBodySchema, broadcastSignalResponseBodySchema};
+export type {BroadcastSignalRequestBody, BroadcastSignalResponseBody};

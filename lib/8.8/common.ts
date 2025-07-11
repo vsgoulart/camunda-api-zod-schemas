@@ -1,17 +1,20 @@
-import { z } from 'zod';
+import {z} from 'zod';
 
 const API_VERSION = 'v2';
 
-const advancedDateTimeFilterSchema = z.union([z.string(), z.object({
-	$eq: z.string().optional(),
-	$neq: z.string().optional(),
-	$exists: z.boolean().optional(),
-	$gt: z.string().optional(),
-	$gte: z.string().optional(),
-	$lt: z.string().optional(),
-	$lte: z.string().optional(),
-	$in: z.array(z.string()).optional(),
-})]);
+const advancedDateTimeFilterSchema = z.union([
+	z.string(),
+	z.object({
+		$eq: z.string().optional(),
+		$neq: z.string().optional(),
+		$exists: z.boolean().optional(),
+		$gt: z.string().optional(),
+		$gte: z.string().optional(),
+		$lt: z.string().optional(),
+		$lte: z.string().optional(),
+		$in: z.array(z.string()).optional(),
+	}),
+]);
 type AdvancedDateTimeFilter = z.infer<typeof advancedDateTimeFilterSchema>;
 
 const basicStringFilterSchema = z.union([
@@ -26,26 +29,32 @@ const basicStringFilterSchema = z.union([
 ]);
 type BasicStringFilter = z.infer<typeof basicStringFilterSchema>;
 
-const advancedStringFilterSchema = z.union([z.string(), z.object({
-	$eq: z.string().optional(),
-	$neq: z.string().optional(),
-	$exists: z.boolean().optional(),
-	$in: z.array(z.string()).optional(),
-	$notIn: z.array(z.string()).optional(),
-	$like: z.string().optional(),
-})]);
+const advancedStringFilterSchema = z.union([
+	z.string(),
+	z.object({
+		$eq: z.string().optional(),
+		$neq: z.string().optional(),
+		$exists: z.boolean().optional(),
+		$in: z.array(z.string()).optional(),
+		$notIn: z.array(z.string()).optional(),
+		$like: z.string().optional(),
+	}),
+]);
 type AdvancedStringFilter = z.infer<typeof advancedStringFilterSchema>;
 
-const advancedIntegerFilterSchema = z.union([z.number().int(), z.object({
-	$eq: z.number().int().optional(),
-	$neq: z.number().int().optional(),
-	$exists: z.boolean().optional(),
-	$gt: z.number().int().optional(),
-	$gte: z.number().int().optional(),
-	$lt: z.number().int().optional(),
-	$lte: z.number().int().optional(),
-	$in: z.array(z.number().int()).optional(),
-})]);
+const advancedIntegerFilterSchema = z.union([
+	z.number().int(),
+	z.object({
+		$eq: z.number().int().optional(),
+		$neq: z.number().int().optional(),
+		$exists: z.boolean().optional(),
+		$gt: z.number().int().optional(),
+		$gte: z.number().int().optional(),
+		$lt: z.number().int().optional(),
+		$lte: z.number().int().optional(),
+		$in: z.array(z.number().int()).optional(),
+	}),
+]);
 type AdvancedIntegerFilter = z.infer<typeof advancedIntegerFilterSchema>;
 
 function getOrFilterSchema<T extends z.ZodRawShape>(schema: z.ZodObject<T>) {
@@ -99,7 +108,7 @@ function getQueryResponseBodySchema<ItemSchema extends z.ZodTypeAny>(
 
 function getCollectionResponseBodySchema<ItemSchema extends z.ZodTypeAny>(
 	itemSchema: ItemSchema,
-): z.ZodType<{ items: z.infer<ItemSchema>[] }> {
+): z.ZodType<{items: z.infer<ItemSchema>[]}> {
 	return z.object({
 		items: z.array(itemSchema),
 	});
@@ -115,20 +124,23 @@ function getQueryRequestSortSchema<Fields extends [string, ...string[]]>(fields:
 }
 
 function getEnumFilterSchema<T extends [string, ...string[]]>(fields: z.ZodEnum<T>) {
-	return z.union([fields, z.object({
-		$eq: fields.optional(),
-		$neq: fields.optional(),
-		$exists: z.boolean().optional(),
-		$in: z.array(fields).optional(),
-		$notIn: z.array(fields).optional(),
-	})]);
+	return z.union([
+		fields,
+		z.object({
+			$eq: fields.optional(),
+			$neq: fields.optional(),
+			$exists: z.boolean().optional(),
+			$in: z.array(fields).optional(),
+			$notIn: z.array(fields).optional(),
+		}),
+	]);
 }
 
 function getQueryRequestBodySchema<
 	FilterSchema extends z.ZodTypeAny,
 	SortFields extends [string, ...string[]],
->(options: { sortFields: SortFields; filter: FilterSchema }) {
-	const { sortFields, filter } = options;
+>(options: {sortFields: SortFields; filter: FilterSchema}) {
+	const {sortFields, filter} = options;
 
 	return z
 		.object({
@@ -143,8 +155,8 @@ interface Endpoint<URLParams extends object | undefined = undefined> {
 	getUrl: URLParams extends undefined
 		? () => string
 		: {} extends URLParams
-		? (params?: URLParams) => string
-		: (params: URLParams) => string;
+			? (params?: URLParams) => string
+			: (params: URLParams) => string;
 	method: string;
 }
 

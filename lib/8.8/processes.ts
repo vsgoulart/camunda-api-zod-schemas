@@ -2,7 +2,7 @@
  * This file exists only to avoid circular dependencies. Do not export it directly.
  */
 
-import { z } from 'zod';
+import {z} from 'zod';
 
 const processInstanceStateSchema = z.enum(['ACTIVE', 'COMPLETED', 'TERMINATED']);
 type ProcessInstanceState = z.infer<typeof processInstanceStateSchema>;
@@ -45,5 +45,5 @@ const processDefinitionStatisticSchema = z.object({
 });
 type ProcessDefinitionStatistic = z.infer<typeof processDefinitionStatisticSchema>;
 
-export { processInstanceStateSchema, processInstanceSchema, processDefinitionSchema, processDefinitionStatisticSchema };
-export type { ProcessInstance, ProcessInstanceState, StatisticName, ProcessDefinition, ProcessDefinitionStatistic };
+export {processInstanceStateSchema, processInstanceSchema, processDefinitionSchema, processDefinitionStatisticSchema};
+export type {ProcessInstance, ProcessInstanceState, StatisticName, ProcessDefinition, ProcessDefinitionStatistic};

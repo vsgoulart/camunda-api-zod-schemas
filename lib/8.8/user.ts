@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import {z} from 'zod';
 import {
 	API_VERSION,
 	getQueryRequestBodySchema,
@@ -71,7 +71,7 @@ const queryUsers: Endpoint = {
 const getUser: Endpoint<Pick<User, 'username'>> = {
 	method: 'GET',
 	getUrl(params) {
-		const { username } = params;
+		const {username} = params;
 
 		return `/${API_VERSION}/users/${username}`;
 	},
@@ -80,7 +80,7 @@ const getUser: Endpoint<Pick<User, 'username'>> = {
 const deleteUser: Endpoint<Pick<User, 'username'>> = {
 	method: 'DELETE',
 	getUrl(params) {
-		const { username } = params;
+		const {username} = params;
 
 		return `/${API_VERSION}/users/${username}`;
 	},
@@ -89,7 +89,7 @@ const deleteUser: Endpoint<Pick<User, 'username'>> = {
 const updateUser: Endpoint<Pick<User, 'username'>> = {
 	method: 'PATCH',
 	getUrl(params) {
-		const { username } = params;
+		const {username} = params;
 
 		return `/${API_VERSION}/users/${username}`;
 	},

@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import {z} from 'zod';
 import {
 	API_VERSION,
 	advancedStringFilterSchema,
@@ -169,7 +169,7 @@ type FailJobRequestBody = z.infer<typeof failJobRequestBodySchema>;
 const failJob: Endpoint<Pick<Job, 'jobKey'>> = {
 	method: 'POST',
 	getUrl(params) {
-		const { jobKey } = params;
+		const {jobKey} = params;
 
 		return `/${API_VERSION}/jobs/${jobKey}/failure`;
 	},
@@ -185,7 +185,7 @@ type ThrowJobErrorRequestBody = z.infer<typeof throwJobErrorRequestBodySchema>;
 const throwJobError: Endpoint<Pick<Job, 'jobKey'>> = {
 	method: 'POST',
 	getUrl(params) {
-		const { jobKey } = params;
+		const {jobKey} = params;
 
 		return `/${API_VERSION}/jobs/${jobKey}/error`;
 	},
@@ -210,7 +210,7 @@ type CompleteJobRequestBody = z.infer<typeof completeJobRequestBodySchema>;
 const completeJob: Endpoint<Pick<Job, 'jobKey'>> = {
 	method: 'POST',
 	getUrl(params) {
-		const { jobKey } = params;
+		const {jobKey} = params;
 
 		return `/${API_VERSION}/jobs/${jobKey}/completion`;
 	},
@@ -230,7 +230,7 @@ type UpdateJobRequestBody = z.infer<typeof updateJobRequestBodySchema>;
 const updateJob: Endpoint<Pick<Job, 'jobKey'>> = {
 	method: 'PATCH',
 	getUrl(params) {
-		const { jobKey } = params;
+		const {jobKey} = params;
 
 		return `/${API_VERSION}/jobs/${jobKey}`;
 	},

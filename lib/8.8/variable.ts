@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import {z} from 'zod';
 import {
 	advancedStringFilterSchema,
 	API_VERSION,
@@ -21,7 +21,7 @@ type Variable = z.infer<typeof variableSchema>;
 
 const getVariable: Endpoint<Pick<Variable, 'variableKey'>> = {
 	method: 'GET',
-	getUrl: ({ variableKey }) => `/${API_VERSION}/variables/${variableKey}`,
+	getUrl: ({variableKey}) => `/${API_VERSION}/variables/${variableKey}`,
 };
 
 const queryVariablesRequestBodySchema = getQueryRequestBodySchema({
@@ -50,11 +50,5 @@ const queryVariables: Endpoint = {
 	getUrl: () => `/${API_VERSION}/variables/search`,
 };
 
-export {
-	getVariable,
-	queryVariables,
-	variableSchema,
-	queryVariablesRequestBodySchema,
-	queryVariablesResponseBodySchema,
-};
-export type { Variable, QueryVariablesRequestBody, QueryVariablesResponseBody };
+export {getVariable, queryVariables, variableSchema, queryVariablesRequestBodySchema, queryVariablesResponseBodySchema};
+export type {Variable, QueryVariablesRequestBody, QueryVariablesResponseBody};

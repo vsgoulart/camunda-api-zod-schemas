@@ -1,5 +1,5 @@
-import { z } from 'zod';
-import { API_VERSION, type Endpoint } from './common';
+import {z} from 'zod';
+import {API_VERSION, type Endpoint} from './common';
 
 const currentUserSchema = z.object({
 	userId: z.string(),
@@ -32,5 +32,5 @@ const getCurrentUser: Endpoint = {
 	getUrl: () => `/${API_VERSION}/authentication/me`,
 };
 
-export { currentUserSchema, getCurrentUser };
-export type { CurrentUser };
+export {currentUserSchema, getCurrentUser};
+export type {CurrentUser};

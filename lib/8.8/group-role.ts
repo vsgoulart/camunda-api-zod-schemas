@@ -2,7 +2,7 @@
  * This file exists only to avoid circular dependencies. Do not export it directly.
  */
 
-import { z } from 'zod';
+import {z} from 'zod';
 
 const groupSchema = z.object({
 	groupId: z.string(),
@@ -18,5 +18,5 @@ const roleSchema = z.object({
 });
 type Role = z.infer<typeof roleSchema>;
 
-export { groupSchema, roleSchema };
-export type { Group, Role };
+export {groupSchema, roleSchema};
+export type {Group, Role};

@@ -1,5 +1,5 @@
-import { z } from 'zod';
-import { API_VERSION, getCollectionResponseBodySchema, type Endpoint } from './common';
+import {z} from 'zod';
+import {API_VERSION, getCollectionResponseBodySchema, type Endpoint} from './common';
 
 const activityTypeSchema = z.enum([
 	'UNSPECIFIED',
@@ -75,7 +75,7 @@ const activateAdHocSubProcessActivities: Endpoint<{
 	adHocSubProcessInstanceKey: string;
 }> = {
 	method: 'POST',
-	getUrl: ({ adHocSubProcessInstanceKey }) =>
+	getUrl: ({adHocSubProcessInstanceKey}) =>
 		`/${API_VERSION}/element-instances/ad-hoc-activities/${adHocSubProcessInstanceKey}/activation`,
 };
 

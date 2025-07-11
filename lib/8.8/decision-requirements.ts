@@ -1,5 +1,5 @@
-import { z } from 'zod';
-import { API_VERSION, getQueryRequestBodySchema, getQueryResponseBodySchema, type Endpoint } from './common';
+import {z} from 'zod';
+import {API_VERSION, getQueryRequestBodySchema, getQueryResponseBodySchema, type Endpoint} from './common';
 
 const decisionRequirementsSchema = z.object({
 	decisionRequirementsName: z.string(),
@@ -36,12 +36,12 @@ const queryDecisionRequirements: Endpoint = {
 
 const getDecisionRequirements: Endpoint<Pick<DecisionRequirements, 'decisionRequirementsKey'>> = {
 	method: 'GET',
-	getUrl: ({ decisionRequirementsKey }) => `/${API_VERSION}/decision-requirements/${decisionRequirementsKey}`,
+	getUrl: ({decisionRequirementsKey}) => `/${API_VERSION}/decision-requirements/${decisionRequirementsKey}`,
 };
 
 const getDecisionRequirementsXml: Endpoint<Pick<DecisionRequirements, 'decisionRequirementsKey'>> = {
 	method: 'GET',
-	getUrl: ({ decisionRequirementsKey }) => `/${API_VERSION}/decision-requirements/${decisionRequirementsKey}/xml`,
+	getUrl: ({decisionRequirementsKey}) => `/${API_VERSION}/decision-requirements/${decisionRequirementsKey}/xml`,
 };
 
 export {

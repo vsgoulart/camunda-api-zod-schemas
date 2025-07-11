@@ -1,5 +1,5 @@
-import { z } from 'zod';
-import { API_VERSION, getQueryRequestBodySchema, getQueryResponseBodySchema, type Endpoint } from './common';
+import {z} from 'zod';
+import {API_VERSION, getQueryRequestBodySchema, getQueryResponseBodySchema, type Endpoint} from './common';
 
 const mappingRuleSchema = z.object({
 	mappingId: z.string(),
@@ -51,7 +51,7 @@ const createMappingRule: Endpoint = {
 const updateMappingRule: Endpoint<Pick<MappingRule, 'mappingId'>> = {
 	method: 'PUT',
 	getUrl(params) {
-		const { mappingId } = params;
+		const {mappingId} = params;
 
 		return `/${API_VERSION}/mapping-rules/${mappingId}`;
 	},
@@ -60,7 +60,7 @@ const updateMappingRule: Endpoint<Pick<MappingRule, 'mappingId'>> = {
 const deleteMappingRule: Endpoint<Pick<MappingRule, 'mappingId'>> = {
 	method: 'DELETE',
 	getUrl(params) {
-		const { mappingId } = params;
+		const {mappingId} = params;
 
 		return `/${API_VERSION}/mapping-rules/${mappingId}`;
 	},
@@ -69,7 +69,7 @@ const deleteMappingRule: Endpoint<Pick<MappingRule, 'mappingId'>> = {
 const getMappingRule: Endpoint<Pick<MappingRule, 'mappingId'>> = {
 	method: 'GET',
 	getUrl(params) {
-		const { mappingId } = params;
+		const {mappingId} = params;
 
 		return `/${API_VERSION}/mapping-rules/${mappingId}`;
 	},

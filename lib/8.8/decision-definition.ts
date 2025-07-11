@@ -1,5 +1,5 @@
-import { z } from 'zod';
-import { API_VERSION, getQueryRequestBodySchema, getQueryResponseBodySchema, type Endpoint } from './common';
+import {z} from 'zod';
+import {API_VERSION, getQueryRequestBodySchema, getQueryResponseBodySchema, type Endpoint} from './common';
 
 const decisionDefinitionSchema = z.object({
 	decisionDefinitionId: z.string(),
@@ -95,14 +95,14 @@ const queryDecisionDefinitions: Endpoint = {
 	getUrl: () => `/${API_VERSION}/decision-definitions/search`,
 };
 
-const getDecisionDefinition: Endpoint<{ decisionDefinitionKey: string }> = {
+const getDecisionDefinition: Endpoint<{decisionDefinitionKey: string}> = {
 	method: 'GET',
-	getUrl: ({ decisionDefinitionKey }) => `/${API_VERSION}/decision-definitions/${decisionDefinitionKey}`,
+	getUrl: ({decisionDefinitionKey}) => `/${API_VERSION}/decision-definitions/${decisionDefinitionKey}`,
 };
 
-const getDecisionDefinitionXml: Endpoint<{ decisionDefinitionKey: string }> = {
+const getDecisionDefinitionXml: Endpoint<{decisionDefinitionKey: string}> = {
 	method: 'GET',
-	getUrl: ({ decisionDefinitionKey }) => `/${API_VERSION}/decision-definitions/${decisionDefinitionKey}/xml`,
+	getUrl: ({decisionDefinitionKey}) => `/${API_VERSION}/decision-definitions/${decisionDefinitionKey}/xml`,
 };
 
 const evaluateDecision: Endpoint = {

@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import {z} from 'zod';
 import {
 	API_VERSION,
 	getQueryResponseBodySchema,
@@ -48,12 +48,12 @@ type Incident = z.infer<typeof incidentSchema>;
 
 const resolveIncident: Endpoint<Pick<Incident, 'incidentKey'>> = {
 	method: 'POST',
-	getUrl: ({ incidentKey }) => `/${API_VERSION}/incidents/${incidentKey}/resolution`,
+	getUrl: ({incidentKey}) => `/${API_VERSION}/incidents/${incidentKey}/resolution`,
 };
 
 const getIncident: Endpoint<Pick<Incident, 'incidentKey'>> = {
 	method: 'GET',
-	getUrl: ({ incidentKey }) => `/${API_VERSION}/incidents/${incidentKey}`,
+	getUrl: ({incidentKey}) => `/${API_VERSION}/incidents/${incidentKey}`,
 };
 
 const getIncidentResponseBodySchema = incidentSchema;

@@ -17,9 +17,7 @@
 ### ❤️ Contributors
 
 - Vinicius Goulart
-- Patrick Dehn 
-
-
+- Patrick Dehn
 
 ## v1.0.0
 
@@ -37,11 +35,9 @@
 - Vinicius Goulart
 - Alexandre Bremard
 - Patrick Dehn
-- Sebastian Stamm  
-
+- Sebastian Stamm
 
 ## v0.0.1
-
 
 ### 🏡 Chore
 
@@ -54,4 +50,3 @@
 ### ❤️ Contributors
 
 - Vinicius Goulart
-

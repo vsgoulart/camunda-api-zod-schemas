@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import {z} from 'zod';
 import {
 	API_VERSION,
 	getCollectionResponseBodySchema,
@@ -10,7 +10,7 @@ import {
 	getOrFilterSchema,
 	type Endpoint,
 } from './common';
-import { variableSchema } from './variable';
+import {variableSchema} from './variable';
 import {
 	processInstanceSchema,
 	processInstanceStateSchema,
@@ -19,7 +19,7 @@ import {
 	type ProcessInstanceState,
 	type StatisticName,
 } from './processes';
-import { batchOperationTypeSchema } from './batch-operation';
+import {batchOperationTypeSchema} from './batch-operation';
 
 const processInstanceVariableFilterSchema = z.object({
 	name: z.string(),
@@ -111,7 +111,7 @@ type QueryProcessInstanceIncidentsRequestBody = z.infer<typeof queryProcessInsta
 
 const getProcessInstance: Endpoint<Pick<ProcessInstance, 'processInstanceKey'>> = {
 	method: 'GET',
-	getUrl: ({ processInstanceKey }) => `/${API_VERSION}/process-instances/${processInstanceKey}`,
+	getUrl: ({processInstanceKey}) => `/${API_VERSION}/process-instances/${processInstanceKey}`,
 };
 
 const createProcessInstanceRequestBodySchema = z.object({
@@ -158,17 +158,17 @@ const queryProcessInstances: Endpoint = {
 
 const cancelProcessInstance: Endpoint<Pick<ProcessInstance, 'processInstanceKey'>> = {
 	method: 'POST',
-	getUrl: ({ processInstanceKey }) => `/${API_VERSION}/process-instances/${processInstanceKey}/cancellation`,
+	getUrl: ({processInstanceKey}) => `/${API_VERSION}/process-instances/${processInstanceKey}/cancellation`,
 };
 
 const queryProcessInstanceIncidents: Endpoint<Pick<ProcessInstance, 'processInstanceKey'>> = {
 	method: 'POST',
-	getUrl: ({ processInstanceKey }) => `/${API_VERSION}/process-instances/${processInstanceKey}/incidents/search`,
+	getUrl: ({processInstanceKey}) => `/${API_VERSION}/process-instances/${processInstanceKey}/incidents/search`,
 };
 
 const getProcessInstanceCallHierarchy: Endpoint<Pick<ProcessInstance, 'processInstanceKey'>> = {
 	method: 'GET',
-	getUrl: ({ processInstanceKey }) => `/${API_VERSION}/process-instances/${processInstanceKey}/call-hierarchy`,
+	getUrl: ({processInstanceKey}) => `/${API_VERSION}/process-instances/${processInstanceKey}/call-hierarchy`,
 };
 
 const callHierarchySchema = z.object({
@@ -182,7 +182,7 @@ type GetProcessInstanceCallHierarchyResponseBody = z.infer<typeof getProcessInst
 
 const getProcessInstanceStatistics: Endpoint<GetProcessInstanceStatisticsParams> = {
 	method: 'GET',
-	getUrl: ({ processInstanceKey, statisticName = 'element-instances' }) =>
+	getUrl: ({processInstanceKey, statisticName = 'element-instances'}) =>
 		`/${API_VERSION}/process-instances/${processInstanceKey}/statistics/${statisticName}`,
 };
 
@@ -197,7 +197,7 @@ type GetProcessInstanceStatisticsParams = Pick<ProcessInstance, 'processInstance
 
 const getProcessInstanceSequenceFlows: Endpoint<Pick<ProcessInstance, 'processInstanceKey'>> = {
 	method: 'GET',
-	getUrl: ({ processInstanceKey }) => `/${API_VERSION}/process-instances/${processInstanceKey}/sequence-flows`,
+	getUrl: ({processInstanceKey}) => `/${API_VERSION}/process-instances/${processInstanceKey}/sequence-flows`,
 };
 
 const sequenceFlowSchema = z.object({

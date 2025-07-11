@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import {z} from 'zod';
 import {
 	API_VERSION,
 	getQueryRequestBodySchema,
@@ -7,7 +7,7 @@ import {
 	basicStringFilterSchema,
 	type Endpoint,
 } from './common';
-import { evaluatedDecisionInputItemSchema, matchedDecisionRuleItemSchema } from './decision-definition';
+import {evaluatedDecisionInputItemSchema, matchedDecisionRuleItemSchema} from './decision-definition';
 
 const decisionDefinitionTypeSchema = z.enum(['DECISION_TABLE', 'LITERAL_EXPRESSION', 'UNSPECIFIED', 'UNKNOWN']);
 type DecisionDefinitionType = z.infer<typeof decisionDefinitionTypeSchema>;
@@ -89,7 +89,7 @@ const queryDecisionInstances: Endpoint = {
 
 const getDecisionInstance: Endpoint<Pick<DecisionInstance, 'decisionInstanceId'>> = {
 	method: 'GET',
-	getUrl: ({ decisionInstanceId }) => `/${API_VERSION}/decision-instances/${decisionInstanceId}`,
+	getUrl: ({decisionInstanceId}) => `/${API_VERSION}/decision-instances/${decisionInstanceId}`,
 };
 
 export {

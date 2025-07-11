@@ -1,5 +1,5 @@
-import { z } from 'zod';
-import { API_VERSION, getQueryResponseBodySchema, getQueryRequestBodySchema, type Endpoint } from './common';
+import {z} from 'zod';
+import {API_VERSION, getQueryResponseBodySchema, getQueryRequestBodySchema, type Endpoint} from './common';
 
 const permissionTypeSchema = z.enum([
 	'ACCESS',
@@ -100,19 +100,19 @@ const createAuthorization: Endpoint = {
 	getUrl: () => `/${API_VERSION}/authorizations`,
 };
 
-const updateAuthorization: Endpoint<{ authorizationKey: string }> = {
+const updateAuthorization: Endpoint<{authorizationKey: string}> = {
 	method: 'PUT',
-	getUrl: ({ authorizationKey }) => `/${API_VERSION}/authorizations/${authorizationKey}`,
+	getUrl: ({authorizationKey}) => `/${API_VERSION}/authorizations/${authorizationKey}`,
 };
 
-const getAuthorization: Endpoint<{ authorizationKey: string }> = {
+const getAuthorization: Endpoint<{authorizationKey: string}> = {
 	method: 'GET',
-	getUrl: ({ authorizationKey }) => `/${API_VERSION}/authorizations/${authorizationKey}`,
+	getUrl: ({authorizationKey}) => `/${API_VERSION}/authorizations/${authorizationKey}`,
 };
 
-const deleteAuthorization: Endpoint<{ authorizationKey: string }> = {
+const deleteAuthorization: Endpoint<{authorizationKey: string}> = {
 	method: 'DELETE',
-	getUrl: ({ authorizationKey }) => `/${API_VERSION}/authorizations/${authorizationKey}`,
+	getUrl: ({authorizationKey}) => `/${API_VERSION}/authorizations/${authorizationKey}`,
 };
 
 const queryAuthorizations: Endpoint = {

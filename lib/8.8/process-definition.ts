@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import {z} from 'zod';
 import {
 	advancedDateTimeFilterSchema,
 	API_VERSION,
@@ -21,17 +21,17 @@ import {
 
 const getProcessDefinition: Endpoint<Pick<ProcessDefinition, 'processDefinitionKey'>> = {
 	method: 'GET',
-	getUrl: ({ processDefinitionKey }) => `/${API_VERSION}/process-definitions/${processDefinitionKey}`,
+	getUrl: ({processDefinitionKey}) => `/${API_VERSION}/process-definitions/${processDefinitionKey}`,
 };
 
 const getProcessDefinitionXml: Endpoint<Pick<ProcessDefinition, 'processDefinitionKey'>> = {
 	method: 'GET',
-	getUrl: ({ processDefinitionKey }) => `/${API_VERSION}/process-definitions/${processDefinitionKey}/xml`,
+	getUrl: ({processDefinitionKey}) => `/${API_VERSION}/process-definitions/${processDefinitionKey}/xml`,
 };
 
 const getProcessStartForm: Endpoint<Pick<ProcessDefinition, 'processDefinitionKey'>> = {
 	method: 'GET',
-	getUrl: ({ processDefinitionKey }) => `/${API_VERSION}/process-definitions/${processDefinitionKey}/form`,
+	getUrl: ({processDefinitionKey}) => `/${API_VERSION}/process-definitions/${processDefinitionKey}/form`,
 };
 
 const advancedProcessInstanceStateFilterSchema = z
@@ -86,7 +86,7 @@ type GetProcessDefinitionStatisticsParams = Pick<ProcessDefinition, 'processDefi
 
 const getProcessDefinitionStatistics: Endpoint<GetProcessDefinitionStatisticsParams> = {
 	method: 'POST',
-	getUrl: ({ processDefinitionKey, statisticName = 'element-instances' }) =>
+	getUrl: ({processDefinitionKey, statisticName = 'element-instances'}) =>
 		`/${API_VERSION}/process-definitions/${processDefinitionKey}/statistics/${statisticName}`,
 };
 

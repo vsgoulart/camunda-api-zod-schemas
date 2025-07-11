@@ -1,5 +1,5 @@
-import { z } from 'zod';
-import { API_VERSION, type Endpoint } from './common';
+import {z} from 'zod';
+import {API_VERSION, type Endpoint} from './common';
 
 const usageMetricsSchema = z.object({
 	assignees: z.number().int(),
@@ -18,12 +18,12 @@ type GetUsageMetricsParams = {
 
 const getUsageMetrics: Endpoint<GetUsageMetricsParams> = {
 	method: 'GET',
-	getUrl: ({ startTime, endTime }) =>
+	getUrl: ({startTime, endTime}) =>
 		`/${API_VERSION}/usage-metrics?${new URLSearchParams({
 			startTime,
 			endTime,
 		}).toString()}`,
 };
 
-export { getUsageMetrics, usageMetricsSchema, getUsageMetricsResponseBodySchema };
-export type { UsageMetrics, GetUsageMetricsResponseBody, GetUsageMetricsParams };
+export {getUsageMetrics, usageMetricsSchema, getUsageMetricsResponseBodySchema};
+export type {UsageMetrics, GetUsageMetricsResponseBody, GetUsageMetricsParams};
