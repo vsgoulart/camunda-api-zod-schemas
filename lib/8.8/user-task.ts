@@ -6,10 +6,14 @@ import {
 	API_VERSION,
 	getQueryRequestBodySchema,
 	getQueryResponseBodySchema,
-	userTaskVariableFilterSchema,
 	type Endpoint,
 } from './common';
 import { variableSchema } from './variable';
+
+const userTaskVariableFilterSchema = variableSchema.pick({
+	name: true,
+	value: true,
+});
 
 const userTaskSchema = z.object({
 	state: z.enum(['COMPLETED', 'CANCELED', 'CREATED', 'FAILED']),
@@ -56,14 +60,14 @@ const queryUserTasksRequestBodySchema = getQueryRequestBodySchema({
 			elementInstanceKey: true,
 		})
 		.extend({
-			assignee: z.union([userTaskSchema.shape.assignee, advancedStringFilterSchema]),
-			priority: z.union([userTaskSchema.shape.priority, advancedIntegerFilterSchema]),
-			candidateGroup: z.union([z.string(), advancedStringFilterSchema]),
-			candidateUser: z.union([z.string(), advancedStringFilterSchema]),
-			creationDate: z.union([userTaskSchema.shape.creationDate, advancedDateTimeFilterSchema]),
-			completionDate: z.union([userTaskSchema.shape.completionDate, advancedDateTimeFilterSchema]),
-			followUpDate: z.union([userTaskSchema.shape.followUpDate, advancedDateTimeFilterSchema]),
-			dueDate: z.union([userTaskSchema.shape.dueDate, advancedDateTimeFilterSchema]),
+			assignee: advancedStringFilterSchema,
+			priority: advancedIntegerFilterSchema,
+			candidateGroup: advancedStringFilterSchema,
+			candidateUser: advancedStringFilterSchema,
+			creationDate: advancedDateTimeFilterSchema,
+			completionDate: advancedDateTimeFilterSchema,
+			followUpDate: advancedDateTimeFilterSchema,
+			dueDate: advancedDateTimeFilterSchema,
 			localVariables: z.array(userTaskVariableFilterSchema),
 			processInstanceVariables: z.array(userTaskVariableFilterSchema),
 		})

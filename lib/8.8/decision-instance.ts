@@ -52,8 +52,8 @@ const queryDecisionInstancesRequestBodySchema = getQueryRequestBodySchema({
 	] as const,
 	filter: z
 		.object({
-			evaluationDate: z.union([advancedDateTimeFilterSchema, decisionInstanceSchema.shape.evaluationDate]),
-			decisionDefinitionKey: z.union([basicStringFilterSchema, decisionInstanceSchema.shape.decisionDefinitionKey]),
+			evaluationDate: advancedDateTimeFilterSchema,
+			decisionDefinitionKey: basicStringFilterSchema,
 			...decisionInstanceSchema.pick({
 				decisionInstanceId: true,
 				state: true,

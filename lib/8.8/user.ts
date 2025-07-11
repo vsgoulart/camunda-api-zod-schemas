@@ -44,9 +44,9 @@ type UpdateUserRequestBody = z.infer<typeof updateUserRequestBodySchema>;
 const queryUsersRequestBodySchema = getQueryRequestBodySchema({
 	sortFields: ['username', 'name', 'email'] as const,
 	filter: z.object({
-		username: z.union([z.string(), advancedStringFilterSchema]).optional(),
-		name: z.union([z.string(), advancedStringFilterSchema]).optional(),
-		email: z.union([z.string(), advancedStringFilterSchema]).optional(),
+		username: advancedStringFilterSchema.optional(),
+		name: advancedStringFilterSchema.optional(),
+		email: advancedStringFilterSchema.optional(),
 	}),
 });
 type QueryUsersRequestBody = z.infer<typeof queryUsersRequestBodySchema>;

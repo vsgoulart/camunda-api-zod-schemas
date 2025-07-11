@@ -76,9 +76,9 @@ const queryIncidentsRequestBodySchema = getQueryRequestBodySchema({
 	] as const,
 	filter: z
 		.object({
-			errorType: z.union([incidentErrorTypeSchema, getEnumFilterSchema(incidentErrorTypeSchema)]),
-			creationTime: z.union([z.string(), advancedDateTimeFilterSchema]),
-			state: z.union([incidentStateSchema, getEnumFilterSchema(incidentStateSchema)]),
+			errorType: getEnumFilterSchema(incidentErrorTypeSchema),
+			creationTime: advancedDateTimeFilterSchema,
+			state: getEnumFilterSchema(incidentStateSchema),
 			...incidentSchema.pick({
 				processDefinitionId: true,
 				errorMessage: true,

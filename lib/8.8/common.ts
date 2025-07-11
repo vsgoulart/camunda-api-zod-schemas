@@ -2,7 +2,7 @@ import { z } from 'zod';
 
 const API_VERSION = 'v2';
 
-const advancedDateTimeFilterSchema = z.object({
+const advancedDateTimeFilterSchema = z.union([z.string(), z.object({
 	$eq: z.string().optional(),
 	$neq: z.string().optional(),
 	$exists: z.boolean().optional(),
@@ -11,29 +11,32 @@ const advancedDateTimeFilterSchema = z.object({
 	$lt: z.string().optional(),
 	$lte: z.string().optional(),
 	$in: z.array(z.string()).optional(),
-});
+})]);
 type AdvancedDateTimeFilter = z.infer<typeof advancedDateTimeFilterSchema>;
 
-const basicStringFilterSchema = z.object({
-	$eq: z.string().optional(),
-	$neq: z.string().optional(),
-	$exists: z.boolean().optional(),
-	$in: z.array(z.string()).optional(),
-	$notIn: z.array(z.string()).optional(),
-});
+const basicStringFilterSchema = z.union([
+	z.string(),
+	z.object({
+		$eq: z.string().optional(),
+		$neq: z.string().optional(),
+		$exists: z.boolean().optional(),
+		$in: z.array(z.string()).optional(),
+		$notIn: z.array(z.string()).optional(),
+	}),
+]);
 type BasicStringFilter = z.infer<typeof basicStringFilterSchema>;
 
-const advancedStringFilterSchema = z.object({
+const advancedStringFilterSchema = z.union([z.string(), z.object({
 	$eq: z.string().optional(),
 	$neq: z.string().optional(),
 	$exists: z.boolean().optional(),
 	$in: z.array(z.string()).optional(),
 	$notIn: z.array(z.string()).optional(),
 	$like: z.string().optional(),
-});
+})]);
 type AdvancedStringFilter = z.infer<typeof advancedStringFilterSchema>;
 
-const advancedIntegerFilterSchema = z.object({
+const advancedIntegerFilterSchema = z.union([z.number().int(), z.object({
 	$eq: z.number().int().optional(),
 	$neq: z.number().int().optional(),
 	$exists: z.boolean().optional(),
@@ -42,14 +45,14 @@ const advancedIntegerFilterSchema = z.object({
 	$lt: z.number().int().optional(),
 	$lte: z.number().int().optional(),
 	$in: z.array(z.number().int()).optional(),
-});
+})]);
 type AdvancedIntegerFilter = z.infer<typeof advancedIntegerFilterSchema>;
 
-const userTaskVariableFilterSchema = z.object({
-	name: z.string(),
-	value: z.union([z.string(), advancedStringFilterSchema]),
-});
-type UserTaskVariableFilter = z.infer<typeof userTaskVariableFilterSchema>;
+function getOrFilterSchema<T extends z.ZodRawShape>(schema: z.ZodObject<T>) {
+	return schema.extend({
+		$or: z.array(schema).optional(),
+	});
+}
 
 const problemDetailsSchema = z.object({
 	type: z.string(),
@@ -112,13 +115,13 @@ function getQueryRequestSortSchema<Fields extends [string, ...string[]]>(fields:
 }
 
 function getEnumFilterSchema<T extends [string, ...string[]]>(fields: z.ZodEnum<T>) {
-	return z.object({
+	return z.union([fields, z.object({
 		$eq: fields.optional(),
 		$neq: fields.optional(),
 		$exists: z.boolean().optional(),
 		$in: z.array(fields).optional(),
 		$notIn: z.array(fields).optional(),
-	});
+	})]);
 }
 
 function getQueryRequestBodySchema<
@@ -140,8 +143,8 @@ interface Endpoint<URLParams extends object | undefined = undefined> {
 	getUrl: URLParams extends undefined
 		? () => string
 		: {} extends URLParams
-			? (params?: URLParams) => string
-			: (params: URLParams) => string;
+		? (params?: URLParams) => string
+		: (params: URLParams) => string;
 	method: string;
 }
 
@@ -160,7 +163,6 @@ export {
 	basicStringFilterSchema,
 	advancedStringFilterSchema,
 	advancedIntegerFilterSchema,
-	userTaskVariableFilterSchema,
 	problemDetailsSchema,
 	querySortOrderSchema,
 	queryPageSchema,
@@ -169,6 +171,7 @@ export {
 	getQueryResponseBodySchema,
 	getQueryRequestBodySchema,
 	getEnumFilterSchema,
+	getOrFilterSchema,
 	problemDetailResponseSchema,
 };
 export type {
@@ -176,7 +179,6 @@ export type {
 	BasicStringFilter,
 	AdvancedStringFilter,
 	AdvancedIntegerFilter,
-	UserTaskVariableFilter,
 	ProblemDetails,
 	QuerySortOrder,
 	QueryPage,

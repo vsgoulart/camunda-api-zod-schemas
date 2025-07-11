@@ -67,6 +67,10 @@ import {
 	getProcessInstanceCallHierarchy,
 	getProcessInstanceStatistics,
 	getProcessInstanceSequenceFlows,
+	createIncidentResolutionBatchOperation,
+	createCancellationBatchOperation,
+	createMigrationBatchOperation,
+	createModificationBatchOperation,
 } from './process-instance';
 import {
 	getUserTask,
@@ -273,6 +277,10 @@ const endpoints = {
 	deleteUser,
 	updateUser,
 	getUsageMetrics,
+	createIncidentResolutionBatchOperation,
+	createCancellationBatchOperation,
+	createMigrationBatchOperation,
+	createModificationBatchOperation,
 } as const;
 
 export { currentUserSchema, getCurrentUser, type CurrentUser } from './authentication';
@@ -556,6 +564,14 @@ export {
 	type StatisticName,
 	type ProcessInstance,
 	type GetProcessInstanceStatisticsResponseBody,
+	type CreateIncidentResolutionBatchOperationRequestBody,
+	type CreateIncidentResolutionBatchOperationResponseBody,
+	type CreateCancellationBatchOperationRequestBody,
+	type CreateCancellationBatchOperationResponseBody,
+	type CreateMigrationBatchOperationRequestBody,
+	type CreateMigrationBatchOperationResponseBody,
+	type CreateModificationBatchOperationRequestBody,
+	type CreateModificationBatchOperationResponseBody,
 } from './process-instance';
 export {
 	userTaskSchema,
