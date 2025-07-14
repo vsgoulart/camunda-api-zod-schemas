@@ -23,8 +23,7 @@
 		"build": "vite build",
 		"preview": "vite preview",
 		"format": "prettier --write .",
-		"prepublish": "pnpm run lint && pnpm run build",
-		"postpublish": "pnpm changelogen gh release"
+		"prepublish": "pnpm run lint && pnpm run build"
 	},
 	"sideEffects": false,
 	"files": [
