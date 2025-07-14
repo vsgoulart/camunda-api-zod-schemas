@@ -17,29 +17,27 @@ const advancedDateTimeFilterSchema = z.union([
 ]);
 type AdvancedDateTimeFilter = z.infer<typeof advancedDateTimeFilterSchema>;
 
-const basicStringFilterSchema = z.union([
-	z.string(),
-	z.object({
+const basicStringFilterSchema = z
+	.object({
 		$eq: z.string().optional(),
 		$neq: z.string().optional(),
 		$exists: z.boolean().optional(),
 		$in: z.array(z.string()).optional(),
 		$notIn: z.array(z.string()).optional(),
-	}),
-]);
+	})
+	.or(z.string());
 type BasicStringFilter = z.infer<typeof basicStringFilterSchema>;
 
-const advancedStringFilterSchema = z.union([
-	z.string(),
-	z.object({
+const advancedStringFilterSchema = z
+	.object({
 		$eq: z.string().optional(),
 		$neq: z.string().optional(),
 		$exists: z.boolean().optional(),
 		$in: z.array(z.string()).optional(),
 		$notIn: z.array(z.string()).optional(),
 		$like: z.string().optional(),
-	}),
-]);
+	})
+	.or(z.string());
 type AdvancedStringFilter = z.infer<typeof advancedStringFilterSchema>;
 
 const advancedIntegerFilterSchema = z.union([
@@ -58,7 +56,8 @@ const advancedIntegerFilterSchema = z.union([
 type AdvancedIntegerFilter = z.infer<typeof advancedIntegerFilterSchema>;
 
 function getOrFilterSchema<T extends z.ZodRawShape>(schema: z.ZodObject<T>) {
-	return schema.extend({
+	return z.object({
+		...schema.shape,
 		$or: z.array(schema).optional(),
 	});
 }
@@ -123,7 +122,7 @@ function getQueryRequestSortSchema<Fields extends [string, ...string[]]>(fields:
 	);
 }
 
-function getEnumFilterSchema<T extends [string, ...string[]]>(fields: z.ZodEnum<T>) {
+function getEnumFilterSchema<T extends Readonly<Record<string, string>>>(fields: z.ZodEnum<T>) {
 	return z.union([
 		fields,
 		z.object({
@@ -155,8 +154,8 @@ interface Endpoint<URLParams extends object | undefined = undefined> {
 	getUrl: URLParams extends undefined
 		? () => string
 		: {} extends URLParams
-			? (params?: URLParams) => string
-			: (params: URLParams) => string;
+		? (params?: URLParams) => string
+		: (params: URLParams) => string;
 	method: string;
 }
 

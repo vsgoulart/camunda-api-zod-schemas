@@ -219,10 +219,11 @@
 		"typescript": "5.8.3",
 		"vite": "7.0.4",
 		"vite-plugin-circular-dependency": "0.5.0",
-		"vite-plugin-dts": "4.5.4"
+		"vite-plugin-dts": "4.5.4",
+		"zod": "^4.0.5"
 	},
 	"peerDependencies": {
-		"zod": ">=3.0.0"
+		"zod": "^3.25.0 || ^4.0.0"
 	},
 	"packageManager": "pnpm@10.13.1"
 }
