@@ -1,5 +1,27 @@
 # Changelog
 
+## v2.0.0
+
+[compare changes](https://github.com/vsgoulart/camunda-api-zod-schemas/compare/v1.2.0...v2.0.0)
+
+### ⚠️ Breaking Changes
+
+- Bump to zod v4 ([c7f0cc5](https://github.com/vsgoulart/camunda-api-zod-schemas/commit/c7f0cc5))
+- Remove cjs support ([9df4d63](https://github.com/vsgoulart/camunda-api-zod-schemas/commit/9df4d63))
+
+### 🚀 Enhancements
+
+- Add batch operation endpoints ([#44](https://github.com/vsgoulart/camunda-api-zod-schemas/pull/44))
+
+### 💅 Refactors
+
+- Replace biome with prettier ([9733d7b](https://github.com/vsgoulart/camunda-api-zod-schemas/commit/9733d7b))
+
+### ❤️ Contributors
+
+- Vinicius Goulart <vinicius.goulart@camunda.com>
+- Patrick Dehn ([@pedesen](https://github.com/pedesen))
+
 ## v1.1.0
 
 ### ⚠️ Breaking Changes
