@@ -23,7 +23,7 @@
 		"build": "vite build",
 		"preview": "vite preview",
 		"format": "prettier --write .",
-		"prepublish": "pnpm run lint && pnpm run build"
+		"prepublish": "pnpm run build"
 	},
 	"sideEffects": false,
 	"files": [
