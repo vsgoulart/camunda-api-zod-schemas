@@ -52,7 +52,7 @@ const queryProcessInstancesFilterSchema = z
 		hasIncident: z.boolean(),
 		tenantId: advancedStringFilterSchema,
 		variables: z.array(processInstanceVariableFilterSchema),
-		batchOperationId: z.string(),
+		batchOperationKey: z.string(),
 		errorMessage: advancedStringFilterSchema,
 		hasRetriesLeft: z.boolean(),
 		elementInstanceState: advancedProcessInstanceStateFilterSchema,
@@ -216,7 +216,7 @@ type GetProcessInstanceSequenceFlowsResponseBody = z.infer<typeof getProcessInst
 type CreateIncidentResolutionBatchOperationRequestBody = z.infer<typeof queryProcessInstancesFilterSchema>;
 
 const createIncidentResolutionBatchOperationResponseBodySchema = z.object({
-	batchOperationId: z.string(),
+	batchOperationKey: z.string(),
 	batchOperationType: batchOperationTypeSchema,
 });
 
@@ -232,7 +232,7 @@ const createIncidentResolutionBatchOperation: Endpoint = {
 type CreateCancellationBatchOperationRequestBody = z.infer<typeof queryProcessInstancesFilterSchema>;
 
 const createCancellationBatchOperationResponseBodySchema = z.object({
-	batchOperationId: z.string(),
+	batchOperationKey: z.string(),
 	batchOperationType: batchOperationTypeSchema,
 });
 
@@ -259,7 +259,7 @@ const createMigrationBatchOperationRequestBodySchema = z.object({
 type CreateMigrationBatchOperationRequestBody = z.infer<typeof createMigrationBatchOperationRequestBodySchema>;
 
 const createMigrationBatchOperationResponseBodySchema = z.object({
-	batchOperationId: z.string(),
+	batchOperationKey: z.string(),
 	batchOperationType: batchOperationTypeSchema,
 });
 
@@ -283,7 +283,7 @@ const createModificationBatchOperationRequestBodySchema = z.object({
 type CreateModificationBatchOperationRequestBody = z.infer<typeof createModificationBatchOperationRequestBodySchema>;
 
 const createModificationBatchOperationResponseBodySchema = z.object({
-	batchOperationId: z.string(),
+	batchOperationKey: z.string(),
 	batchOperationType: batchOperationTypeSchema,
 });
 

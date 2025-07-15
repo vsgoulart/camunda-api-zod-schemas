@@ -24,7 +24,7 @@ const batchOperationItemStateSchema = z.enum(['ACTIVE', 'COMPLETED', 'CANCELED',
 type BatchOperationItemState = z.infer<typeof batchOperationItemStateSchema>;
 
 const batchOperationSchema = z.object({
-	batchOperationId: z.string(),
+	batchOperationKey: z.string(),
 	state: batchOperationStateSchema,
 	batchOperationType: batchOperationTypeSchema,
 	startDate: z.string(),
@@ -36,7 +36,7 @@ const batchOperationSchema = z.object({
 type BatchOperation = z.infer<typeof batchOperationSchema>;
 
 const batchOperationItemSchema = z.object({
-	batchOperationId: z.string(),
+	batchOperationKey: z.string(),
 	itemKey: z.string(),
 	processInstanceKey: z.string(),
 	state: batchOperationItemStateSchema,
@@ -46,10 +46,10 @@ const batchOperationItemSchema = z.object({
 type BatchOperationItem = z.infer<typeof batchOperationItemSchema>;
 
 const queryBatchOperationsRequestBodySchema = getQueryRequestBodySchema({
-	sortFields: ['batchOperationId', 'operationType', 'state', 'startDate', 'endDate'] as const,
+	sortFields: ['batchOperationKey', 'operationType', 'state', 'startDate', 'endDate'] as const,
 	filter: z
 		.object({
-			batchOperationId: z.string(),
+			batchOperationKey: z.string(),
 			operationType: batchOperationTypeSchema,
 			state: batchOperationStateSchema,
 		})
@@ -61,10 +61,10 @@ const queryBatchOperationsResponseBodySchema = getQueryResponseBodySchema(batchO
 type QueryBatchOperationsResponseBody = z.infer<typeof queryBatchOperationsResponseBodySchema>;
 
 const queryBatchOperationItemsRequestBodySchema = getQueryRequestBodySchema({
-	sortFields: ['batchOperationId', 'itemKey', 'processInstanceKey', 'state'] as const,
+	sortFields: ['batchOperationKey', 'itemKey', 'processInstanceKey', 'state'] as const,
 	filter: z
 		.object({
-			batchOperationId: z.string(),
+			batchOperationKey: z.string(),
 			itemKey: z.string(),
 			processInstanceKey: z.string(),
 			state: batchOperationItemStateSchema,
@@ -76,9 +76,9 @@ type QueryBatchOperationItemsRequestBody = z.infer<typeof queryBatchOperationIte
 const queryBatchOperationItemsResponseBodySchema = getQueryResponseBodySchema(batchOperationItemSchema);
 type QueryBatchOperationItemsResponseBody = z.infer<typeof queryBatchOperationItemsResponseBodySchema>;
 
-const getBatchOperation: Endpoint<{batchOperationId: string}> = {
+const getBatchOperation: Endpoint<{batchOperationKey: string}> = {
 	method: 'GET',
-	getUrl: ({batchOperationId}) => `/${API_VERSION}/batch-operations/${batchOperationId}`,
+	getUrl: ({batchOperationKey}) => `/${API_VERSION}/batch-operations/${batchOperationKey}`,
 };
 
 const queryBatchOperations: Endpoint = {
@@ -86,19 +86,19 @@ const queryBatchOperations: Endpoint = {
 	getUrl: () => `/${API_VERSION}/batch-operations/search`,
 };
 
-const cancelBatchOperation: Endpoint<{batchOperationId: string}> = {
+const cancelBatchOperation: Endpoint<{batchOperationKey: string}> = {
 	method: 'PUT',
-	getUrl: ({batchOperationId}) => `/${API_VERSION}/batch-operations/${batchOperationId}/cancellation`,
+	getUrl: ({batchOperationKey}) => `/${API_VERSION}/batch-operations/${batchOperationKey}/cancellation`,
 };
 
-const suspendBatchOperation: Endpoint<{batchOperationId: string}> = {
+const suspendBatchOperation: Endpoint<{batchOperationKey: string}> = {
 	method: 'PUT',
-	getUrl: ({batchOperationId}) => `/${API_VERSION}/batch-operations/${batchOperationId}/suspension`,
+	getUrl: ({batchOperationKey}) => `/${API_VERSION}/batch-operations/${batchOperationKey}/suspension`,
 };
 
-const resumeBatchOperation: Endpoint<{batchOperationId: string}> = {
+const resumeBatchOperation: Endpoint<{batchOperationKey: string}> = {
 	method: 'PUT',
-	getUrl: ({batchOperationId}) => `/${API_VERSION}/batch-operations/${batchOperationId}/resumption`,
+	getUrl: ({batchOperationKey}) => `/${API_VERSION}/batch-operations/${batchOperationKey}/resumption`,
 };
 
 const queryBatchOperationItems: Endpoint = {
