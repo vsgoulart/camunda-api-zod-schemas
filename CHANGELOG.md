@@ -1,5 +1,22 @@
 # Changelog
 
+## v2.0.1
+
+[compare changes](https://github.com/vsgoulart/camunda-api-zod-schemas/compare/v2.0.0...v2.0.1)
+
+### 🩹 Fixes
+
+- Rename batchOperationId -> batchOperationKey ([#47](https://github.com/vsgoulart/camunda-api-zod-schemas/pull/47))
+
+### 🏡 Chore
+
+- Fix formatting ([d2d1fa5](https://github.com/vsgoulart/camunda-api-zod-schemas/commit/d2d1fa5))
+
+### ❤️ Contributors
+
+- Vinicius Goulart <vinicius.goulart@camunda.com>
+- Patrick Dehn ([@pedesen](https://github.com/pedesen))
+
 ## v2.0.0
 
 [compare changes](https://github.com/vsgoulart/camunda-api-zod-schemas/compare/v1.2.0...v2.0.0)
