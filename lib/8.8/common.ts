@@ -154,8 +154,8 @@ interface Endpoint<URLParams extends object | undefined = undefined> {
 	getUrl: URLParams extends undefined
 		? () => string
 		: {} extends URLParams
-		? (params?: URLParams) => string
-		: (params: URLParams) => string;
+			? (params?: URLParams) => string
+			: (params: URLParams) => string;
 	method: string;
 }
 
