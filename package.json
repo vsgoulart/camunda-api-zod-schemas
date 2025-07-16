@@ -213,7 +213,7 @@
 		"access": "public"
 	},
 	"devDependencies": {
-		"@types/node": "24.0.13",
+		"@types/node": "24.0.14",
 		"changelogen": "0.6.2",
 		"typescript": "5.8.3",
 		"vite": "7.0.4",
