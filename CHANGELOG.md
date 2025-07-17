@@ -1,5 +1,17 @@
 # Changelog
 
+## v2.0.3
+
+[compare changes](https://github.com/vsgoulart/camunda-api-zod-schemas/compare/v2.0.2...v2.0.3)
+
+### 🩹 Fixes
+
+- Add email to current user ([89232e5](https://github.com/vsgoulart/camunda-api-zod-schemas/commit/89232e5))
+
+### ❤️ Contributors
+
+- Vinicius Goulart <vinicius.goulart@camunda.com>
+
 ## v2.0.2
 
 [compare changes](https://github.com/vsgoulart/camunda-api-zod-schemas/compare/v2.0.1...v2.0.2)
