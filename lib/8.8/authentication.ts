@@ -5,11 +5,13 @@ const currentUserSchema = z.object({
 	userId: z.string(),
 	userKey: z.number(),
 	displayName: z.string(),
-	authorizedComponents: z.array(z.string()),
+	authorizedApplications: z.array(z.string()),
 	tenants: z.array(
 		z.object({
+			key: z.number(),
 			tenantId: z.string(),
 			name: z.string(),
+			description: z.string().optional(),
 		}),
 	),
 	groups: z.array(z.string()),
@@ -22,7 +24,7 @@ const currentUserSchema = z.object({
 		}),
 	),
 	canLogout: z.boolean(),
-	apiUser: z.boolean(),
+	apiUser: z.boolean().optional(),
 });
 
 type CurrentUser = z.infer<typeof currentUserSchema>;
