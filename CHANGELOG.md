@@ -1,5 +1,17 @@
 # Changelog
 
+## v2.0.2
+
+[compare changes](https://github.com/vsgoulart/camunda-api-zod-schemas/compare/v2.0.1...v2.0.2)
+
+### 🩹 Fixes
+
+- Fix current user response format ([c6638e9](https://github.com/vsgoulart/camunda-api-zod-schemas/commit/c6638e9))
+
+### ❤️ Contributors
+
+- Vinicius Goulart <vinicius.goulart@camunda.com>
+
 ## v2.0.1
 
 [compare changes](https://github.com/vsgoulart/camunda-api-zod-schemas/compare/v2.0.0...v2.0.1)
