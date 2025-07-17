@@ -5,6 +5,7 @@ const currentUserSchema = z.object({
 	userId: z.string(),
 	userKey: z.number(),
 	displayName: z.string(),
+	email: z.string(),
 	authorizedApplications: z.array(z.string()),
 	tenants: z.array(
 		z.object({
