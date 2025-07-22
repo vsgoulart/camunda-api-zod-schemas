@@ -4,6 +4,7 @@ import {
 	advancedIntegerFilterSchema,
 	advancedStringFilterSchema,
 	API_VERSION,
+	getEnumFilterSchema,
 	getQueryRequestBodySchema,
 	getQueryResponseBodySchema,
 	type Endpoint,
@@ -15,8 +16,23 @@ const userTaskVariableFilterSchema = variableSchema.pick({
 	value: true,
 });
 
+const userStateSchema = z.enum([
+	'CREATED',
+	'ASSIGNING',
+	'UPDATING',
+	'COMPLETING',
+	'COMPLETED',
+	'CANCELING',
+	'CANCELED',
+	'FAILED',
+]);
+
+const advancedUserTaskStateFilterSchema = getEnumFilterSchema(userStateSchema);
+
+type AdvancedUserTaskStateFilter = z.infer<typeof advancedUserTaskStateFilterSchema>;
+
 const userTaskSchema = z.object({
-	state: z.enum(['COMPLETED', 'CANCELED', 'CREATED', 'FAILED']),
+	state: userStateSchema,
 	processDefinitionVersion: z.number(),
 	processDefinitionId: z.string(),
 	processName: z.string().optional(),
@@ -70,6 +86,7 @@ const queryUserTasksRequestBodySchema = getQueryRequestBodySchema({
 			dueDate: advancedDateTimeFilterSchema,
 			localVariables: z.array(userTaskVariableFilterSchema),
 			processInstanceVariables: z.array(userTaskVariableFilterSchema),
+			state: advancedUserTaskStateFilterSchema,
 		})
 		.partial(),
 });
@@ -180,6 +197,8 @@ export {
 	completeTask,
 	queryVariablesByUserTask,
 	userTaskSchema,
+	userStateSchema,
+	advancedUserTaskStateFilterSchema,
 	queryUserTasksResponseBodySchema,
 	queryUserTasksRequestBodySchema,
 	formSchema,
@@ -202,4 +221,5 @@ export type {
 	QueryVariablesByUserTaskRequestBody,
 	QueryVariablesByUserTaskResponseBody,
 	UpdateUserTaskRequestBody,
+	AdvancedUserTaskStateFilter,
 };
