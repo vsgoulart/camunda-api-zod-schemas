@@ -16,7 +16,7 @@ const userTaskVariableFilterSchema = variableSchema.pick({
 	value: true,
 });
 
-const userStateSchema = z.enum([
+const userTaskStateSchema = z.enum([
 	'CREATED',
 	'ASSIGNING',
 	'UPDATING',
@@ -27,12 +27,10 @@ const userStateSchema = z.enum([
 	'FAILED',
 ]);
 
-const advancedUserTaskStateFilterSchema = getEnumFilterSchema(userStateSchema);
-
-type AdvancedUserTaskStateFilter = z.infer<typeof advancedUserTaskStateFilterSchema>;
+type UserTaskState = z.infer<typeof userTaskStateSchema>;
 
 const userTaskSchema = z.object({
-	state: userStateSchema,
+	state: userTaskStateSchema,
 	processDefinitionVersion: z.number(),
 	processDefinitionId: z.string(),
 	processName: z.string().optional(),
@@ -86,7 +84,7 @@ const queryUserTasksRequestBodySchema = getQueryRequestBodySchema({
 			dueDate: advancedDateTimeFilterSchema,
 			localVariables: z.array(userTaskVariableFilterSchema),
 			processInstanceVariables: z.array(userTaskVariableFilterSchema),
-			state: advancedUserTaskStateFilterSchema,
+			state: getEnumFilterSchema(userTaskStateSchema),
 		})
 		.partial(),
 });
@@ -197,8 +195,7 @@ export {
 	completeTask,
 	queryVariablesByUserTask,
 	userTaskSchema,
-	userStateSchema,
-	advancedUserTaskStateFilterSchema,
+	userTaskStateSchema,
 	queryUserTasksResponseBodySchema,
 	queryUserTasksRequestBodySchema,
 	formSchema,
@@ -221,5 +218,5 @@ export type {
 	QueryVariablesByUserTaskRequestBody,
 	QueryVariablesByUserTaskResponseBody,
 	UpdateUserTaskRequestBody,
-	AdvancedUserTaskStateFilter,
+	UserTaskState,
 };
