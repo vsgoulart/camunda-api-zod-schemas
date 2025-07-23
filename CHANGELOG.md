@@ -1,5 +1,22 @@
 # Changelog
 
+## v2.0.4
+
+[compare changes](https://github.com/vsgoulart/camunda-api-zod-schemas/compare/v2.0.3...v2.0.4)
+
+### 🚀 Enhancements
+
+- Add advanced filtering to state in user tasks ([#49](https://github.com/vsgoulart/camunda-api-zod-schemas/pull/49))
+
+### 🩹 Fixes
+
+- Naming and unnecessary exports ([3fea1a5](https://github.com/vsgoulart/camunda-api-zod-schemas/commit/3fea1a5))
+
+### ❤️ Contributors
+
+- Vinicius Goulart <vinicius.goulart@camunda.com>
+- Vítor Tavares ([@vitorwtavares](https://github.com/vitorwtavares))
+
 ## v2.0.3
 
 [compare changes](https://github.com/vsgoulart/camunda-api-zod-schemas/compare/v2.0.2...v2.0.3)
