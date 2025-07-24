@@ -1,5 +1,17 @@
 # Changelog
 
+## v2.0.5
+
+[compare changes](https://github.com/vsgoulart/camunda-api-zod-schemas/compare/v2.0.4...v2.0.5)
+
+### 🚀 Enhancements
+
+- Add scopeKey filter to element instance history query ([a7958c5](https://github.com/vsgoulart/camunda-api-zod-schemas/commit/a7958c5))
+
+### ❤️ Contributors
+
+- Vinicius Goulart <vinicius.goulart@camunda.com>
+
 ## v2.0.4
 
 [compare changes](https://github.com/vsgoulart/camunda-api-zod-schemas/compare/v2.0.3...v2.0.4)
