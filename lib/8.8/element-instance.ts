@@ -70,6 +70,7 @@ const elementInstanceFilterSchema = z
 		processInstanceKey: z.string(),
 		processDefinitionKey: z.string(),
 		incidentKey: z.string(),
+		scopeKey: z.string(),
 	})
 	.partial();
 
