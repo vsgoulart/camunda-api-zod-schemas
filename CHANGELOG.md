@@ -1,5 +1,17 @@
 # Changelog
 
+## v2.0.6
+
+[compare changes](https://github.com/vsgoulart/camunda-api-zod-schemas/compare/v2.0.5...v2.0.6)
+
+### 🚀 Enhancements
+
+- Update process definition shape and filtering ([d92f505](https://github.com/vsgoulart/camunda-api-zod-schemas/commit/d92f505))
+
+### ❤️ Contributors
+
+- Vinicius Goulart <vinicius.goulart@camunda.com>
+
 ## v2.0.5
 
 [compare changes](https://github.com/vsgoulart/camunda-api-zod-schemas/compare/v2.0.4...v2.0.5)
