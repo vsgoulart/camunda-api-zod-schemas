@@ -33,6 +33,7 @@ const processDefinitionSchema = z.object({
 	processDefinitionId: z.string(),
 	tenantId: z.string(),
 	processDefinitionKey: z.string(),
+	hasStartForm: z.boolean(),
 });
 type ProcessDefinition = z.infer<typeof processDefinitionSchema>;
 

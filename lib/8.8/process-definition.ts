@@ -100,7 +100,11 @@ const queryProcessDefinitionsRequestBodySchema = getQueryRequestBodySchema({
 		'processDefinitionId',
 		'tenantId',
 	] as const,
-	filter: processDefinitionSchema.partial(),
+	filter: processDefinitionSchema
+		.extend({
+			isLatestVersion: z.boolean(),
+		})
+		.partial(),
 });
 type QueryProcessDefinitionsRequestBody = z.infer<typeof queryProcessDefinitionsRequestBodySchema>;
 
