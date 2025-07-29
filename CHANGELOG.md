@@ -1,5 +1,17 @@
 # Changelog
 
+## v2.0.7
+
+[compare changes](https://github.com/vsgoulart/camunda-api-zod-schemas/compare/v2.0.6...v2.0.7)
+
+### 🚀 Enhancements
+
+- Add process definition advanced filters ([ddafaf1](https://github.com/vsgoulart/camunda-api-zod-schemas/commit/ddafaf1))
+
+### ❤️ Contributors
+
+- Vinicius Goulart <vinicius.goulart@camunda.com>
+
 ## v2.0.6
 
 [compare changes](https://github.com/vsgoulart/camunda-api-zod-schemas/compare/v2.0.5...v2.0.6)
