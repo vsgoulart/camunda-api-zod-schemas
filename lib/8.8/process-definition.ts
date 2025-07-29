@@ -101,8 +101,14 @@ const queryProcessDefinitionsRequestBodySchema = getQueryRequestBodySchema({
 		'tenantId',
 	] as const,
 	filter: processDefinitionSchema
+		.omit({
+			processDefinitionId: true,
+			name: true,
+		})
 		.extend({
 			isLatestVersion: z.boolean(),
+			processDefinitionId: basicStringFilterSchema,
+			name: advancedStringFilterSchema,
 		})
 		.partial(),
 });
