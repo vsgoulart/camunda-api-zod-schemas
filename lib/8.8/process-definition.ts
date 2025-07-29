@@ -107,7 +107,7 @@ const queryProcessDefinitionsRequestBodySchema = getQueryRequestBodySchema({
 		})
 		.extend({
 			isLatestVersion: z.boolean(),
-			processDefinitionId: basicStringFilterSchema,
+			processDefinitionId: advancedStringFilterSchema,
 			name: advancedStringFilterSchema,
 		})
 		.partial(),
