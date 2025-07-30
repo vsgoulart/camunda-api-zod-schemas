@@ -1,5 +1,17 @@
 # Changelog
 
+## v2.0.9
+
+[compare changes](https://github.com/vsgoulart/camunda-api-zod-schemas/compare/v2.0.8...v2.0.9)
+
+### 🩹 Fixes
+
+- Remove userKey and userId from user references ([7d05814](https://github.com/vsgoulart/camunda-api-zod-schemas/commit/7d05814))
+
+### ❤️ Contributors
+
+- Vinicius Goulart <vinicius.goulart@camunda.com>
+
 ## v2.0.8
 
 [compare changes](https://github.com/vsgoulart/camunda-api-zod-schemas/compare/v2.0.7...v2.0.8)
