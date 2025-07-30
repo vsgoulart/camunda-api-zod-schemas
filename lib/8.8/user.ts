@@ -11,7 +11,6 @@ const userSchema = z.object({
 	username: z.string(),
 	name: z.string(),
 	email: z.string(),
-	userKey: z.string(),
 });
 type User = z.infer<typeof userSchema>;
 

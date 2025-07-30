@@ -2,8 +2,7 @@ import {z} from 'zod';
 import {API_VERSION, type Endpoint} from './common';
 
 const currentUserSchema = z.object({
-	userId: z.string(),
-	userKey: z.number(),
+	username: z.string(),
 	displayName: z.string(),
 	email: z.string(),
 	authorizedApplications: z.array(z.string()),
