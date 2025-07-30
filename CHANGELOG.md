@@ -1,5 +1,17 @@
 # Changelog
 
+## v2.0.10
+
+[compare changes](https://github.com/vsgoulart/camunda-api-zod-schemas/compare/v2.0.9...v2.0.10)
+
+### 🚀 Enhancements
+
+- Decision instance search endpoint extention ([#51](https://github.com/vsgoulart/camunda-api-zod-schemas/pull/51))
+
+### ❤️ Contributors
+
+- Yuliia Saienko <yuliia.saienko-ext@camunda.com>
+
 ## v2.0.9
 
 [compare changes](https://github.com/vsgoulart/camunda-api-zod-schemas/compare/v2.0.8...v2.0.9)
