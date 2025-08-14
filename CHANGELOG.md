@@ -1,5 +1,17 @@
 # Changelog
 
+## v2.0.11
+
+[compare changes](https://github.com/vsgoulart/camunda-api-zod-schemas/compare/v2.0.10...v2.1.0)
+
+### 🚀 Enhancements
+
+- Align authentication schema with renamed API response property ([#54](https://github.com/vsgoulart/camunda-api-zod-schemas/pull/54))
+
+### ❤️ Contributors
+
+- Thorben Lindhauer ([@ThorbenLindhauer](https://github.com/ThorbenLindhauer))
+
 ## v2.0.10
 
 [compare changes](https://github.com/vsgoulart/camunda-api-zod-schemas/compare/v2.0.9...v2.0.10)
