@@ -294,6 +294,37 @@ const createModificationBatchOperation: Endpoint = {
 	getUrl: () => `/${API_VERSION}/process-instances/modification`,
 };
 
+const variableInstructionSchema = z.object({
+	variables: z.record(z.string(), z.unknown()),
+	scopeId: z.string().optional(),
+});
+const activateInstructionSchema = z.object({
+	elementId: z.string(),
+	variableInstructions: z.array(variableInstructionSchema).optional(),
+	ancestorElementInstanceKey: z.string().optional(),
+});
+const terminateInstructionSchema = z.object({
+	elementInstanceKey: z.string(),
+});
+
+const modifyProcessInstanceRequestBodySchema = z
+	.object({
+		operationReference: z.number().optional(),
+		activateInstructions: z.array(activateInstructionSchema).optional(),
+		terminateInstructions: z.array(terminateInstructionSchema).optional(),
+	})
+	.refine(
+		({activateInstructions, terminateInstructions}) =>
+			(activateInstructions && activateInstructions.length > 0) ||
+			(terminateInstructions && terminateInstructions.length > 0),
+	);
+type ModifyProcessInstanceRequestBody = z.infer<typeof modifyProcessInstanceRequestBodySchema>;
+
+const modifyProcessInstance: Endpoint<Pick<ProcessInstance, 'processInstanceKey'>> = {
+	method: 'POST',
+	getUrl: ({processInstanceKey}) => `/${API_VERSION}/process-instances/${processInstanceKey}/modification`,
+};
+
 export {
 	createProcessInstance,
 	getProcessInstance,
@@ -307,8 +338,10 @@ export {
 	createCancellationBatchOperation,
 	createMigrationBatchOperation,
 	createModificationBatchOperation,
+	modifyProcessInstance,
 	createProcessInstanceRequestBodySchema,
 	createProcessInstanceResponseBodySchema,
+	modifyProcessInstanceRequestBodySchema,
 	queryProcessInstancesRequestBodySchema,
 	queryProcessInstancesResponseBodySchema,
 	cancelProcessInstanceRequestBodySchema,
@@ -344,4 +377,5 @@ export type {
 	CreateMigrationBatchOperationResponseBody,
 	CreateModificationBatchOperationRequestBody,
 	CreateModificationBatchOperationResponseBody,
+	ModifyProcessInstanceRequestBody,
 };
