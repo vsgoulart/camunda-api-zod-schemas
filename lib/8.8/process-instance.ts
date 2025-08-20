@@ -315,8 +315,8 @@ const modifyProcessInstanceRequestBodySchema = z
 	})
 	.refine(
 		({activateInstructions, terminateInstructions}) =>
-			(activateInstructions && activateInstructions.length > 0) ||
-			(terminateInstructions && terminateInstructions.length > 0),
+			(activateInstructions !== undefined && activateInstructions.length > 0) ||
+			(terminateInstructions !== undefined && terminateInstructions.length > 0),
 	);
 type ModifyProcessInstanceRequestBody = z.infer<typeof modifyProcessInstanceRequestBodySchema>;
 
