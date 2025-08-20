@@ -1,5 +1,17 @@
 # Changelog
 
+## v2.0.12
+
+[compare changes](https://github.com/vsgoulart/camunda-api-zod-schemas/compare/v2.0.11...v2.1.0)
+
+### 🚀 Enhancements
+
+- Add process instance modification endpoint ([#55](https://github.com/vsgoulart/camunda-api-zod-schemas/pull/55))
+
+### ❤️ Contributors
+
+- Patrick Dehn ([@pedesen](https://github.com/pedesen))
+
 ## v2.0.11
 
 [compare changes](https://github.com/vsgoulart/camunda-api-zod-schemas/compare/v2.0.10...v2.1.0)
