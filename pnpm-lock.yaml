@@ -28,7 +28,7 @@ importers:
         version: 4.5.4(@types/node@24.0.14)(rollup@4.43.0)(typescript@5.8.3)(vite@7.0.5(@types/node@24.0.14)(jiti@2.4.2))
       zod:
         specifier: ^4.0.5
-        version: 4.0.5
+        version: 4.1.4
 
 packages:
 
@@ -874,8 +874,8 @@ packages:
   yallist@4.0.0:
     resolution: {integrity: sha512-3wdGidZyq5PB084XLES5TpOSRA3wjXAlIWMhum2kRcv/41Sn2emQ0dycQW4uZXLejwKvg6EsvbdlVL+FYEct7A==}
 
-  zod@4.0.5:
-    resolution: {integrity: sha512-/5UuuRPStvHXu7RS+gmvRf4NXrNxpSllGwDnCBcJZtQsKrviYXm54yDGV2KYNLT5kq0lHGcl7lqWJLgSaG+tgA==}
+  zod@4.1.4:
+    resolution: {integrity: sha512-2YqJuWkU6IIK9qcE4k1lLLhyZ6zFw7XVRdQGpV97jEIZwTrscUw+DY31Xczd8nwaoksyJUIxCojZXwckJovWxA==}
 
 snapshots:
 
@@ -1638,4 +1638,4 @@ snapshots:
 
   yallist@4.0.0: {}
 
-  zod@4.0.5: {}
+  zod@4.1.4: {}
