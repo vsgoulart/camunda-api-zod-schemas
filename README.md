@@ -1,3 +1,5 @@
+# This project has been archived in favor of the one maintained by Camunda [here](https://github.com/camunda/camunda/tree/main/client-components/packages/camunda-api-zod-schemas)
+
 # @vzeta/camunda-api-zod-schemas
 
 This is a community-driven open-source project that provides [Zod](https://zod.dev/) schemas and TypeScript type definitions for the Camunda 8 REST API.
